@@ -1,0 +1,35 @@
+{Сортировка кучей}
+
+procedure kuch(var a:tar;v,n:byte);
+var i,d,j:integer;   
+Begin                  
+
+  i:=2*v+1;
+  if i>n then i:=2*v else d:=a[i];
+  if i>n then i:=0 else d:=a[i];
+  if i<>0 then if a[2*v]>d then begin i:=2*v;d:=a[i];end;
+if i<>0 then
+  if a[v]<d then
+   begin
+    a[i]:=a[v];a[v]:=d;
+    kuch(a,i,n);
+   end;
+End;
+
+procedure buildkuch(var a:tar;n:byte);
+var i:integer;       {Преобразует массив}
+Begin                      {в кучу}
+  for i:=n div 2 downto 1 do kuch(a,i,n);
+end;
+
+procedure kuchsort(var a:tar;n:byte);
+var i,d:integer;
+Begin
+  for i:=n downto 2 do
+   begin
+    d:=a[1];
+    a[1]:=a[i];
+    a[i]:=d;
+    kuch(a,1,i-1);
+   end;
+End;

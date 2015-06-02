@@ -1,0 +1,14 @@
+{Сортировка выбором}
+procedure sort(var a:tar;n:integer);
+var k,l,num,d:byte;
+begin
+  for k:=0 to n-2 do
+   begin
+    num:=k;
+    for l:=k to n-1 do
+      if a[l]<a[num] then num:=l;
+    d:=a[k];
+    a[k]:=a[num];
+    a[num]:=d;
+   end;
+end;

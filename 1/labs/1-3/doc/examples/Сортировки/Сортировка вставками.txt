@@ -1,0 +1,13 @@
+{Сортировка вставками}
+procedure sort_in(var a:tar;n:byte);
+var i,j,d,k:byte;
+Begin
+  for i:=2 to n do
+   begin
+    j:=1;
+    while (a[j]<=a[i])and(j<i) do j:=j+1;
+    d:=a[i];
+    for k:=i downto j+1 do a[k]:=a[k-1];
+    a[j]:=d;
+   end;
+End;

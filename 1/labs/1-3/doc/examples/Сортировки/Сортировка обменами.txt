@@ -1,0 +1,22 @@
+{Сортировка пузырьком}
+
+procedure sort(var a:tar;n:byte);
+var i,j,d:integer;                   
+    t:boolean;
+Begin
+  i:=1;
+  repeat
+    t:=true;
+    for j:=1 to n-i do
+     begin
+      if a[j]>a[j+1] then 
+       begin
+        d:=a[j+1];
+        a[j+1]:=a[j];
+        a[j]:=d;
+        t:=false;
+       end;
+     end;
+    i:=i+1;
+  until(i>n)or t;
+End;

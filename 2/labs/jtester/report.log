@@ -1,0 +1,298 @@
+Start testing...
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\bubble_sort.exe"
+
+Execution for N = 2 | time = 218
+Execution for N = 4 | time = 211
+Execution for N = 6 | time = 366
+Execution for N = 8 | time = 640
+Execution for N = 10 | time = 986
+Execution for N = 12 | time = 1377
+Execution for N = 14 | time = 1880
+Execution for N = 16 | time = 2453
+Execution for N = 18 | time = 3114
+Execution for N = 20 | time = 3829
+Execution for N = 22 | time = 4619
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = 0.96863561
+y = 223.8227 * x + -895.6000
+
+LogarithmicRegression:
+correlation = 0.84492985
+y = 1738.0818 * log(x) + -2179.9685
+
+PowerRegression:
+correlation = 0.96038034
+y = 3.7308 * ( x ^ 1.4430 )
+
+QuasilogRegression:
+correlation = 0.98549763
+y = 67.1336 * x * log(x) + -336.1230
+
+End analyzing approximations
+Best approximation is:
+
+QuasilogRegression:
+correlation = 0.98549763
+y = 67.1336 * x * log(x) + -336.1230
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\bubble_sort.exe"
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\coctail_sort.exe"
+
+Execution for N = 2 | time = 107
+Execution for N = 4 | time = 143
+Execution for N = 6 | time = 286
+Execution for N = 8 | time = 498
+Execution for N = 10 | time = 768
+Execution for N = 12 | time = 1094
+Execution for N = 14 | time = 1466
+Execution for N = 16 | time = 1905
+Execution for N = 18 | time = 2399
+Execution for N = 20 | time = 3082
+Execution for N = 22 | time = 3718
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = 0.96809548
+y = 180.2818 * x + -757.3818
+
+LogarithmicRegression:
+correlation = 0.84623407
+y = 1402.9108 * log(x) + -1798.6214
+
+PowerRegression:
+correlation = 0.98105569
+y = 3.0610 * ( x ^ 1.6060 )
+
+QuasilogRegression:
+correlation = 0.98479826
+y = 54.0657 * x * log(x) + -306.4810
+
+End analyzing approximations
+Best approximation is:
+
+QuasilogRegression:
+correlation = 0.98479826
+y = 54.0657 * x * log(x) + -306.4810
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\coctail_sort.exe"
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\comb_sort.exe"
+
+Execution for N = 2 | time = 39
+Execution for N = 4 | time = 29
+Execution for N = 6 | time = 41
+Execution for N = 8 | time = 28
+Execution for N = 10 | time = 34
+Execution for N = 12 | time = 42
+Execution for N = 14 | time = 31
+Execution for N = 16 | time = 32
+Execution for N = 18 | time = 32
+Execution for N = 20 | time = 33
+Execution for N = 22 | time = 35
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = -0.16803946
+y = -0.1182 * x + 35.6000
+
+LogarithmicRegression:
+correlation = -0.20819972
+y = -1.3035 * log(x) + 37.1595
+
+PowerRegression:
+correlation = -0.18302788
+y = 3.5985 * ( x ^ -0.0329 )
+
+QuasilogRegression:
+correlation = -0.15783985
+y = -0.0327 * x * log(x) + 35.2184
+
+End analyzing approximations
+Best approximation is:
+
+LogarithmicRegression:
+correlation = -0.20819972
+y = -1.3035 * log(x) + 37.1595
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\comb_sort.exe"
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\insertion_sort.exe"
+
+Execution for N = 2 | time = 65
+Execution for N = 4 | time = 52
+Execution for N = 6 | time = 73
+Execution for N = 8 | time = 118
+Execution for N = 10 | time = 180
+Execution for N = 12 | time = 284
+Execution for N = 14 | time = 383
+Execution for N = 16 | time = 406
+Execution for N = 18 | time = 469
+Execution for N = 20 | time = 553
+Execution for N = 22 | time = 737
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = 0.97149867
+y = 33.3227 * x + -98.0545
+
+LogarithmicRegression:
+correlation = 0.85913229
+y = 262.3398 * log(x) + -297.4357
+
+PowerRegression:
+correlation = 0.93359803
+y = 2.6777 * ( x ^ 1.1779 )
+
+QuasilogRegression:
+correlation = 0.98440083
+y = 9.9543 * x * log(x) + -13.4753
+
+End analyzing approximations
+Best approximation is:
+
+QuasilogRegression:
+correlation = 0.98440083
+y = 9.9543 * x * log(x) + -13.4753
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\insertion_sort.exe"
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\merge_sort.exe"
+
+Execution for N = 2 | time = 42
+Execution for N = 4 | time = 78
+Execution for N = 6 | time = 150
+Execution for N = 8 | time = 277
+Execution for N = 10 | time = 386
+Execution for N = 12 | time = 517
+Execution for N = 14 | time = 679
+Execution for N = 16 | time = 914
+Execution for N = 18 | time = 1324
+Execution for N = 20 | time = 1433
+Execution for N = 22 | time = 1648
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = 0.97316387
+y = 84.2682 * x + -334.1273
+
+LogarithmicRegression:
+correlation = 0.86034975
+y = 663.2213 * log(x) + -837.8831
+
+PowerRegression:
+correlation = 0.99150784
+y = 2.2969 * ( x ^ 1.6265 )
+
+QuasilogRegression:
+correlation = 0.98694294
+y = 25.1948 * x * log(x) + -120.9303
+
+End analyzing approximations
+Best approximation is:
+
+PowerRegression:
+correlation = 0.99150784
+y = 2.2969 * ( x ^ 1.6265 )
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\merge_sort.exe"
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\selection_sort.exe"
+
+Execution for N = 2 | time = 54
+Execution for N = 4 | time = 58
+Execution for N = 6 | time = 91
+Execution for N = 8 | time = 139
+Execution for N = 10 | time = 225
+Execution for N = 12 | time = 291
+Execution for N = 14 | time = 391
+Execution for N = 16 | time = 494
+Execution for N = 18 | time = 616
+Execution for N = 20 | time = 758
+Execution for N = 22 | time = 916
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = 0.97147870
+y = 43.4591 * x + -154.8727
+
+LogarithmicRegression:
+correlation = 0.85156369
+y = 339.1332 * log(x) + -408.0341
+
+PowerRegression:
+correlation = 0.96270592
+y = 2.5200 * ( x ^ 1.3097 )
+
+QuasilogRegression:
+correlation = 0.98730332
+y = 13.0208 * x * log(x) + -45.7865
+
+End analyzing approximations
+Best approximation is:
+
+QuasilogRegression:
+correlation = 0.98730332
+y = 13.0208 * x * log(x) + -45.7865
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\selection_sort.exe"
+----------------------------------------
+----------------------------------------
+Start testing file "D:\work\prog\projects\c++\jtester\jtester\shell_sort.exe"
+
+Execution for N = 2 | time = 67
+Execution for N = 4 | time = 63
+Execution for N = 6 | time = 64
+Execution for N = 8 | time = 100
+Execution for N = 10 | time = 129
+Execution for N = 12 | time = 176
+Execution for N = 14 | time = 278
+Execution for N = 16 | time = 319
+Execution for N = 18 | time = 380
+Execution for N = 20 | time = 460
+Execution for N = 22 | time = 543
+
+Start analyzing approximations
+
+LinearRegression:
+correlation = 0.96536818
+y = 25.0136 * x + -65.7091
+
+LogarithmicRegression:
+correlation = 0.83752488
+y = 193.1912 * log(x) + -206.8456
+
+PowerRegression:
+correlation = 0.90968760
+y = 2.8776 * ( x ^ 1.0049 )
+
+QuasilogRegression:
+correlation = 0.98272408
+y = 7.5068 * x * log(x) + -3.3172
+
+End analyzing approximations
+Best approximation is:
+
+QuasilogRegression:
+correlation = 0.98272408
+y = 7.5068 * x * log(x) + -3.3172
+
+End testing file "D:\work\prog\projects\c++\jtester\jtester\shell_sort.exe"
+----------------------------------------
+----------------------------------------
+End testing...

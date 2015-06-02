@@ -1,0 +1,17 @@
+{—ортировка подсчетом}
+Procedure Sort(var a:tar; n: Integer);
+Var c: Tar;
+    max,i,l,j: integer;
+Begin  
+Max:=a[1];
+ For i:=1 to n do
+ if a[i]>max then max:=a[i];{нахождение}
+ For i:=1 to max do c[i]:=0;    {максимума}
+ For i:=1 to n do c[a[i]]:=c[a[i]]+1;
+ l:=1;
+ for i:=1 to max do
+  if c[i]<>0 then begin
+    For j:=l to c[i]+l do a[j]:=i;
+    l:=l+c[j];                 
+                  end;
+  end;

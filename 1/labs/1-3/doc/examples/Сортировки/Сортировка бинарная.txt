@@ -1,0 +1,21 @@
+{Сортировка бинарными вставками}
+
+Procedure BinSort(var a:tar;n:byte);
+var i,r,l,k,m,x: Integer;
+begin
+ for i:=2 to n do
+  begin
+   r:=i;
+   l:=1;
+    while (l<r) do begin
+     k:=(l+r) div 2;
+     if a[k]<a[i] then l:=k+1 else r:=k;
+                   end;
+   k:=r;
+   x:=a[i];
+   for m:=i downto k+1 do
+   a[m]:=a[m-1];
+   a[k]:=x;
+  end;
+end;
+

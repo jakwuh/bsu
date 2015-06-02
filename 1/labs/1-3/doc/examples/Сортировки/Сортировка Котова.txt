@@ -1,0 +1,23 @@
+{Сортировка по Котову}
+
+procedure quiksort(var d:tar;n:byte);
+var a,s:tar;
+    x,i:integer;
+BEGIN
+  for i:=1 to n do begin a[i]:=0;s[i]:=0 end;
+  for i:=1 to n do
+   begin
+    x:=d[i];
+    s[i]:=a[x];
+    a[x]:=i
+   end;
+  for i:=1 downto n do
+   begin
+    x:=a[i];
+    while x<>0 do
+     begin
+      write(d[x],' ');
+      x:=s[x]
+     end;
+   end;
+END;

@@ -1,0 +1,20 @@
+{Сортировка по Хоару}
+   procedure Qsort(var a:tar;l,r:word);
+    var b,p,i,j: integer;
+    begin
+      b:= a[(l+r) div 2]; i:=l; j:=r;
+      while i<=j do
+        begin
+        while a[i] < b do  inc(i);
+        while a[j] > b do  dec(j);
+             if i<=j then
+                 begin
+                   p:=a[i];
+                   a[i]:=a[j];
+                   a[j]:=p;
+                   inc(i);dec(j);
+                  end;
+         end;
+         if l<j then Qsort(a,l,j);
+         if i<r then Qsort(a,i,r);
+      end;
