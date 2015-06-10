@@ -19,11 +19,13 @@ int main()
 {
 	ifstream in("out.bin", ios::in | ios::binary);
 	ofstream out("out.bin", ios::out | ios::binary);
+	stringstream ss;
 	Test a, b;
 	b.x = b.y = b.z = 0;
 	out << a;
 	in >> b;
 	out.close();
 	in.close();
+	ss << a;
 	system("pause");
 }
