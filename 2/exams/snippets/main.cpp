@@ -23,9 +23,10 @@ int main()
 	Test a, b;
 	b.x = b.y = b.z = 0;
 	out << a;
-	in >> b;
+	// in >> b;
 	out.close();
 	in.close();
 	ss << a;
+	// cout << a;
 	system("pause");
 }

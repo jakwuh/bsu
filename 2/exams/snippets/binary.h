@@ -1,21 +1,22 @@
-#ifndef __BINARY_TEMPLATE_H_INCLUDED__
-#define __BINARY_TEMPLATE_H_INCLUDED__
+#ifndef __BINARY_H_INCLUDED__
+#define __BINARY_H_INCLUDED__
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <type_traits>
+#include "collection.h"
 
-class BinaryTemplate
+class Binary
 {
 public:
+	void save(std::ios& stream)	{ stream << *this; }
+	void load(std::ios& stream) { stream >> *this; }
 
 	template <typename K>
 	friend std::ios& operator << (std::ios&, K const&);
-
 	template <typename K>
 	friend std::ios& operator >> (std::ios&, K&);
-
 };
 
 template <typename Stream, typename K>
