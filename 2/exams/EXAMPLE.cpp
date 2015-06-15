@@ -7,6 +7,7 @@ HINSTANCE hI;
 
 void home();
 void login();
+void go();
 
 int WINAPI WinMain(HINSTANCE hI_, HINSTANCE hPI, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -46,6 +47,7 @@ void login()
 	editName->resize(200, 100);
 	editName->setPosition(Position::hcenter, 200);
 	editName->show();
+	editName->on(Action::focus, go);
 	ui["editName"] = editName;
 
 	Button* buttonExit = new Button(hI, ui["window"]);
@@ -56,6 +58,22 @@ void login()
 	buttonExit->show();
 	buttonExit->on(Action::click, home);
 	ui["buttonExit"] = buttonExit;
+
+	CheckBox* checkBox = new CheckBox(hI, ui["window"]);
+	checkBox->resize(100, 20);
+	checkBox->setPosition(Position::hcenter, 0);
+	checkBox->setText("blavla");
+	checkBox->show();
+	checkBox->on(Action::click, go);
+	ui["checkBox"] = checkBox;
+}
+
+void go()	
+{
+	Popup::show(hI, *ui["window"], "hihihi");
+	// CheckBox* checkBox = dynamic_cast<CheckBox*>(ui["checkBox"]);
+	// checkBox->setState(true);
+	// MessageBox(NULL, Window::saveFile().c_str(), "SDfd", MB_OK);
 }
 
 void home()
@@ -102,6 +120,8 @@ void home()
     grid->addRow(row);
     grid->addRow(row);
     grid->addRow(row);
+    grid->getSelectedId();
+    grid->on(Action::select, go);
     ui["grid"] = grid;
 }
 
@@ -138,36 +158,3 @@ void home()
 // 	// in.close();
 // 	system("pause");
 // }
-
-
-// // my dream
-
-// void intro(Window& window)
-// {
-// 	Button button(0, 0, 100, 200);
-// 	button.setText("hello world");
-// 	button.setFont(UI::Fonts::bold);
-// 	button.on(UI::Actions::click, Delegate(&window, &Window::close);	
-// }
-
-// void home(Window& window)
-// {
-
-// }
-
-// Window window(500, 600);
-// window.setCaption("Hello world");
-// window.show();
-
-// Popup popup();
-// popup.setFont(UI::Fonts::thick);
-// window.on(UI::Actions::popup, Delegate(&popup, &Popup::show);
-
-// Timer timer(500);
-// timer.on(UI::Actions::end, Delegate(&popup, &Popup::show));
-
-// window.add(popup);
-// window.add(button);
-// window.remove(button);
-
-// window.show();

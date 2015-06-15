@@ -9,7 +9,7 @@
 
 
 // Choices
-enum class Action {resize, redraw, change, click, select, timer};
+enum class Action {resize, redraw, change, click, select, timer, focus};
 enum class Position {left, hcenter, right, top, vcenter, bottom};
 
 

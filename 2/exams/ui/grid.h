@@ -15,10 +15,12 @@ public:
 	Grid(HINSTANCE hI, UI* ui);
 	void addColumn(std::string const&, unsigned, unsigned);
 	void addRow(std::vector<std::string> const&);
-	std::vector<std::string> getRow();
+	std::vector<std::string> getRow(unsigned);
 	void deleteRow(unsigned);
 	void clear();
-	unsigned count();
+	unsigned rowCount();
+	unsigned columnCount();
+	int getSelectedId();
 protected:
 	void registerWindow();
 };
