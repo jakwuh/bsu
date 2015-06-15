@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"co",
+				"comboBox"
+			],
+			[
+				"edi",
+				"editName"
+			],
+			[
+				"Edi",
+				"EditBox"
+			],
+			[
+				"te",
+				"textBox"
+			],
+			[
+				"re",
+				"registerWindow"
+			],
+			[
+				"butt",
+				"buttonExit"
+			],
+			[
+				"but",
+				"buttonExit"
+			],
+			[
+				"top",
+				"topStrategy"
+			],
+			[
+				"left",
+				"leftStrategy"
+			],
+			[
+				"Draw",
+				"DrawableStrategy"
+			],
+			[
+				"LP",
+				"LPCTSTR"
+			],
+			[
+				"json",
+				"json_encode"
+			],
+			[
+				"HIN",
+				"HINSTANCE"
+			],
+			[
 				"bin",
 				"binary"
 			],
@@ -288,10 +340,6 @@
 				"registrationValidator"
 			],
 			[
-				"re",
-				"registrationValidator"
-			],
-			[
 				"req",
 				"require_once"
 			],
@@ -466,59 +514,43 @@
 			[
 				"lo",
 				"usd_local"
-			],
-			[
-				"mi",
-				"minimal_price_in_usd"
-			],
-			[
-				"currency_",
-				"currency_rate_in_usd"
-			],
-			[
-				"calen",
-				"calendars"
-			],
-			[
-				"plae",
-				"places_string"
-			],
-			[
-				"org",
-				"organization_name"
-			],
-			[
-				"resi",
-				"resize_sidebar_title_text"
-			],
-			[
-				"n",
-				"nullptr"
-			],
-			[
-				"acl",
-				"aclShortcourseShow"
-			],
-			[
-				"va",
-				"values"
-			],
-			[
-				"shortcour",
-				"shortcourse-form"
-			],
-			[
-				"shortcourse_cl",
-				"shortcourse_calendar"
-			],
-			[
-				"Short",
-				"Shortcourseform"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 3573,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ui/window.cpp",
+			"settings":
+			{
+				"buffer_size": 2212,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ui/timer.h",
+			"settings":
+			{
+				"buffer_size": 320,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ui/timer.cpp",
+			"settings":
+			{
+				"buffer_size": 360,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -544,11 +576,27 @@
 	"command_palette":
 	{
 		"height": 152.0,
-		"last_filter": "c++",
+		"last_filter": "C+",
 		"selected_items":
 		[
 			[
+				"C+",
+				"Set Syntax: C++"
+			],
+			[
 				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"+",
+				"Set Syntax: C++"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"c+",
 				"Set Syntax: C++"
 			],
 			[
@@ -566,10 +614,6 @@
 			[
 				"hmtl",
 				"Set Syntax: HTML"
-			],
-			[
-				"c+",
-				"Set Syntax: C++"
 			],
 			[
 				"insta",
@@ -610,10 +654,6 @@
 			[
 				"jso",
 				"Set Syntax: JSON"
-			],
-			[
-				"php",
-				"Set Syntax: PHP"
 			],
 			[
 				"js",
@@ -812,10 +852,6 @@
 				"Package Control: Install Package"
 			],
 			[
-				"+",
-				"Set Syntax: C++11"
-			],
-			[
 				"cla",
 				"Clang Format: Set Path"
 			],
@@ -902,15 +938,66 @@
 	],
 	"file_history":
 	[
-		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/menu.cpp",
-		"/D/work/prog/terms/2/exams/snippets/ui/button.h",
-		"/D/work/prog/terms/2/exams/snippets/ui/window.h",
-		"/D/work/prog/terms/2/exams/snippets/main.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/all.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/ui.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/ui.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/edit.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/interfaces.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/edit.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/combobox.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/combobox.h",
+		"/D/work/prog/terms/2/exams/snippets/combobox.h",
+		"/D/work/prog/terms/2/exams/snippets/combobox.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/window.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/interfaces.cpp",
 		"/D/work/prog/terms/2/exams/snippets/binary/binary.h",
-		"/D/work/prog/terms/2/exams/snippets/binary/utils.h",
-		"/D/work/prog/terms/2/lections/Stream classes.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/editbox.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/textbox.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/textbox.h",
+		"/D/work/prog/terms/2/exams/snippets/editbox.h",
+		"/D/work/prog/terms/2/exams/snippets/editbox.cpp",
+		"/C/Users/James Akwuh/Downloads/PROD.h",
+		"/C/Users/James Akwuh/Downloads/MyForm.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/label.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/label.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/window.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/button.cpp",
+		"/D/work/prog/terms/2/exams/snippets/main.cpp",
+		"/D/work/prog/terms/2/lections/Examples/WinApi Example #2.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/button.h",
+		"/D/work/prog/terms/2/labs/2-3/cpp/2 list/list/list.cpp",
+		"/D/work/prog/terms/2/labs/2-3/cpp/2 list/list/list.h",
+		"/D/work/prog/terms/2/labs/2-5/cpp/3 template vector/template vector/string.h",
+		"/D/work/prog/terms/2/labs/2-5/cpp/3 template vector/template vector/vector.h",
+		"/D/work/prog/terms/2/exams/snippets/ui/message.h",
 		"/D/work/prog/terms/2/exams/snippets/ui/exception.h",
+		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/menu.cpp",
+		"/D/work/prog/terms/2/exams/snippets/ui/styles.h",
+		"/C/xampp/htdocs/smartsearch/app/Resources/views/doc/prototype.html.twig",
+		"/C/xampp/htdocs/smartsearch/app/Resources/views/prototype/test.html.twig",
+		"/C/Users/James Akwuh/Desktop/sqa/docs.txt",
+		"/D/work/prog/terms/2/exams/snippets/ui/drawable.h",
+		"/D/work/prog/terms/2/labs/jrush/game/src/utils/styles.h",
+		"/D/work/prog/terms/2/exams/snippets/utils/format.cpp",
+		"/D/work/prog/terms/2/exams/snippets/utils/format.h",
+		"/C/Users/James Akwuh/AppData/Local/Temp/Rar$DIa0.201/paginator.php",
+		"/C/Users/James Akwuh/AppData/Local/Temp/Rar$DIa0.278/pagination.css",
+		"/D/work/prog/terms/2/labs/jrush/game/src/core/application.cpp",
+		"/D/work/prog/terms/2/labs/jrush/game/src/main.cpp",
+		"/D/work/prog/terms/2/labs/jrush/game/src/core/application.h",
+		"/C/xampp/htdocs/hack/trash/api/paginator.php",
+		"/C/xampp/htdocs/hack/trash/test.php",
+		"/D/work/prog/terms/2/labs/jrush/game/src/core/event_handler.cpp",
+		"/D/work/prog/terms/2/labs/jrush/game/src/example.cpp",
+		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/view.h",
+		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/settings.cpp",
+		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/tmp.cpp",
+		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/bitmap.h",
+		"/D/work/prog/terms/2/labs/jrush/game/src/graphics/circle.h",
+		"/D/work/prog/terms/2/exams/snippets/binary/utils.h",
 		"/D/work/prog/terms/2/exams/snippets/binary/exception.h",
+		"/D/work/prog/terms/2/exams/snippets/snippets.sublime-project",
+		"/D/work/prog/terms/2/lections/Stream classes.cpp",
 		"/D/work/prog/terms/2/exams/snippets/binary/error.h",
 		"/D/work/prog/projects/c++/snippets/binary_template/in.bin",
 		"/D/work/prog/projects/c++/snippets/binary_template/out.bin",
@@ -963,7 +1050,6 @@
 		"/C/xampp/htdocs/sqa/application/views/shortcourse/shortcourse.php",
 		"/C/xampp/htdocs/sqa/application/classes/Controller/Admin/Parser.php",
 		"/C/xampp/htdocs/sqa/application/classes/ACL.php",
-		"/C/Users/James Akwuh/Desktop/sqa/docs.txt",
 		"/C/xampp/htdocs/sqa/application/classes/Model/ShortcourseForm.php",
 		"/C/xampp/htdocs/sqa/application/classes/Controller/Shortcourses.php",
 		"/C/xampp/htdocs/sqa/application/classes/Controller/Common2.php",
@@ -979,61 +1065,11 @@
 		"/C/xampp/htdocs/sqa/application/config/studyqa.php",
 		"/C/xampp/htdocs/sqa/application/views/admin/univer.php",
 		"/C/xampp/htdocs/sqa/application/classes/Controller/Ajax.php",
-		"/C/xampp/htdocs/sqa/application/classes/Email.php",
-		"/D/work/english/projects/devsize/en/translation.txt",
-		"/C/Users/James Akwuh/Downloads/Telegram Desktop/translation.txt",
-		"/C/Users/James Akwuh/Downloads/Telegram Desktop/translation (2).txt",
-		"/D/work/english/projects/devsize/ru/ru.txt",
-		"/C/Users/James Akwuh/Desktop/en.txt",
-		"/C/Users/James Akwuh/Desktop/ru.txt",
-		"/C/xampp/htdocs/sqa/application/classes/Controller/Univer.php",
-		"/C/xampp/htdocs/sqa/application/classes/Controller/Common.php",
-		"//10.150.1.3/Subfaculty/Каф. ТП/!!Программы студентов/Карпович Н А/1_Курс/2_семестр/2014_15/7 группа/Аквух Джеймс/sam_27_05/sam_27_05/main.cpp",
-		"//10.150.1.3/Subfaculty/Каф. ТП/!!Программы студентов/Карпович Н А/1_Курс/2_семестр/2014_15/7 группа/Аквух Джеймс/sam_27_05/sam_27_05/olymp.h",
-		"/C/Users/James Akwuh/Documents/Visual Studio 2013/Projects/sam_27_05/sam_27_05/olymp.bin",
-		"/C/Users/James Akwuh/Documents/Visual Studio 2013/Projects/sam_27_05/sam_27_05/parts.bin",
-		"/D/work/prog/acm/programs/algorithms/sort_algorithms.cpp",
-		"/D/work/prog/acm/programs/algorithms/long_arithmetics.h",
-		"/C/xampp/htdocs/sqa/application/classes/Database.php",
-		"/C/xampp/htdocs/sqa/modules/validator/classes/validators/UserValidator.php",
-		"/C/xampp/htdocs/sqa/application/classes/Model/UserPhone.php",
-		"/C/xampp/htdocs/sqa/application/bootstrap.php",
-		"/C/Users/James Akwuh/Desktop/sqa/as.php",
-		"/C/xampp/htdocs/sqa/application/classes/Controller/Register.php",
-		"/C/xampp/htdocs/sqa/application/classes/Model/UserAddress.php",
-		"/C/xampp/htdocs/sqa/modules/googleapi/vendor/src/contrib/Google_BooksService.php",
-		"/D/work/prog/projects/web/tr/code/src/Tkrm/BaseBundle/Resources/views/base.html.twig",
-		"/C/xampp/htdocs/sqa/media/img/mail/shortcourse_book_user.html",
-		"/C/xampp/htdocs/sqa/media/img/mail/webmail1.html",
-		"/C/Users/James Akwuh/Desktop/reviews/index.html",
-		"/C/Users/James Akwuh/Desktop/12.html",
-		"/C/Users/James Akwuh/Desktop/Вилла «Северин» в Калининграде, Россия_ бронирование и цены — hotellook.ru.html",
-		"/C/Users/James Akwuh/Desktop/jka.html",
-		"/C/xampp/htdocs/sqa/media/img/mail/shortcourse_book_admin.html",
-		"/C/xampp/htdocs/sqa/application/classes/Controller/Profile.php",
-		"/C/xampp/htdocs/sqa/application/classes/Controller/Admin/Users.php",
-		"/C/xampp/htdocs/sqa/modules/auth/guide/auth/config.md",
-		"/C/xampp/htdocs/sqa/modules/geo/classes/Geo.php",
-		"/C/Users/James Akwuh/Desktop/request.php",
-		"/C/Users/James Akwuh/Desktop/aviasales.php",
-		"/C/xampp/htdocs/sqa/request.txt",
-		"/C/xampp/htdocs/sqa/modules/geo/classes/Kohana/Geo.php",
-		"/C/Users/James Akwuh/Downloads/f_88155621c8fa97df.sql",
-		"/C/xampp/htdocs/.htaccess",
-		"/C/xampp/htdocs/sqa/system/classes/HTTP/Message.php",
-		"/C/xampp/htdocs/sqa/application/classes/Model/UserEmail.php",
-		"/C/xampp/htdocs/sqa/modules/googleapi/vendor/src/contrib/Google_LatitudeService.php",
-		"/C/xampp/htdocs/sqa/application/config/userguide.php",
-		"/C/xampp/htdocs/smartsearch/web/app_dev.php",
-		"/C/xampp/htdocs/smartsearch/web/app.php",
-		"/C/xampp/htdocs/smartsearch/app/config/config.yml",
-		"/C/Users/James Akwuh/Desktop/eng.txt",
-		"/C/xampp/htdocs/forbidden/readme.auth_remote.txt",
-		"/C/xampp/htdocs/sqa/composer.json"
+		"/C/xampp/htdocs/sqa/application/classes/Email.php"
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -1063,134 +1099,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"function",
-			"detach",
-			"attacdh",
-			"add",
-			"__BINARY_H_INCLUDED__",
-			"b",
-			"\\{Return\\}",
-			"\\{Space\\}",
-			"Space",
-			"{Space}",
-			"\\n",
-			" ",
-			"shortcourse",
-			"get_id",
-			"disabled",
-			"view",
-			"shortcourse.",
+			"Edit",
+			"EDIT",
+			"Edit",
+			"change",
+			"jim",
+			"LB_ADDSTRING",
+			"hw",
+			"SendDlgItemMessage",
+			"textbox",
+			"WS_CHILD",
+			"ComboBox",
+			"EDIT",
+			"Edit",
+			"edit",
+			"Edit",
+			"EDIT",
+			"click",
+			"unsigned",
+			"unsigned = 0",
+			"unsigned oper",
+			"unsigned",
+			"unsigned margin",
+			"unsigned",
+			"show",
+			"BOOL",
+			"HWND",
+			"enable",
+			"close",
+			"destroy",
+			"edName",
+			"window",
+			"labelName",
+			"hide",
 			".",
-			"shortcourse",
-			"country_id",
-			"country",
-			"city_name_en",
-			"country",
-			"countr",
-			"shortcourse",
-			"deadline",
-			"tuitionfee",
-			"deadline",
-			"city_name_en",
-			"country",
-			"shortcourse",
-			"Univer",
-			"univer",
-			"shortcourse_calendar_startdate",
-			"shortcourse_id",
-			"model",
-			"country_name_en",
-			"country",
-			"user_country",
-			"shortcourse_country_name",
-			"</script>",
-			"href",
-			"specialization",
-			"Univer",
-			"univer",
-			"City",
-			"city",
-			"Country",
-			"country",
-			"specialization_name",
-			"rganization",
-			"language_name",
-			"organization",
-			"country_name",
-			"organization",
-			"city_name",
-			"organization",
-			"organization_name",
-			"param",
-			"para",
-			"bind",
-			"deleted",
-			"model",
-			"shortcourse_specialization_name",
-			"$this->prepa",
-			"id",
-			"shortcourse_language1_id",
-			"univer",
-			"Univer",
-			"univer",
-			"organization",
-			"Univer",
-			"disabled",
-			"univer_name",
-			"country_name_en",
-			"univer",
-			"country_name_en",
-			"url",
-			"гкдurl",
-			"гкд",
-			"Db::upda",
-			"_url",
-			"add_addre",
-			"shortcoursE_name",
-			"link",
-			"place_city",
-			"place",
-			"shortcourse_calendar_deadilne_comments",
-			"die",
-			"univer",
-			"univer\n",
-			"tuitionfee",
-			"deadilne",
-			"shortcourse_calendar_tutor",
-			"city",
-			"specializations",
-			"language_id2",
-			"shortcourse_language_id2",
-			"language_id2",
-			"language_id1",
-			"issuper",
-			"specialization_name_en",
-			"shortcourse_original_url",
-			"shortcourse_url",
-			"arr1",
-			"phones",
-			"add_phon",
-			"arr1",
-			"'), ",
-			"emails",
-			"add_ema",
-			"add_ph",
-			"user_ema",
-			"clear_pho",
-			"haystack",
-			"->",
-			"DB::select",
-			"select",
-			"add_ema",
-			"input",
-			"clear_ema",
-			"univer_name",
-			"country_name_en",
-			"registerconfirmbefore",
-			"Email:",
-			"email",
-			"info",
-			"save_photo_gall"
+			"login",
+			"test",
+			"RICHEDIT_CLASS",
+			"EDITBox",
+			"E",
+			"EDIT",
+			"Edit",
+			"EditBox",
+			"TextBox",
+			"out",
+			"ostream",
+			"Ar",
+			"EDIT",
+			"Edit",
+			"EDIT",
+			"0",
+			"Label",
+			"LABEL",
+			"EDIT",
+			"Edit",
+			"edit",
+			"Label",
+			"Edit",
+			"EDIT",
+			"200",
+			"100",
+			"Button",
+			"BUTTON_",
+			"interfaces",
+			"ids",
+			"BTN_PLAY",
+			"window_ptr",
+			"ui/",
+			"Strategy()",
+			"Strategy",
+			"rp",
+			"}",
+			"ptop",
+			"rp",
+			"top",
+			"left",
+			"500",
+			"100",
+			"hI",
+			"Name",
+			"name",
+			"Name",
+			"name",
+			"Name",
+			"name",
+			"void",
+			"vector",
+			"parent",
+			"handlerParent",
+			";\n",
+			" = 0",
+			"virtual",
+			" = 0",
+			"hWnd",
+			"unsigned",
+			"VPosition",
+			"r",
+			"hi",
+			"hI",
+			"hi",
+			"hI",
+			"COLORS",
+			"draw",
+			"right",
+			"hwnd_ptr",
+			"attach",
+			"buttonExit",
+			"std::map<HWND, Window*>",
+			"wstring",
+			"string",
+			"form",
+			"z.",
+			"z",
+			"std::string",
+			"format",
+			"toString",
+			"forma",
+			"LPCSTR",
+			"toLPCTSTR",
+			"to",
+			"static",
+			"string",
+			"btn_height",
+			"h_instance",
+			"res",
+			"paginatorArray",
+			"last",
+			"main_window",
+			"window_proc"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1198,6 +1234,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"parent",
+			"string",
+			"std::wstring",
 			"\\n",
 			" ",
 			"  ",
@@ -1225,8 +1264,122 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "main.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3573,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2218,
+								2218
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 938.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ui/window.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1444,
+								1444
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 718.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "ui/timer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 320,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								244,
+								244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "ui/timer.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 360,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								232,
+								232
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1277,7 +1430,7 @@
 	"project": "snippets.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1286,6 +1439,94 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"all",
+				"ui\\all.h"
+			],
+			[
+				"uicp",
+				"ui\\ui.cpp"
+			],
+			[
+				"ui",
+				"ui\\ui.h"
+			],
+			[
+				"edi",
+				"ui\\edit.h"
+			],
+			[
+				"int",
+				"ui\\interfaces.h"
+			],
+			[
+				"edicp",
+				"ui\\edit.cpp"
+			],
+			[
+				"in",
+				"ui\\interfaces.h"
+			],
+			[
+				"co",
+				"ui\\combobox.h"
+			],
+			[
+				"inte",
+				"ui\\interfaces.h"
+			],
+			[
+				"win",
+				"ui\\window.cpp"
+			],
+			[
+				"coh",
+				"ui\\combobox.h"
+			],
+			[
+				"inteh",
+				"ui\\interfaces.h"
+			],
+			[
+				"inh",
+				"ui\\interfaces.h"
+			],
+			[
+				"incp",
+				"ui\\interfaces.cpp"
+			],
+			[
+				"wi",
+				"ui\\window.cpp"
+			],
+			[
+				"butt",
+				"ui\\button.cpp"
+			],
+			[
+				"bu",
+				"ui\\button.h"
+			],
+			[
+				"cpp",
+				"ui\\window.cpp"
+			],
+			[
+				"",
+				"ui\\window.cpp"
+			],
+			[
+				"form",
+				"utils\\format.h"
+			],
+			[
+				"main",
+				"main.cpp"
+			],
+			[
+				"for",
+				"utils\\format.h"
+			],
 			[
 				"ecp",
 				"binary\\exception.h"
@@ -1709,94 +1950,6 @@
 			[
 				"controprof",
 				"application\\classes\\Controller\\Profile.php"
-			],
-			[
-				"controllerusers",
-				"application\\classes\\Controller\\Admin\\Users.php"
-			],
-			[
-				"stu",
-				"application\\config\\studyqa.php"
-			],
-			[
-				"config",
-				"modules\\auth\\guide\\auth\\config.md"
-			],
-			[
-				"succ",
-				"application\\views\\shortcourse\\success.php"
-			],
-			[
-				"ajax",
-				"application\\classes\\Controller\\Ajax.php"
-			],
-			[
-				"geo",
-				"modules\\geo\\classes\\Kohana\\Geo.php"
-			],
-			[
-				"configsta",
-				"application\\config\\studyqa.php"
-			],
-			[
-				"kohanageo",
-				"modules\\geo\\classes\\Kohana\\Geo.php"
-			],
-			[
-				"viewsucc",
-				"application\\views\\shortcourse\\success.php"
-			],
-			[
-				"messa",
-				"system\\classes\\HTTP\\Message.php"
-			],
-			[
-				"viewsea",
-				"application\\views\\shortcourse\\search.php"
-			],
-			[
-				"modelser",
-				"modules\\googleapi\\vendor\\src\\contrib\\Google_LatitudeService.php"
-			],
-			[
-				"user",
-				"application\\config\\userguide.php"
-			],
-			[
-				"userema",
-				"application\\classes\\Model\\UserEmail.php"
-			],
-			[
-				"modeluse",
-				"application\\classes\\Model\\User.php"
-			],
-			[
-				"",
-				"composer.json"
-			],
-			[
-				"forma",
-				"application\\classes\\Format.php"
-			],
-			[
-				"controsho",
-				"application\\classes\\Controller\\Shortcourses.php"
-			],
-			[
-				"modelsta",
-				"application\\classes\\Model\\State.php"
-			],
-			[
-				"stripeval",
-				"modules\\validator\\classes\\validators\\StripeValidator.php"
-			],
-			[
-				"modephone",
-				"application\\classes\\Model\\Phonetype.php"
-			],
-			[
-				"userval",
-				"modules\\validator\\classes\\validators\\UserValidator.php"
 			]
 		],
 		"width": 0.0
@@ -1844,12 +1997,12 @@
 	},
 	"select_symbol":
 	{
-		"height": 0.0,
+		"height": 400.0,
 		"last_filter": "",
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 400.0
 	},
 	"selected_group": 0,
 	"settings":

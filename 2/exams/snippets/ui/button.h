@@ -3,14 +3,16 @@
 
 #include <string>
 #include <Windows.h>
-#include "../ui/interfaces.h"
-#include "../utils/format.h"
+#include "../ui/ui.h"
+#include "../ui/window.h"
 #include "../ui/exception.h"
 
-class Button :
+class Button : public UI
 {
 public:
-	
+	Button(HINSTANCE hI, UI* ui);
+protected:
+	void registerWindow();
 };
 
 #endif
