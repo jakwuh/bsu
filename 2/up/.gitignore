@@ -1,0 +1,15 @@
+# i/o files
+input.txt
+output.txt
+*.exe
+
+# Unnecessary VS files and folders
+Debug
+*.sln
+*.sdf
+*.filters
+*.vcxproj
+*.suo
+*.opensdf
+*.gch
+*.v12
