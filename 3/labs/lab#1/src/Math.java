@@ -39,6 +39,7 @@ public class Math {
 
     private static double verify(int n, double x)
     {
+        int[][] a = {{1,2},{1,2}};
         double r = java.lang.Math.pow(x, 5) / (n * (n - 1));
         double p = r;
         double s = p;
