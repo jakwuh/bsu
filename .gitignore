@@ -12,3 +12,8 @@ Debug
 *.suo
 *.opensdf
 *.gch
+
+# Unnecessary Java files and folders
+*lab*/\.idea/
+*lab*/out/
+*lab*/*\.iml
