@@ -15,5 +15,6 @@ Debug
 
 # Unnecessary Java files and folders
 *lab*/*idea/
-*lab*/out/
+*/labs/*/*.iml
+*/labs/*/out
 */\.idea
