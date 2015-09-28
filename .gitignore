@@ -14,6 +14,6 @@ Debug
 *.gch
 
 # Unnecessary Java files and folders
-*lab*/\.idea/
+*lab*/*idea/
 *lab*/out/
-*lab*/*\.iml
+*/\.idea
