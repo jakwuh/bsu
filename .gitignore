@@ -17,4 +17,5 @@ Debug
 *lab*/*idea/
 */labs/*/*.iml
 */labs/*/out
+*/labs/*/\.idea
 */\.idea
