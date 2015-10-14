@@ -20,6 +20,7 @@
 * По полному имени packageName.className `java.lang.String`
 * По сокращенному имени, предварительно импортировав. `import packageName.className`
 * Импортировать весь пакет `import packageName.*`
+* Использовать статический импорт `import static className.staticFieldName`
 
 ```java
 import p1.x;
