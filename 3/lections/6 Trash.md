@@ -59,6 +59,6 @@ a=a+b;
 
 > Для сравнивания строк использовать только `a.equals(c)`, но не `a==c`
 ```java
-"abc".equals(b);
-b.equals("abc");
+"abc".equals(b); // если b==null -> false - поэтому такой метод предпочтительней
+b.equals("abc"); // если b==null -> ошибка
 ```
