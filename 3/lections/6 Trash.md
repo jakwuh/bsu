@@ -20,3 +20,9 @@
 * По полному имени packageName.className `java.lang.String`
 * По сокращенному имени, предварительно импортировав. `import packageName.className`
 * Импортировать весь пакет `import packageName.*`
+
+```java
+import p1.x;
+import p2.x;
+// compilation error
+```
