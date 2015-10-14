@@ -1,3 +1,4 @@
+```java
 public class Circle {
 	public static final pi = 3.14159; // constant
 
@@ -9,3 +10,4 @@ public class Circle {
 		r = 1.0; // or this(1.0);
 	}
 }
+```

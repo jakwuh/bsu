@@ -1,3 +1,4 @@
+```java
 /**
  * String - это класс
  * println - метод, вызываемый у объекта out - поля класса System
@@ -7,3 +8,4 @@ public class HelloWorld {
 		System.out.println("Hello World!");
 	}
 }
+```
