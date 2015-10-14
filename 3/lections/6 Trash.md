@@ -20,10 +20,23 @@
 * По полному имени packageName.className `java.lang.String`
 * По сокращенному имени, предварительно импортировав. `import packageName.className`
 * Импортировать весь пакет `import packageName.*`
-* Использовать статический импорт `import static className.staticFieldName`
+* Использовать статический импорт `import static className.staticFieldName` или `import static className.*`
 
 ```java
 import p1.x;
 import p2.x;
 // compilation error
+```  
+```java
+import static java.lang.System.out;
+out.println("Hello!");
+// или
+import static java.lang.Math.*
+double с = sqrt(pow(2, 3));
 ```
+
+## Класс String
+
+* Экземпляры только этого класса можно создвать без использования ключевого слова new. Каждый строковый литерал порождает экземпляр String, и это единственный литерал (кроме null), имеющий объектный тип
+* Затем значение любого типа может быть приведено к строке с помощью оператора конкатенации строк +
+* Еще одним важным свойством данного класса является неизменяемость. Это означает, что, породив объект, содержащий некое значение-строку, мы уже не можем изменить данное значение - необходимо создать новый объект
