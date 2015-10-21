@@ -48,3 +48,16 @@ for (int i=a.length()-1;i>=0;i--)
 ## Класс StringTokenizer
 
 * Класс java.util.StringTokenizer служит для разбиения строки на лексемы (токены).
+* Строка, которую следует разобрать, передается конструктору StringTokenizer(String str), разделителями служат пробельные символы
+* Определено еще два конструктора, которым можно также передать строку, содержащую символы-разделители лексем String Tokenizer(String str, String delim) и признак возврата разделителя лексем StringTokenizer(String str, String delim, boolean returnDelims)
+
+```java
+String s = "one,two,three four;five";
+StringTokenizer st = new StringTokenizer(s, ";, ");
+// StringTokenizer st = new StringTokenizer(s, ";, ", true); кроме слов будут выводить и все разделители
+while (st.hasMoreTokens()) {
+	System.out.println(st.nextToken());
+}
+// one two three four five
+```
+> Минусом является то, что в качестве разделителя нельзя указать разделитель в виде комбинации нескольких символов
