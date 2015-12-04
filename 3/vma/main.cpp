@@ -19,38 +19,46 @@ typedef vector<double> Vector;
 typedef vector<vector<double>> Matrix;
 
 namespace operators {
+	Vector operator+ (Vector a, Vector b) {
+		for (int i = 0; i < a.size(); ++i) a[i] += b[i];
+		return a;
+	}
+	Vector operator- (Vector a, Vector b) {
+		for (int i = 0; i < a.size(); ++i) a[i] -= b[i];
+		return a;
+	}
+	double operator* (Vector a, Vector b) {
+		double x = 0;
+		for (int i = 0; i < a.size(); ++i) x += a[i] * b[i];
+		return x;
+	}
+
 	Matrix operator+ (Matrix a, Matrix b) {
-		Matrix c(a.size(), Vector(a[0].size()));
-		for (int i = 0; i < a.size(); ++i) {
-			for (int j = 0; j < a[0].size(); ++j) {
-				c[i][j] = a[i][j] + b[i][j];
-			}
-		}
-		return c;
+		for (int i = 0; i < a.size(); ++i) a[i] = a[i] + b[i];
+		return a;
 	}
-
 	Matrix operator- (Matrix a, Matrix b) {
-		Matrix c(a.size(), Vector(a[0].size()));
-		for (int i = 0; i < a.size(); ++i) {
-			for (int j = 0; j < a[0].size(); ++j) {
-				c[i][j] = a[i][j] - b[i][j];
-			}
-		}
-		return c;
+		for (int i = 0; i < a.size(); ++i) a[i] = a[i] - b[i];
+		return a;
 	}
-
 	Matrix operator*(Matrix a, Matrix b) {
 		int n = a.size(), m = b.size(), k = b[0].size();
 		if (m != a[0].size()) {throw "Matrix:operator*:dimensions differ";}
 		Matrix c(n, Vector(k, 0));
 		for (int i = 0; i < n; ++i) {
 			for (int j = 0; j < k; ++j) {
-				for (int l = 0; l < m; ++l) {
-					c[i][j] += a[i][l] * b[l][j];
-				}
+				for (int l = 0; l < m; ++l) c[i][j] += a[i][l] * b[l][j];
 			}
 		}
 		return c;
+	}
+	Matrix operator*(Matrix a, double c) {
+		for (int i = 0; i < a.size(); ++i) {
+			for (int j = 0; j < a[0].size(); ++j) {
+				a[i][j] *= c;
+			}
+		}
+		return a;
 	}
 }
 
@@ -58,18 +66,14 @@ using namespace operators;
 namespace generators {
 	Matrix identity_matrix(int n) {
 		Matrix a(n, Vector(n, 0));
-		for (int i = 0; i < n; ++i) {
-			a[i][i] = 1;
-		}
+		for (int i = 0; i < n; ++i) a[i][i] = 1;
 		return a;
 	}
 
 	Matrix transpose(Matrix a) {
-		Matrix b(a[0].size(), Vector(a.size()));
+		Matrix b(a[0].size(), Vector(a.size(), 0));
 		for (int i = 0; i < a.size(); ++i) {
-			for (int j = 0; j < a[0].size(); ++j) {
-				b[j][i] = a[i][j];
-			}
+			for (int j = 0; j < a[0].size(); ++j) b[j][i] = a[i][j];
 		}
 		return b;
 	}
@@ -88,39 +92,27 @@ namespace generators {
 		for (int i = 0; i < b.size(); ++i) {
 			for (int k = (i == 0 ? 1 : 0); k < b.size(); k += (k == i - 1 ? 2 : 1)) {
 				double c = - b[k][i] / b[i][i];
-				for (int j = 0; j < b[0].size(); ++j) {
-					b[k][j] += c * b[i][j];
-				}
+				for (int j = 0; j < b[0].size(); ++j) b[k][j] += c * b[i][j];
 			}
-			for (int j = 0; j < b[0].size(); ++j) {
-				if (j == i) continue;
-				b[i][j] /= b[i][i];
-			}
+			for (int j = 0; j < b[0].size(); ++j) if (j != i) b[i][j] /= b[i][i];
 			b[i][i] = 1;
 		}
-		for (auto it = b.begin(); it != b.end(); ++it) {it->erase(it->begin(), it->begin() + a.size());}
+		for (auto it = b.begin(); it != b.end(); ++it) it->erase(it->begin(), it->begin() + a.size());
 		return b;
 	}
 
 	Matrix minor(Matrix a, int i, int j) {
 		a.erase(a.begin() + i);
-		for (auto it = a.begin(); it != a.end(); ++it) {it->erase(it->begin() + j);}
+		for (auto it = a.begin(); it != a.end(); ++it) it->erase(it->begin() + j);
 		return a;
 	}
 
 	Matrix quad(Matrix a) {
-		int n = a.size();
-		int m = a[0].size();
-		n = (m < n ? m : n);
-		for (int i = n; i < a.size(); ++i) {
-			a.erase(a.begin() + i);
-		}
+		int n = min(a.size(), a[0].size());
+		for(int i = n; i < a.size(); ++i) a.erase(a.begin() + i);
 		a = transpose(a);
-		for (int i = n; i < a.size(); ++i) {
-			a.erase(a.begin() + i);
-		}
-		a = transpose(a);
-		return a;
+		for(int i = n; i < a.size(); ++i) a.erase(a.begin() + i);
+		return transpose(a);
 	}
 }
 
@@ -133,22 +125,29 @@ namespace helpers {
 			for (int j = 0; j < a[0].size(); ++j) {
 				tmp += fabs(a[i][j]);
 			}
-			if (tmp > x) x = tmp;
+			x = max(tmp, x);
 		}
 		return x;
 	}
 
+	double norm(Vector x) {
+		double tmp = fabs(x[0]);
+		for (int i = 0; i < x.size(); ++i) tmp = max(tmp, fabs(x[i]));
+		return tmp;
+	}
+
 	double det(Matrix a) {
 		if (a.size() == 1) return a[0][0];
-		double sum = 0;
+		double x = 0;
 		for (int j = 0, k = 1; j < a.size(); ++j, k *= -1) {
 			Matrix m = minor(a, 0, j);
-			sum += 	k * a[0][j] * det(m);
+			x += k * a[0][j] * det(m);
 		}
-		return sum;
+		return x;
 	}
 
 	bool silvester(Matrix a) {
+		if (a.size() != a[0].size()) return false;
 		for (int i = 0; i < a.size(); ++i) {
 			for (int j = i + 1; j < a.size(); ++j) {
 				if (a[i][j] != a[j][i]) return false;
@@ -164,6 +163,15 @@ namespace helpers {
 
 	Matrix column(Matrix a, int j) {
 		return transpose(transpose(a)[j]);
+	}
+
+	Matrix swap_rows(Matrix a, int i, int j) {
+		swap(a[i], a[j]);
+		return a;
+	}
+
+	Matrix swap_cols(Matrix a, int i, int j) {
+		return transpose(swap_rows(transpose(a), i, j));
 	}
 }
 
@@ -192,7 +200,7 @@ namespace io {
 
 	void check(Matrix a, Vector x) {
 		Matrix aq = quad(a);
-		Matrix r = transpose(aq * transpose(x) - column(a, a.size()));
+		Vector r = transpose(aq * transpose(x) - column(a, a.size()))[0];
 		Matrix E = identity_matrix(a.size());
 		Matrix R = aq * inverse(aq) - E;
 		
@@ -220,7 +228,23 @@ namespace methods {
 	 */
 	void gauss_with_pivoting(Matrix a) {
 		Matrix ac(a);
+		Vector xs(a.size());
+		for (int i = 0; i < xs.size(); ++i) xs[i] = i;
 		for (int i = 0; i < ac.size(); ++i) {
+			double max = fabs(a[i][i]), maxI = i, maxJ = i;
+			for (int l = i; l < ac.size(); ++l) {
+				for (int m = i; m < ac.size(); ++m) {
+					if (fabs(ac[l][m]) > max) {
+						max = fabs(ac[l][m]);
+						maxI = l;
+						maxJ = m;
+					}
+				}
+			}
+			if (maxI != i) ac = swap_rows(ac, i, maxI);
+			if (maxJ != i) ac = swap_cols(ac, i, maxJ);
+			swap(xs[i], xs[maxJ]);
+
 			for (int k = i + 1; k < ac.size(); ++k) {
 				double c = - ac[k][i] / ac[i][i];
 				for (int j = i; j < ac[0].size(); ++j) {
@@ -233,9 +257,9 @@ namespace methods {
 		}
 		Vector v(ac.size());
 		for (int i = ac.size() - 1; i >= 0; --i) {
-			v[i] = ac[i][ac[0].size()-1];
+			v[xs[i]] = ac[i][ac[0].size()-1];
 			for (int j = i + 1; j < ac.size(); ++j) {
-				v[i] -= v[j] * ac[i][j];
+				v[xs[i]] -= v[xs[j]] * ac[i][j];
 			}
 		}
 		// solution residual
@@ -317,18 +341,15 @@ namespace methods {
 	}
 
 	void jacobi(Matrix a, double precision) {
-		Matrix tmp = a;
-		Matrix tmp_v(1, transpose(a)[a.size()]);
-		for (auto it = tmp.begin(); it != tmp.end(); ++it){it->erase(it->begin() + it->size() -1);}
-		tmp = transpose(tmp) * tmp;
-		tmp_v = transpose(tmp) * transpose(tmp_v);
-		for (int i = 0; i < tmp.size(); ++i) {
-			for (int j = 0; j < tmp.size(); ++j) {
-				a[i][j] = tmp[i][j];
-			}
-			a[i][a.size()] = tmp_v[i][0];
-		}
 		int n = a.size();
+		bool criteria = true;
+		for (int i = 0; i < n; ++i) {
+			double sum = -fabs(a[i][i]);
+			for (int j = 0; j < n; ++j) {
+				sum += fabs(a[i][j]);
+			}
+			if (a[i][i] <= sum) criteria = false;
+		}
 		Matrix X(1, Vector(n, 0));
 		double eps = precision + 1;
 		int k = 0;
@@ -341,7 +362,7 @@ namespace methods {
 					X[k + 1][i] -= a[i][j] / a[i][i] * X[k][j];
 				}
 			}
-			eps = norm(Matrix(1, X[k + 1]) - Matrix(1, X[k]));
+			eps = norm(X[k + 1] - X[k]);
 			++k;
 		}
 		Vector x = X[k];
@@ -355,7 +376,7 @@ namespace methods {
 		cout << "Jacobi method:" << endl;
 		cout << "Given matrix:" << endl;
 		print(a);
-		// cout << "Sufficient condition test:" << (sufficient ? " Passed" : " Failed") << endl;
+		cout << "Sufficient condition test:" << (criteria ? " Passed" : " Failed") << endl;
 		cout << "Solution:" << endl;
 		print(x);
 		cout << "Precision:" << endl;
@@ -369,6 +390,14 @@ namespace methods {
 		Matrix X(1, Vector(n, 0));
 		double eps = precision + 1;
 		int k = 0;
+		bool criteria = true;
+		for (int i = 0; i < n; ++i) {
+			double sum = -fabs(a[i][i]);
+			for (int j = 0; j < n; ++j) {
+				sum += fabs(a[i][j]);
+			}
+			if (a[i][i] <= sum) criteria = false;
+		}
 		while (eps > precision) {
 			X.resize(k + 2, Vector(n, 0));
 			for (int i = 0; i < n; ++i) {
@@ -382,7 +411,7 @@ namespace methods {
 					}
 				}
 			}
-			eps = norm(Matrix(1, X[k + 1]) - Matrix(1, X[k]));
+			eps = norm(X[k + 1] - X[k]);
 			++k;
 		}
 		Vector x = X[k];
@@ -396,7 +425,7 @@ namespace methods {
 		cout << "Gauss-seidel method:" << endl;
 		cout << "Given matrix:" << endl;
 		print(a);
-		// cout << "Sufficient condition test:" << (sufficient ? " Passed" : " Failed") << endl;
+		cout << "Sufficient condition test:" << (criteria ? " Passed" : " Failed") << endl;
 		cout << "Solution:" << endl;
 		print(x);
 		cout << "Precision:" << endl;
@@ -406,7 +435,37 @@ namespace methods {
 	}
 
 	void minimal_residual_method(Matrix a, double precision) {
+		Matrix aq = quad(a);
+		Matrix bq = transpose(aq) * aq;
+		Matrix f = transpose(aq) * column(a, a.size());
+		for (int i = 0; i < a.size(); ++i) {
+			for (int j = 0; j <= a.size(); ++j) {
+				a[i][j] = (j == a.size() ? f[i][0] : bq[i][j]);
+			}
+		}
+		aq = quad(a);
+		f = column(a, a.size());
 
+		Matrix x = f;
+		Matrix r = aq * x - f;
+
+		int k = 0;
+		while (norm(transpose(r)[0]) > precision) {
+			++k;
+			x = x - r * ((transpose(r) * (aq * r))[0][0] / (transpose(aq * r) * (aq * r))[0][0]);
+			r = aq * x - f;
+		}
+		Vector xs = transpose(x)[0];
+		cout << "Minimal residual method:" << endl;
+		cout << "Given matrix:" << endl;
+		print(a);
+		cout << "Sufficient condition test:" << (silvester(bq) ? " Passed" : " Failed") << endl;
+		cout << "Solution:" << endl;
+		print(xs);
+		cout << "Precision:" << endl;
+		cout << norm(transpose(r)[0]) << " (" << k << " iterations)" << endl;
+		check(a, xs);
+		cout << endl;
 	}
 }
 
