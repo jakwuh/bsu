@@ -20,3 +20,4 @@ Debug
 */labs/*/\.idea
 */\.idea
 *.class
+*.log

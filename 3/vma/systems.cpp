@@ -5,13 +5,18 @@
  * (However there should be no memory leaks because of using vectors)
  */
 #include <iostream>
+#include <fstream>
+#include <istream>
+#include <ostream>
 #include <iomanip>
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <initializer_list>
 
 #define DEBUG false
 #define EPS 0.00001
+#undef minor
 
 using namespace std;
 
@@ -118,6 +123,8 @@ namespace generators {
 
 using namespace generators;
 namespace helpers {
+	double sqr(double a){ return a*a;}
+
 	double norm(Matrix a) {
 		double x = 0;
 		for (int i = 0; i < a.size(); ++i) {
@@ -177,6 +184,7 @@ namespace helpers {
 
 using namespace helpers;
 namespace io {
+
 	void print(Vector v) {
 		if (DEBUG)cout << "{";
 		bool first = true;
@@ -338,6 +346,66 @@ namespace methods {
 	}
 
 	void square_root(Matrix a) {
+		Matrix aq = quad(a);
+		Matrix bq = transpose(aq) * aq;
+		Matrix f = transpose(aq) * column(a, a.size());
+		for (int i = 0; i < a.size(); ++i) {
+			for (int j = 0; j <= a.size(); ++j) {
+				a[i][j] = (j == a.size() ? f[i][0] : bq[i][j]);
+			}
+		}
+		aq = quad(a);
+		f = column(a, a.size());
+		int n = a.size();
+
+		Matrix s(n, Vector(n, 0));
+		s[0][0] = sqrt(a[0][0]);
+		for (int j = 1; j < n; ++j) {s[0][j] = a[0][j] / s[0][0];}
+		for (int i = 1; i < n; ++i) {
+			s[i][i] = a[i][i];
+			for (int k = 0; k < i; ++k) {
+				s[i][i] -= sqr(s[k][i]);
+			}
+			s[i][i] = sqrt(s[i][i]);
+
+			for (int j = i + 1; j < n; ++j) {
+				s[i][j] = a[i][j];
+				for (int k = 0; k < i; ++k) {
+					s[i][j] -= s[k][i] * s[k][j];
+				}
+				s[i][j] /= s[i][i];
+			}
+		}
+		Vector y(n, 0);
+		Vector x(n, 0);
+		y[0] = f[0][0] / s[0][0];
+		for (int i = 1; i < n; ++i) {
+			y[i] = f[i][0];
+			for (int j = 0; j < i; ++j) {
+				y[i] -= s[j][i] * y[j];
+			}
+			y[i] /= s[i][i];
+		}
+		x[n - 1] = y[n - 1] / s[n - 1][n - 1];
+		for (int i = n - 2; i >= 0; --i) {
+			x[i] = y[i];
+			for (int j = i + 1; j < n; ++j) {
+				x[i] -= s[i][j] * x[j];
+			}
+			x[i] /= s[i][i];
+		}
+
+		Matrix E = Matrix(a.size(), Vector(n, 0));
+		for (int i = 0; i < n; ++i){ E[i][i] =1; }
+		Matrix R = aq * inverse(aq) - E;
+		cout << "Square root method for symmetrical matrix:" << endl;
+		cout << "Given matrix:" << endl;
+		print(a);
+		cout << "Sufficient condition test:" << (silvester(aq) ? " Passed" : " Failed") << endl;
+		cout << "Solution:" << endl;
+		print(x);
+		check(a, x);
+		cout << endl;
 	}
 
 	void jacobi(Matrix a, double precision) {
@@ -470,8 +538,9 @@ namespace methods {
 }
 
 using namespace methods;
-int main() {
+int main(int argc, char *argv[]) {
 	try	{
+		if (argc == 2) {freopen (argv[1], "w", stdout);}
 		Matrix a = {
 			{0.4997, -0.0658, 0.0132, 0.0263, 0.0921, -2.8141},
 			{0.0684, 0.7824, 0.0000, -0.0526, 0.0526, 2.4104},
@@ -485,6 +554,7 @@ int main() {
 		jacobi(a, EPS);
 		gauss_seidel(a, EPS);
 		minimal_residual_method(a, EPS);
+		if (argc == 2) {fclose(stdout);}
 	} catch (const char* error) {
 		cout << error;
 	}
