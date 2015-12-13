@@ -1,5 +1,4 @@
 import java.io.*;
-import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
@@ -55,14 +54,12 @@ public class Main {
         return true;
     }
 
-    protected static void saveStep(EntryList el) throws IOException {
-        FileOutputStream fos = new FileOutputStream("current.bin");
-        PrintWriter pw = new PrintWriter("current.txt");
-        el.save(fos);
-        pw.print(el);
-        System.out.print(el);
-        pw.close();
-        fos.close();
+    protected static void saveStep(EntryList entries) throws IOException {
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+            new FileOutputStream("out.txt"), "UTF-8"));
+        entries.toStream(new DataOutputStream(new FileOutputStream("out.bin")));
+        entries.toFile(out);
+        System.out.print(entries);
     }
 
     protected static void printMenu() {
@@ -76,30 +73,20 @@ public class Main {
         System.out.println("[7] - Exit\n");
     }
 
-    public static void generateData() throws IOException {
-        EntryList temp = new EntryList();
-        temp.add(new Entry(LocalDate.of(2013, 11, 13), 2733, "Безвозмездная спонсорская помощь", "СООО \"Саммит технологиз\"", 176, 8000000));
-        temp.add(new Entry(LocalDate.of(2013, 11, 27), 2788, "Возврат неиспользуемой суммы", "СООО \"Саммит технологиз\"", 176, -120128));
-        temp.add(new Entry(LocalDate.of(2013, 8, 16), 6677, "За выполнение НИР по договору ", "Институт физико-органической химии", 232, 12660000));
-        temp.add(new Entry(LocalDate.of(2013, 5, 9), 6678, "Аванс на выполнение НИР", "Институт физико-органической химии", 232, 19000000));
-        temp.add(new Entry(LocalDate.of(2014, 11, 1), 237, "Проведение испытаний на пожарную опасность", "ООО “Тритекс трейд”", 155, 4572000));
-        temp.add(new Entry(LocalDate.of(2013, 12, 5), 2111, "Проведение биоаналитических биостатических опытов", "ГП \"Академфарм\"", 155, 89000000));
-        temp.add(new Entry(LocalDate.of(2013, 12, 2), 8189, "Проведение испытаний гранул древесных гранул", "УП “Брестоблгаз”", 155, 4572000));
-        FileOutputStream fos = new FileOutputStream("current.bin");
-        temp.save(fos);
-        fos.close();
-    }
-
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Locale.setDefault(new Locale("ru", "RU"));
-        generateData();
         printMenu();
 
         entries = new EntryList();
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+            new FileInputStream("in.txt"), "UTF8"));
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+            new FileOutputStream("in.txt"), "UTF-8"));
+        entries.generateDefaultData(out);
+        entries.fromFile(in);
+        entries.toStream(new DataOutputStream(new FileOutputStream("in.bin")));
+        entries.fromStream(new DataInputStream(new FileInputStream("in.bin")));
+
         sc = new Scanner(System.in);
-        FileInputStream in = new FileInputStream("default.bin");
-        entries.load(in);
-        in.close();
 
         while (true) {
             int input = sc.nextInt();

@@ -6,58 +6,54 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 public class EntryList extends Vector<Entry> {
 
     public EntryList() {};
 
-    public void save(OutputStream fos) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(this);
-        oos.close();
-    }
-
-    public void load(InputStream fis) throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        this.addAll((EntryList) ois.readObject());
-    }
-
     public String toString(){
-        String out = "Total count:" + this.elementCount + "\n";
-        for (Entry entry : this) {
-            out += entry.toString() + "\n";
+        String out = "";
+        for (int i = 0; i < this.size(); ++i) {
+            out += this.elementAt(i) + (i == this.size() - 1 ? "" : "\n");
         }
         return out;
     }
 
-    public void fromStream(){
-
+    public void toFile(BufferedWriter out) throws IOException {
+        out.write(this.toString());
+        out.flush();
     }
 
-    public void toStream(){
-
+    public void fromFile(BufferedReader in) throws IOException {
+        this.clear();
+        String line;
+        while ((line = in.readLine()) != null) {
+            this.add(new Entry(line));
+        }
     }
 
-    public void toStream(){
-
+    public void toStream(DataOutputStream out) throws IOException {
+        for (Entry entry : this) entry.write(out);
+    }
+    
+    public void fromStream(DataInputStream in) throws IOException {
+        this.clear();
+        while (in.available() != 0) {
+            this.add(new Entry(in));
+        }
     }
 
-    public void fromStream(){
-
-    }
-
-    public static void generateDefaultData() throws IOException {
+    public static void generateDefaultData(BufferedWriter out) throws IOException {
         EntryList temp = new EntryList();
-        temp.add(new Entry(2733, 176, 8000000, LocalDate.of(2013, 11, 13), "ÑÎÎÎ \"Ñàììèò òåõíîëîãèç\"", "Áåçâîçìåçäíàÿ ñïîíñîðñêàÿ ïîìîùü"));
-        temp.add(new Entry(2788, 176, -120128, LocalDate.of(2013, 11, 27), "ÑÎÎÎ \"Ñàììèò òåõíîëîãèç\"", "Âîçâðàò íåèñïîëüçóåìîé ñóììû"));
-        temp.add(new Entry(6677, 232, 12660000, LocalDate.of(2013, 8, 16), "Èíñòèòóò ôèçèêî-îðãàíè÷åñêîé õèìèè", "Çà âûïîëíåíèå ÍÈÐ ïî äîãîâîðó "));
-        temp.add(new Entry(6678, 232, 19000000, LocalDate.of(2013, 5, 9), "Èíñòèòóò ôèçèêî-îðãàíè÷åñêîé õèìèè", "Àâàíñ íà âûïîëíåíèå ÍÈÐ"));
-        temp.add(new Entry(237, 155, 4572000, LocalDate.of(2014, 11, 1), "ÎÎÎ “Òðèòåêñ òðåéä”", "Ïðîâåäåíèå èñïûòàíèé íà ïîæàðíóþ îïàñíîñòü"));
-        temp.add(new Entry(2111, 155, 89000000, LocalDate.of(2013, 12, 5), "ÃÏ \"Àêàäåìôàðì\"","Ïðîâåäåíèå áèîàíàëèòè÷åñêèõ áèîñòàòè÷åñêèõ îïûòîâ"));
-        temp.add(new Entry(8189, 155, 4572000, LocalDate.of(2013, 12, 2), "ÓÏ “Áðåñòîáëãàç”", "Ïðîâåäåíèå èñïûòàíèé ãðàíóë äðåâåñíûõ ãðàíóë"));
-        FileOutputStream fos = new FileOutputStream("in.bin");w
-        temp.save(fos);
-        fos.close();
+        temp.add(new Entry(2733, 176, 8000000, LocalDate.of(2013, 11, 13), "Ð¡ÐžÐžÐž \"Ð¡Ð°Ð¼Ð¼Ð¸Ñ‚ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð·\"", "Ð‘ÐµÐ·Ð²Ð¾Ð·Ð¼ÐµÐ·Ð´Ð½Ð°Ñ ÑÐ¿Ð¾Ð½ÑÐ¾Ñ€ÑÐºÐ°Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒ"));
+        temp.add(new Entry(2788, 176, -120128, LocalDate.of(2013, 11, 27), "Ð¡ÐžÐžÐž \"Ð¡Ð°Ð¼Ð¼Ð¸Ñ‚ Ñ‚ÐµÑ…Ð½Ð¾Ð»Ð¾Ð³Ð¸Ð·\"", "Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‚ Ð½ÐµÐ¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ð¾Ð¹ ÑÑƒÐ¼Ð¼Ñ‹"));
+        temp.add(new Entry(6677, 232, 12660000, LocalDate.of(2013, 8, 16), "Ð˜Ð½ÑÑ‚Ð¸Ñ‚ÑƒÑ‚ Ñ„Ð¸Ð·Ð¸ÐºÐ¾-Ð¾Ñ€Ð³Ð°Ð½Ð¸Ñ‡ÐµÑÐºÐ¾Ð¹ Ñ…Ð¸Ð¼Ð¸Ð¸", "Ð—Ð° Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ ÐÐ˜Ð  Ð¿Ð¾ Ð´Ð¾Ð³Ð¾Ð²Ð¾Ñ€Ñƒ "));
+        temp.add(new Entry(6678, 232, 19000000, LocalDate.of(2013, 5, 9), "Ð˜Ð½ÑÑ‚Ð¸Ñ‚ÑƒÑ‚ Ñ„Ð¸Ð·Ð¸ÐºÐ¾-Ð¾Ñ€Ð³Ð°Ð½Ð¸Ñ‡ÐµÑÐºÐ¾Ð¹ Ñ…Ð¸Ð¼Ð¸Ð¸", "ÐÐ²Ð°Ð½Ñ Ð½Ð° Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ ÐÐ˜Ð "));
+        temp.add(new Entry(237, 155, 4572000, LocalDate.of(2014, 11, 1), "ÐžÐžÐž â€œÐ¢Ñ€Ð¸Ñ‚ÐµÐºÑ Ñ‚Ñ€ÐµÐ¹Ð´â€", "ÐŸÑ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¸ÑÐ¿Ñ‹Ñ‚Ð°Ð½Ð¸Ð¹ Ð½Ð° Ð¿Ð¾Ð¶Ð°Ñ€Ð½ÑƒÑŽ Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚ÑŒ"));
+        temp.add(new Entry(2111, 155, 89000000, LocalDate.of(2013, 12, 5), "Ð“ÐŸ \"ÐÐºÐ°Ð´ÐµÐ¼Ñ„Ð°Ñ€Ð¼\"","ÐŸÑ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð±Ð¸Ð¾Ð°Ð½Ð°Ð»Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð±Ð¸Ð¾ÑÑ‚Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¾Ð¿Ñ‹Ñ‚Ð¾Ð²"));
+        temp.add(new Entry(8189, 155, 4572000, LocalDate.of(2013, 12, 2), "Ð£ÐŸ â€œÐ‘Ñ€ÐµÑÑ‚Ð¾Ð±Ð»Ð³Ð°Ð·â€", "ÐŸÑ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð¸ÑÐ¿Ñ‹Ñ‚Ð°Ð½Ð¸Ð¹ Ð³Ñ€Ð°Ð½ÑƒÐ» Ð´Ñ€ÐµÐ²ÐµÑÐ½Ñ‹Ñ… Ð³Ñ€Ð°Ð½ÑƒÐ»"));
+        temp.toFile(out);
     }
 
 }
