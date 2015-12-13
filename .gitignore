@@ -2,7 +2,8 @@
 input.txt
 output.txt
 *.exe
- 
+*lock.systems* 
+
 # Unnecessary VS files and folders
 Debug
 *.sln
