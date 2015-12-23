@@ -1,0 +1,213 @@
+import com.sun.media.sound.InvalidFormatException;
+import util.Window;
+import util.Settings;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.List;
+import java.util.regex.*;
+import java.util.*;
+import java.io.*;
+import java.util.stream.Collectors;
+import javax.swing.*;
+
+public class Main {
+	
+	private static Window window = null;
+	private static HashMap components = new HashMap();
+	private static List<Animal> animals = new ArrayList<Animal>();
+
+	public static void main(String[] args) {
+		try {
+			build();
+		} catch (Exception e) {
+			Window.message(e.getMessage());
+		}
+	}
+
+	public static void build() throws NullPointerException {
+		components.clear();
+		
+		// Main window
+		window = new Window(new Settings()
+			.setHeight(430)
+			.setWidth(600)
+			.setName("Animals")
+			.setMenuName("Menu")
+			.setGridWidth(2)
+			.setGridHeight(5));
+		components.put("window", window);
+		
+		// About menu item
+		window.addMenuItem(new Settings()
+			.setName("About")
+			.setListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					about();
+				}
+			}));
+
+		// File menu item
+		window.addMenuItem(new Settings()
+			.setName("Open file")
+			.setListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						open();
+					} catch (Exception ex) {
+						String message = null;
+						if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
+							message = ex.getMessage();
+						} else {
+							message = "Cannot parse the file";
+						}
+						Window.message(message);
+					}
+				}
+			}));
+
+		// Text area
+		JPanel textPanel = new JPanel();
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(true);
+		textArea.setBackground(Color.decode("#EEEEEE"));
+		textArea.setSize(600, 200);
+		textArea.setLocation(10, 10);
+		textArea.setLineWrap (true);
+		textArea.setWrapStyleWord (false);
+		textPanel.setLayout(new BorderLayout());
+		textPanel.add(new TextArea(), BorderLayout.CENTER);
+		textPanel.add(textArea);
+		textPanel.setBackground(Color.white);
+		window.add(textPanel);
+		components.put("textArea", textArea);
+
+		JButton sortByNameButton = new JButton("Sort by name");
+		sortByNameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sortByName();
+			}
+		});
+		window.add(sortByNameButton);
+
+		JButton sortButton = new JButton("Sort by 3 fields");
+		sortButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sort();
+			}
+		});
+		window.add(sortButton);
+
+		JButton filter = new JButton("Filter");
+		filter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				filter();
+			}
+		});
+		window.add(filter);
+	}
+
+	public static void about(){
+		Settings settings = new Settings();
+		settings
+			.setHeight(200)
+			.setWidth(200)
+			.setName("About")
+			.setGridWidth(1)
+			.setGridHeight(1);
+		Window about = new Window(settings);
+
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.append("James Akwuh, 3 group, 2 course");
+		about.add(textArea);
+	}
+
+	public static void open() throws IOException {
+		JFileChooser fileopen = new JFileChooser();             
+        int ret = fileopen.showDialog(null, "Open bears or elks file");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File input = fileopen.getSelectedFile();
+			Scanner in = new Scanner(input);
+			if (!in.hasNextLine()) {
+				throw new InvalidFormatException("Cannot parse the file");
+			}
+			String type = in.nextLine();
+			if (null != animals) {
+				animals.clear();
+			}
+			Animal tmp = null;
+			if (type.toLowerCase().contains("bears")) {
+				while (in.hasNextLine()) {
+					tmp = new Bear(in.nextLine());
+					animals.add(tmp);
+					showImage(tmp);
+				}
+			} else if (type.toLowerCase().contains("elks")) {
+				while (in.hasNextLine()) {
+					tmp = new Elk(in.nextLine());
+					animals.add(tmp);
+					showImage(tmp);
+				}
+			} else {
+				throw new InvalidFormatException("Wrong file format");
+			}
+			redraw();
+        }
+	}
+
+	public static void redraw(){
+		JTextArea textArea = ((JTextArea)components.get("textArea"));
+		textArea.setText("");
+		for (Animal a : animals) {
+			textArea.append(a.toString() + "\n");
+		}
+	}
+
+	public static void redraw(List<Animal> l){
+		JTextArea textArea = ((JTextArea)components.get("textArea"));
+		textArea.setText("");
+		for (Animal a : l) {
+			textArea.append(a.toString() + "\n");
+		}
+	}
+
+	public static void sortByName(){
+		Collections.sort(animals, (a, b) -> a.name.compareTo(b.name));
+		redraw();
+	}
+
+	public static void sort(){
+		Collections.sort(animals, (a, b) -> {
+			int c;
+			c = a.habitat.compareTo(b.habitat);
+			if (c == 0)
+				c = a.name.compareTo(b.name);
+			if (c == 0)
+				c = -a.food.compareTo(b.food);
+			return c;
+		});
+		redraw();
+	}
+
+	public static void filter(){
+		String habitat = JOptionPane.showInputDialog(null, "Type habitat:");
+		List<Animal> filtered = animals.stream()
+				.filter(p -> p.habitat.contains(habitat)).collect(Collectors.toList());
+		redraw(filtered);
+	}
+
+	public static void showImage(Animal animal){
+		Settings settings = new Settings();
+		settings
+				.setHeight(200)
+				.setWidth(200)
+				.setName(animal.toString())
+				.setGridWidth(1)
+				.setGridHeight(1);
+		Window image = new Window(settings);
+		JLabel lblimage = new JLabel(new ImageIcon(animal.image));
+		image.add(lblimage);
+	}
+
+}

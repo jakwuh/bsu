@@ -1,0 +1,4 @@
+Bears
+Michail|Africa|150|./Selection_001.png|Green|200
+Dmitry|Belarus|150|./Selection_002.png|Green|200
+James|Africa|150|./Selection_003.png|Green|200

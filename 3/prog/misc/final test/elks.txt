@@ -1,0 +1,4 @@
+Elks
+Michail|Africa|150|./Selection_001.png|branchy
+Michail|Africa|250|./Selection_002.png|usual
+James|China|150|./Selection_003.png|branchy

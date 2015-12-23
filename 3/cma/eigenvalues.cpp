@@ -222,7 +222,6 @@ namespace io {
 		cout << lambda << endl;
 		cout << "Eigenvector:" << endl;
 		print(x);
-		cout << "Matrix residual:" << endl;
 		cout << "Matrix residual norm:" << endl;
 		print(R1);
 		cout << "Polynom residual:" << endl;
@@ -312,7 +311,6 @@ namespace methods {
 			print(a);
 			cout << "Initial vector:" << endl;
 			print(Vector(n, 1));
-			print(xk);
 			cout << "Precision:" << endl;
 			cout << eps << endl;
 			check(a, transpose(xk)[0], lambda);
