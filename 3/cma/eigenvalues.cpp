@@ -290,7 +290,9 @@ namespace methods {
 		Matrix x, xk = transpose(Vector(n, 1));
 		double eps = precision + 1, lambda, lambdak;
 		bool first = true;
+		int count = 0;
 		while (eps > precision) {
+			count++;
 			x = xk;
 			xk = a * x;
 			if (first) {
@@ -311,7 +313,7 @@ namespace methods {
 			print(a);
 			cout << "Initial vector:" << endl;
 			print(Vector(n, 1));
-			cout << "Precision:" << endl;
+			cout << "Precision: (" << count << ") iterations" << endl;
 			cout << eps << endl;
 			check(a, transpose(xk)[0], lambda);
 		}
