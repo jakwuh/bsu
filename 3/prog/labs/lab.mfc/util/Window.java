@@ -1,0 +1,59 @@
+package util;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.util.regex.*;
+import java.util.*;
+import java.io.*;
+import javax.swing.*;
+
+public class Window {
+
+    private JFrame frame = null;
+    private JMenu menu = null;
+
+    public Window(Settings settings) {
+        frame = new JFrame(settings.getName());
+        if (null != settings.getMenuName()) {
+            JMenuBar menuBar = new JMenuBar();
+            frame.setJMenuBar(menuBar);
+            menu = new JMenu(settings.getMenuName());
+            menuBar.add(menu);
+        }
+
+        frame.setLayout(new GridLayout(settings.getGridWidth(), settings.getGridHeight()));
+        
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                frame.dispose();
+            }
+        });
+
+        frame.setPreferredSize(new Dimension(settings.getWidth(), settings.getHeight()));
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void addMenuItem(Settings settings) {
+        JMenuItem item = new JMenuItem(settings.getName());
+        menu.add(item);
+        if (null != settings.getListener()) {
+            item.addActionListener(settings.getListener());
+        }
+        update();
+    }
+
+    public static void message(String text) {
+        JOptionPane.showMessageDialog(null, text);
+    }
+
+    public void add(Component component) {
+        frame.add(component);
+        update();
+    }
+
+    public void update() {
+        SwingUtilities.updateComponentTreeUI(frame);
+    }
+
+}
