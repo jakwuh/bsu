@@ -159,15 +159,15 @@ class Matrix<T extends Number & Comparable<T>> extends AbstractList implements C
 		m.data = tmp;
 	}
 
-	public boolean isInteger() throws Exception {
-		if (empty()) throw new Exception("Matrix is empty");
-		return data[0][0].getClass() == Integer.class;
-	}
+	// public boolean isInteger() throws Exception {
+	// 	if (empty()) throw new Exception("Matrix is empty");
+	// 	return data[0][0].getClass() == Integer.class;
+	// }
 
-	public boolean isDouble() throws Exception {
-		if (empty()) throw new Exception("Matrix is empty");
-		return data[0][0].getClass() == Double.class;
-	}
+	// public boolean isDouble() throws Exception {
+	// 	if (empty()) throw new Exception("Matrix is empty");
+	// 	return data[0][0].getClass() == Double.class;
+	// }
 
 	public void add(Matrix<T> m) throws Exception {
 		if (rows() != m.rows() || cols() != m.cols()) {

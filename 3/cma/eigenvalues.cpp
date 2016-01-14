@@ -16,7 +16,7 @@
 #include <math.h>
 
 #define DEBUG false
-#define EPS 1E-6
+#define EPS 1E-15
 #undef minor
 
 using namespace std;
@@ -384,6 +384,7 @@ namespace methods {
 		double max = precision + 1;
 		int imax, jmax, n = a.size(), k = 0;
 		Matrix A(a);
+		Matrix UUU = identity_matrix(a.size());
 		while (true) {
 			k++;
 			max = 0;
@@ -403,12 +404,19 @@ namespace methods {
 			U[jmax][jmax] = cos(phi);
 			U[imax][jmax] = -1 * sin(phi);
 			U[jmax][imax] = sin(phi);
+			UUU = UUU * U;
 			A = transpose(U) * A * U;
 		}
 		Vector X(n);
 		for (int i = 0; i < n; ++i) {
 			X[i] = A[i][i];
 		}
+		Matrix X22 = column(UUU, a.size() - 1);
+		X22 = X22 * (1 / sqrt(norm(transpose(X22) * X22)));
+
+		cout << "dsfdsdsfsd"<< endl;
+		print(UUU);
+		print(X22);
 		cout << "Jacobi method for eigenvalues:" << endl;
 		cout << "Given matrix:" << endl;
 		print(a);
