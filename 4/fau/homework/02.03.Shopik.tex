@@ -1,0 +1,223 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1cm,right=1cm,
+top=1cm,bottom=1cm,bindingoffset=0cm]{geometry}
+\pagestyle{empty}
+\usepackage[english,russian]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\begin{document}
+	\begin{titlepage}
+		
+		\centerline{\large \bf Белорусский государственный университет}
+		\centerline{\large \bf Факультет прикладной математики и информатики}
+		\vfill
+		\vfill
+		\centerline{\Large \bf Женя Шопик}
+		\centerline{\Large \bf 3 группа}
+		\bigskip
+		\vfill
+		\bigskip
+		\vfill
+		\vfill
+		\vfill
+		\hfill
+		\vfill
+		\vfill
+		\centerline{\Large \bf Минск 2016}
+	\end{titlepage}
+	\noindent\textbf{№1} \\  \\
+	$$y(x) = 2\int_{0}^{x}\frac{y(t)}{2t+1}dt + 4x$$ 
+	\textbf{Решение.} \\ \\
+	$y(x) = 2\phi(x) + 4x, \phi(x) = 2\int_{0}^{x}\frac{y(t)}{2t+1}dt.$ \\  \\
+	$\phi'(x) = \frac{y(x)}{2x+1} = \frac{2\phi(x) + 4x}{2x+1}$ \\ \\
+	$(2x+1)\phi'(x) - 2\phi(x) = 4x$ \\ \\ 
+	Однородное уравнение: \\ \\
+	$(2x+1)\phi'(x) - 2\phi(x) = 0 \Rightarrow \phi(x) = c(x)e^{\ln(2x+1)} = c(x)(2x+1)$ \\ \\ 
+	Подставляем в исходное дифференциальное уравнение: \\ \\
+	$(2x + 1)(c'(x)(2x+1) + 2c(x)) - 2(2x+1)c(x) = 4x \Rightarrow c'(x) = \frac{4x}{(2x+1)^2}$ \\ \\
+	$c(x) = \int\frac{4x}{(2x+1)^2}dx = \dots = \frac{1}{2x+1} + \ln(2x+1) + c$ \\ \\
+	$\phi(x) = (\frac{1}{2x+1} + \ln(2x+1) + c)(2x+1) = 1 + \ln(2x+1) + c(2x+1)$ \\ \\
+	$\phi(0) = 0 \Rightarrow c(0)(2*0 + 1) = 0 \Rightarrow c = -1$ \\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x) = 2\phi(x) + 4x = 2\ln(2x+1)$ \\ \\
+	
+	\noindent\textbf{№2} \\  \\
+	$$y(x) = \int_{0}^{x}\frac{\sin(x)}{\cos(t)}y(t)dt + 1$$ 
+	\textbf{Решение.} \\ \\
+	$y(x) = \sin(x)\phi(x) + 1, \phi(x) = \int_{0}^{x}\frac{y(t)}{\cos(t)}dt.$ \\  \\
+	$\phi'(x) = \frac{y(x)}{\cos(x)} = \frac{\sin(x)\phi(x) + 1}{\cos(x)}$ \\ \\
+	$\cos(x)\phi'(x) - \sin(x)\phi(x) = 1$ \\ \\ 
+	Однородное уравнение: \\ \\
+	$\cos(x)\phi'(x) - \sin(x)\phi(x) = 0 \Rightarrow \phi(x) = c(x)e^{-\ln(\cos(x))} = \frac{c(x)}{\cos(x)} $\\ \\ 
+	Подставляем в исходное дифференциальное уравнение: \\ \\
+	$\cos(x)\left(\frac{c'(x)}{\cos(x)} + \frac{c(x)\sin(x)}{\cos^2 x}\right) - \sin(x)\frac{c(x)}{\cos(x)} = 1 \Rightarrow c'(x) = 1 \Rightarrow c(x) = x +c $ \\ \\
+	$\phi(x) = \frac{c(x)}{\cos(x)} = \frac{x + c}{\cos(x)}$ \\ \\
+	$\phi(0) = 0 \Rightarrow c = 0$ \\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x) = \sin(x)\phi(x) + 1 = x\tg x + 1$ \\ \\
+	
+	\noindent\textbf{№3} \\  \\
+	$$y(x) = \int_{1}^{x}\frac{x\cos(x)}{t\cos(t)}y(t)dt + \cos(x) e^x$$
+	\textbf{Решение.} \\ \\
+	$y(x) = x\cos(x)\phi(x) + \cos(x) e^x, \phi(x) = \int_{1}^{x}\frac{y(t)}{t\cos(t)}dt.$ \\  \\
+	$\phi'(x) = \frac{y(x)}{x\cos(x)} = \frac{x\cos(x)\phi(x) + \cos(x) e^x}{x\cos(x)} = \phi(x) + \frac{e^x}{x}$ \\ \\
+	$\phi'(x) - \phi(x) = \frac{e^x}{x}$ \\ \\ 
+	Однородное уравнение: \\ \\
+	$\phi'(x) - \phi(x) = 0 \Rightarrow \phi(x) = c(x)e^x $\\ \\ 
+	Подставляем в исходное дифференциальное уравнение: \\ \\
+	$c'(x)e^x + c(x)e^x - c(x)e^x = \frac{e^x}{x} \Rightarrow c'(x) = 1 / x \Rightarrow c(x) = \ln(x) +c $ \\ \\
+	$\phi(x) = c(x)e^x = (\ln(x) + c)e^x$ \\ \\
+	$\phi(1) = 0 \Rightarrow c = 0$ \\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x) = x\cos(x)\phi(x) + \cos(x) e^x = \cos(x) e^x (x\ln(x) + 1)$ \\ \\
+	
+	\noindent\textbf{№4} \\  \\
+	$$y(x) = \int_{\pi}^{x}\frac{x^2}{t^3}y(t)dt + x^3\cos(x)$$
+	\textbf{Решение.} \\ \\
+	$y(x) = x^2\phi(x) + x^3\cos(x), \phi(x) = \int_{\pi}^{x}\frac{y(t)}{t^3}dt.$ \\  \\
+	$\phi'(x) = \frac{y(x)}{x^3} = \frac{x^2\phi(x) + x^3\cos(x)}{x^3} = \frac{\phi(x)}{x} + \cos(x)$\\ \\
+	$\phi'(x) - \frac{\phi(x)}{x} = \cos(x)$ \\ \\ 
+	Однородное уравнение: \\ \\
+	$\phi'(x) - \frac{\phi(x)}{x} = 0 \Rightarrow \phi(x) = c(x)e^{\ln(x)} = c(x)x$ \\ \\ 
+	Подставляем в исходное дифференциальное уравнение: \\ \\
+	$c'(x)x + c(x) - \frac{c(x)x}{x} = \cos(x) \Rightarrow c'(x) = \frac{\cos(x)}{x}$ \\ \\
+	$c(x) = \int\frac{\cos(x)}{x}dx$ -- неберущийся интеграл. \\ \\
+
+	\noindent\textbf{№5} \\  \\
+	$$y(x) = \int_{e}^{x}\frac{2}{t\ln(x)}y(t)dt + 1$$
+	\textbf{Решение.} \\ \\
+	$y(x) = \frac{\phi(x)}{\ln(x)} + 1, \phi(x) = \int_{e}^{x}\frac{2y(t)}{t}dt.$ \\  \\
+	$\phi'(x) = \frac{2y(x)}{x} = \frac{2\phi(x) + 2\ln(x)}{x\ln(x)}$ \\ \\
+	$\phi'(x) - \frac{2}{x\ln(x)}\phi(x) = \frac{2}{x}$ \\ \\ 
+	Однородное уравнение: \\ \\
+	$\phi'(x) - \frac{2}{x\ln(x)}\phi(x) = 0 \Rightarrow \phi(x) = c(x)e^{2\ln\ln(x)} = c(x)\ln^2x$ \\ \\ 
+	Подставляем в исходное дифференциальное уравнение: \\ \\
+	$c'(x)\ln^2x + \frac{2\ln(x)}{x}c(x) - \frac{2\ln(x)}{x}c(x) = \frac{2}{x} \Rightarrow c'(x) = \frac{2}{x\ln^2 x}$ \\ \\
+	$c(x) = \int\frac{2}{x\ln^2 x}dx = \dots = -\frac{2}{\ln(x)} + c$ \\ \\
+	$\phi(x) = -2\ln(x) + c\ln^2 x$ \\ \\
+	$\phi(e) = 0 \Rightarrow c = 2$ \\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x) =  \frac{\phi(x)}{\ln(x)} + 1 = -2 + 2\ln(x) + 1 = 2\ln(x) - 1$ \\ \\		
+	
+	\noindent\textbf{№6} \\ \\
+	$$y(x) + \int_0^x \cos x e^{x-t} y(t) dt = e^{x - sin x}$$ \\
+	\textbf{Решение.}\\\\
+	$y(x) = e^{x-\sin x} - e^x \cos x \phi (x)$\\ \\
+	$\phi (x) = \int_0^x e^{-t} y(t) dt, \phi (0) = 0$\\ \\
+	$\phi'(x) = e^{-x} ( e^{x - \sin x} - e^x \cos x \phi (x)) = e^{-\sin x} - \cos x \phi (x)$\\ \\
+	$D\phi+\cos x\phi=e^{-\sin x}$\\ \\
+	$D\phi+\cos x \phi=0 \Rightarrow \phi_{o} (x)=c e^{-\sin x}$\\ \\
+	$\phi(x)=c(x) e^{-\sin x}$\\ \\
+	$c(x) e^{-\sin x} (-\cos x) + c'(x) e^{-\sin x} + c(x) e^{-\sin x} \cos x = e^{-\sin x} \Rightarrow c'(x) = 1 \Rightarrow c(x)=c+x$\\ \\
+	$\phi(x)=(c+x) e^{-\sin x}, \phi(0)=0 \Rightarrow c=0$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=e^{x-\sin x}-e^x \cos x x e^{-\sin x} = e^{x-\sin x}(1-x\cos x)$\\ \\
+ 
+	\noindent\textbf{№7} \\ \\
+	$$y(x)=\int_{\frac{\pi}{2}}^x \frac{\cos t}{\sin x} y(t) dt - \frac{\tan x}{x^2}$$ \\
+	\textbf{Решение}\\\\
+	$y(x)=\frac{u(x)}{\sin x} - \frac{\tan x}{x^2}$\\ \\
+	$u'(x)=\cos x (\frac{u(x)}{\sin x} - \frac{\tan x}{x^2})=\cot x u(x) - \frac{\sin x}{x^2}$\\ \\
+	$u'(x)=\cot x u(x) = -\frac{\sin x}{x^2}$\\ \\
+	$u_{o}(x)=x e^{\int_{\frac{\pi}{4}}^x \frac{\cos t}{\sin t} dt} = c e^{\ln (\sin x)} = c\sin x$\\ \\
+	$u_{p}(x)=c(x)\sin x$\\ \\
+	$u_{p}'(x) =c'(x) \sin x + c(x) \cos x \Rightarrow c'(x) = -\frac{1}{x^2} \Rightarrow c(x) = \frac{1}{x}$\\ \\
+	$u(x)=c\sin x + \frac{\sin x}{x} \Rightarrow u(x)=-\frac{2\sin x}{\pi} + \frac{\sin x}{x}$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=-\frac{2}{\pi}+\frac{1}{x}-\frac{\tan x}{x^2}.$\\ \\
+
+	\noindent\textbf{№8} \\ \\
+	$$y(x)=\int_{\frac{\pi}{4}}^x \frac{y(t)}{\cos x\sin t} dt + 1$$ \\
+	\textbf{Решение}\\\\
+	$y(x)=\frac{1}{\cos x} u(x) + 1$\\ \\ 
+	$u(x)=\int_{\frac{\pi}{4}}^x \frac{y(t)}{\sin t} dt$\\ \\
+	$u'(x)=\frac{1}{\sin x} (\frac{1}{\cos x}u + 1)$\\ \\
+	$\sin x u'(x) - \frac{1}{\cos x}u=0$\\ \\
+	$ln u - ln c = \int \frac{2 \sin(2x) dx}{\sin(2x)^2} = ln(\tan x)$\\ \\
+	$u(x)=c(x) \tan x$\\ \\
+	$u'(x)=c'(x) \tan x + \frac{c(x)}{\cos(x)^2}$\\ \\ 
+	$c'(x)=\frac{\cos x}{\sin(x)^2}$\\ \\
+	$c(x)=-\frac{1}{\sin x} + c$\\ \\
+	$u=(c - \frac{1}{\sin x})\tan x$\\ \\
+	$u(\frac{\pi}{4})=0 \Rightarrow c = \sqrt{2}$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=\frac{1}{\cos x}(\sqrt{2} - \frac{1}{\sin x}) \tan x + 1$\\ \\
+
+	\noindent\textbf{№9} \\ \\
+	$$y(x)=\int_0^x \frac{1-t^2}{1-x^4} y(t) dt + \frac{e^{\arctan x}}{1-x^2}$$ \\
+	\textbf{Решение.}\\\\
+	$y(x)=\frac{1}{1-x^4}\phi(x)+\frac{e^{\arctan x}}{1-x^2}$\\ \\
+	$\phi(x)=\int_0^x (1-t^2)y(t)dt, \phi(0)=0$\\ \\
+	$\phi'(x)=(1-x^2)(\frac{1}{1-x^4}\phi(x)+\frac{e^{\arctan x}}{1-x^2})=\frac{\phi(x)}{1+x^2}+e^{\arctan x}$\\ \\
+	$D\phi-\frac{1}{1+x^2}\phi=e^{\arctan x}$\\ \\
+	$D\phi-\frac{1}{1+x^2}\phi=0 \Rightarrow \phi_{o}(x)=c e^{\arctan x} \Rightarrow$\\ $c'(x)=1 \Rightarrow c(x)=x+c$\\ \\
+	$\phi(x)=(x+c)e^{\arctan x}, \phi(x)=0 \Rightarrow c=0$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=\frac{1}{1-x^4}x e^{\arctan x} + \frac{e^{\arctan x}}{1-x^2}$\\ \\
+
+	\noindent\textbf{№10} \\ \\
+	$$y(x)=2 \int_{0}^{x}\frac{1+t^2}{1-x^4}y(t)dt+\frac{(1-3x)(1+x)}{1+x^2}$$ \\
+	\textbf{Решение.} \\ \\
+	$y(x)=\frac{2}{1-x^4}\int_{0}^{x}(1+t^2)y(t)dt+\frac{(1-3x)(1+x)}{1+x^2}$\\ \\
+	$y(x)=\frac{2}{1-x^4}u(x)+\frac{(1-3x)(1+x)}{1+x^2}$\\ \\
+	$u(x)=\int_{0}^{x}(1+t^2)y(t)dt$\\ \\
+	$u'(x)=(1+x^2)(\frac{2u(x)}{(1-x^2)(1+x^2)}+\frac{(1-3x)(1+x)}{1+x^2})=\frac{2u(x)}{1-x^2}+(1-3x)(1+x)$ \\ \\
+	$u(x)=ce^{\int_{0}^{x}\frac{2}{1-t^2}dt}=ce^{ln(x+1)-ln(x-1)}=c\frac{x+1}{x-1}$ \\  \\
+	$u(x)=c(x)\frac{x+1}{x-1}$\\ \\
+	$u'_x(x)=c'(x)\frac{x+1}{x-1}+\frac{c(x)^2}{(1-x)^2}$\\ \\
+	$c'(x)\frac{1+x}{1-x}+\frac{c(x)^2}{(1-x)^2}-\frac{2c(x)(1+x)}{(1-x)^2(1+x)}=(1-3x)(1+x)$\\ \\
+	$c'(x)=(1-x)(1-3x)=1-4x+3x^2$\\ \\
+	$c(x)=x-2x^2+x^3+c$\\ \\
+	$u(x)=(x-2x^2+x^3)(\frac{1+x}{1-x})$\\ \\
+	$u(x)=(x-2x^2+x^3)(\frac{1+x}{1-x})+c\frac{x+1}{x-1}$\\ \\
+	$u(0)=0 \Rightarrow c=0$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=\frac{2(1+x)}{(1-x)(1-x^4)}(1+x-2x^2+x^3)+\frac{(1-3x)(1+x)}{1+x^2}$ \\ \\
+	
+	\noindent\textbf{№11} \\ \\
+	$$y(x)=\frac{1}{2}\int_{0}^{x}\sqrt{\frac{1+x}{1-t^2}}y(t)dt+\sqrt{1-x^2}$$\\ \\
+	\textbf{Решение.} \\ \\
+	$y(x)=\frac{\sqrt{1+x}}{2}\int_{0}^{x}\frac{y(t)}{\sqrt{1-t^2}}dt+\sqrt{1-x^2}$\\ \\
+	$u(x)=\int_{0}^{x}\frac{y(t)}{\sqrt{1-t^2}}dt$\\ \\
+	$u'(x)=\frac{1}{\sqrt{1-x^2}}(\frac{u(x)\sqrt{1+x}}{2}+\sqrt{1-x^2})$\\ \\
+	$u'(x)=\frac{u(x)}{2\sqrt{1-x}}+1$ \\ \\
+	$\frac{du}{u}=-\frac{dx}{2\sqrt{1-x}}$\\ \\
+	$u(x)=ce^{-\sqrt{1-x}}$ \\ \\
+	$u(x)=c(x)e^{-\sqrt{1-x}}$\\ \\
+	$u'(x)=c'(x)e^{-\sqrt{1-x}}+c(x)$\\ \\
+	$c'(x)=e^{\sqrt{1-x}}$\\ \\
+	$u(x)=ce^{-\sqrt{1-x}}-2\sqrt{1-x}+2$\\ \\
+	$u(0)=0 \Rightarrow c=0$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=\sqrt{1+x}(1-\sqrt{1-x})+\sqrt{1-x^2}=\sqrt{1+x}$\\ \\
+	
+	\noindent\textbf{1.10} \\  \\
+	Определить, является ли нормой в $l_2$ $$\sqrt{\sum_{i = 1}^{\infty} a_ix_i^2},a_i \ge 0, i = 1, 2, \dots$$. \\ \\
+	\textbf{Решение.} \\ \\
+	Первая аксиома:
+	$ ||x|| = 0 \Leftrightarrow x = 0$. \\ \\
+	При $\forall a_i = 0$ и $\forall x_i \ne 0$ получим, что $||x|| = 0$, но $x \ne 0$. \\ \\
+	\textbf{Ответ: не является нормой.} \\ \\
+	
+	\noindent\textbf{2.10} \\  \\
+	Найти предел в $C[a, b]$, если он существует.\\ \\
+	$x_n(t) = t^2e^{nt}, t \in [0, 2]$. \\ \\
+	\textbf{Решение.} \\ \\
+	Предельная функция:
+	$x_0(t) = \lim\limits_{n \rightarrow \infty} x_n(t) = \lim\limits_{n \leftarrow \infty} t^2e^{nt} = \infty$
+	Следовательно, не поточечной сходимости. \\ \\ 
+	\textbf{Ответ: предела нет.} \\ \\
+	
+	
+	\noindent\textbf{3.1} \\  \\
+	Найти предел последовательности в пространстве $l_{3/2}$, если он существует. \\
+	$$x_n = \left(\left(\frac{5n + 1}{5n + 2}\right)^n, \dots, \left(\frac{5n + 1}{5n + 2}\right)^n, \dots \right) $$
+	\textbf{Решение.} \\ \\
+	$$\lim\limits_{n \leftarrow \infty}\left(\frac{5n + 1}{5n + 2}\right)^n = \dots = \frac{1}{\sqrt[5]{e}}$$
+	$$x_0 = \left(\frac{1}{\sqrt[5]{e}}, \frac{1}{\sqrt[5]{e}}, \dots \right) $$
+	$$\sum_{n = 1}^{\infty} \frac{1}{\sqrt[5]{e}} = \infty \Rightarrow x_0 \notin l_{3/2}$$
+	\textbf{Ответ: предела нет.} \\ \\
+\end{document}

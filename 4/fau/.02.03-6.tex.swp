@@ -1,0 +1,25 @@
+\documentclass[14pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1cm,right=1cm,
+top=1cm,bottom=1cm,bindingoffset=0cm]{geometry}
+\pagestyle{empty}
+\usepackage[english,russian]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\begin{document}
+	\noindent
+	\textbf{Number 6} \\ \\
+	$$y(x) + \int_0^x \cos x e^{x-t} y(t) dt = e^{x - sin x}$$ \\
+	\textbf{Solution}\\\\
+	$y(x) = e^{x-\sin x} - e^x \cos x \phi (x)$\\
+	$\phi (x) = \int_0^x e^{-t} y(t) dt, \phi (0) = 0$\\
+	$\phi'(x) = e^{-x} ( e^{x - \sin x} - e^x \cos x \phi (x)) = e^{-\sin x} - \cos x \phi (x)$\\
+	$D\phi+\cos x\phi=e^{-\sin x}$\\
+	$D\phi+\cos x \phi=0 \Rightarrow \phi_{o} (x)=c e^{-\sin x}$\\
+	$\phi(x)=c(x) e^{-\sin x}$\\
+	$c(x) e^{-\sin x} (-\cos x) + c'(x) e^{-\sin x} + c(x) e^{-\sin x} \cos x = e^{-\sin x} \Rightarrow c'(x) = 1 \Rightarrow c(x)=c+x$\\
+	$\phi(x)=(c+x) e^{-\sin x}, \phi(0)=0 \Rightarrow c=0$\\
+	$y(x)=e^{x-\sin x}-e^x \cos x x e^{-\sin x} = e^{x-\sin x}(1-x\cos x)$\\
+\end{document}

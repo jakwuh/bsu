@@ -1,0 +1,74 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1cm,right=1cm,
+top=1cm,bottom=1cm,bindingoffset=0cm]{geometry}
+\pagestyle{empty}
+\usepackage[english,russian]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\begin{document}
+	\begin{titlepage}
+		
+		\centerline{\large \bf Белорусский государственный университет}
+		\centerline{\large \bf Факультет прикладной математики и информатики}
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		\centerline{\Large \bf Джеймс Аквух}
+		\centerline{\Large \bf 3 группа}
+		\bigskip
+		\vfill
+		\bigskip
+		\vfill
+		\vfill
+		\vfill
+		\hfill
+		\vfill
+		\vfill
+		\centerline{\Large \bf Минск 2016}
+	\end{titlepage}
+	\noindent
+	$u'(x)=c'(x)e^{-\sqrt{1-x}}+c(x)$\\ \\
+	$c'(x)=e^{\sqrt{1-x}}$\\ \\
+	$u(x)=ce^{-\sqrt{1-x}}-2\sqrt{1-x}+2$\\ \\
+	$u(0)=0 \Rightarrow c=0$\\ \\
+	\textbf{Ответ:} \\ \\
+	$y(x)=\sqrt{1+x}(1-\sqrt{1-x})+\sqrt{1-x^2}=\sqrt{1+x}$\\ \\
+	
+	\noindent\textbf{1.1} \\  \\
+	Определить, является ли нормой в $|x(0)|+|x'(0)|+\max\limits_{t\in {[0,1]}} |x''(t)|$. \\ \\
+	\textbf{Решение.} \\ \\
+	Первая аксиома:
+	$ ||x|| = 0 \Leftrightarrow x = 0$. Очевидно. \\
+	Вторая аксиома:
+	$ ||\alpha x|| = |\alpha|||x||$. Очевидно.\\
+	Третья аксиома:
+	$||x+y||<=|x|+|y|$. Очевидно.\\
+	\textbf{Ответ: является нормой.} \\ \\
+	
+	\noindent\textbf{2.1} \\  \\
+	Найти предел в $C[a, b]$, если он существует.\\ \\
+	$x_n(t) = t\arctan(nt), t \in [0, 2]$. \\ \\
+	\textbf{Решение.} \\ \\
+	Предельная функция:
+	$x_0(t) = \lim\limits_{n \rightarrow \infty} x_n(t) = \lim\limits_{n \rightarrow \infty} t\arctan(nt) = t \frac{\pi}{2}$\\
+	$||x_0(t)-x_n(t)||=\max\limits_{0<=t<=3} |t\arctan(tn) - t\frac{\pi}{2}|<\epsilon$\\
+	$\forall t \in [0,3], \epsilon > 0 \exists n_0 = \frac{\tan(\frac{\pi}{2}-\frac{\epsilon}{2})}{t} : \forall n>n_0 \Rightarrow |t\arctan(tn) - t\frac{\pi}{2}|<\epsilon$\\
+	Следовательно, последовательность сходится.\\
+	\textbf{Ответ: $t\frac{\pi}{2}$.} \\ \\
+	
+	
+	\noindent\textbf{3.1} \\  \\
+	Найти предел последовательности в пространстве $l_{3/2}$, если он существует. \\
+	$$x_n = \left(\left(\frac{5n + 1}{5n + 2}\right)^n, \dots, \left(\frac{5n + 1}{5n + 2}\right)^n, \dots \right) $$
+	\textbf{Решение.} \\ \\
+	$$\lim\limits_{n \leftarrow \infty}\left(\frac{5n + 1}{5n + 2}\right)^n = \dots = \frac{1}{\sqrt[5]{e}}$$
+	$$x_0 = \left(\frac{1}{\sqrt[5]{e}}, \frac{1}{\sqrt[5]{e}}, \dots \right) $$
+	$$\sum_{n = 1}^{\infty} \frac{1}{\sqrt[5]{e}} = \infty \Rightarrow x_0 \notin l_{3/2}$$
+	\textbf{Ответ: предела нет.} \\ \\
+\end{document}

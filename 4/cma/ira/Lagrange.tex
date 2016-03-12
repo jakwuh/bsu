@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1.5cm,right=1.5cm,
+top=1.5cm,bottom=1.5cm,bindingoffset=0cm]{geometry}
+\usepackage[english,russian]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\begin{document}
+	\begin{titlepage}
+	
+		\centerline{\large \bf Белорусский государственный университет}
+		\centerline{\large \bf Факультет прикладной математики и информатики}
+		\vfill
+		\vfill
+		\centerline{\Large \bf Построение}
+		\centerline{\Large \bf интерполяционного многочлена Лагранжа}
+		\bigskip
+		\vfill
+		\bigskip
+		\vfill
+		\begin{centering}
+			{\large
+				Отчет по лабораторной работе \\
+				студентки 2 курса 3 группы \\
+				Бурак Ирины \\
+			}
+		\end{centering}
+		\vfill
+		\vfill
+		\hfill
+		\begin{minipage}{0.25\textwidth}
+			{\large{\bf Преподаватель} \\
+				{Будник А.М.}}
+		\end{minipage}
+		\vfill
+		\vfill
+		\centerline{\Large \bf Минск 2015}
+	\end{titlepage}
+	\section{Постановка задачи}
+	Для некоторой функции $f(x)$ известны её значения $f(x_i)$ в точках $x_i, i = \overline{0, n}$. Требуется восстановить функцию и в других точках заданного отрезка $[a, b]$. 
+	\section{Построение многочлена Лагранжа}
+	Многочлен в форме Лагранжа записывается в виде:
+	$$P_n(x) = \sum_{i = 0}^{n}\frac{\omega(x)}{(x - x_i)\omega'(x_i)}*f(x_i),$$
+	где $\omega(x) = (x - x_0)(x - x_1)\dots(x - x_n)$, а $\omega'(x_i) = (x_i - x_0)\dots(x - x_{i-1})(x - x_{i+1})\dots(x - x_n)$.
+	\section{Оценка погрешности}
+	Предполагается,что функция $f(x)$ является достаточное число раз дифференцируемой. Тогда, если $\forall x \in[a, b] \leftarrow |f^{(n+1)}(x)| \le M = const$, то верна следующая оценка погрешности:
+	$$|f(x) - P_n(x)| = \frac{M}{(n+1)!}|\omega(x)|$$
+	\section{Реализация}
+	Для функции $f(x) = 0.9e^x + 0.1e^{-x}, [a, b] = [0, 2]$ получаем следующие таблицы значений:
+	\begin{itemize}
+		\item $n = 5:$ \\
+		\includegraphics[scale = 0.6]{Table_5.png}
+		\item $n = 10:$ \\
+		\includegraphics[scale = 0.6]{Table_10.png}
+	\end{itemize}
+	Для оценки погрешности получаем: 
+	$$|f^{n+1}(x)| = |0.9e^{x} + (-1)^{n+1}*0.1e^{-x}| \le 0.9e^{x} + 0.1e^{-x} \le 0.9e^2 + 0.1 = M$$
+	\section{Листинг}
+	\verbatiminput{Listing.txt}
+	\section{Результаты}
+	Для оценки точности результата были рассмотрены точки в начале, середине и конце отрезка:
+	\begin{itemize}
+		\item $n = 5:$ \\
+		\includegraphics[scale = 0.8]{Results_5.png}
+		\item $n = 10:$ \\
+		\includegraphics[scale = 0.8]{Results_10.png}
+	\end{itemize}
+	Исходя из величин погрешностей можно сделать вывод, что при увеличении $n$ многочлен Лагранжа точнее приближает функцию. \\
+	Наименьшую погрешность в данном случае приближение даёт в середине рассматриваемого отрезка. \\
+	Теоретическая величина погрешности в силу нестрогих оценок оказывается на практике завышенной. 
+\end{document}
