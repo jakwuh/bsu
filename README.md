@@ -4,4 +4,4 @@ The repository for studying in BSU. It contains:
 * Snippets and my implementations of examination tasks  
 ... and much much more
 
-Copyright @jakwuh (James Akwuh)
+@jakwuh
