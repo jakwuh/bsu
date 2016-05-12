@@ -1,0 +1,151 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1cm,right=1cm,
+top=1cm,bottom=1cm,bindingoffset=0cm]{geometry}
+\pagestyle{empty}
+\usepackage[english,russian]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\begin{document}
+	\begin{titlepage}
+		
+		\centerline{\large \bf Белорусский государственный университет}
+		\centerline{\large \bf Факультет прикладной математики и информатики}
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		\vfill
+		\centerline{\Large \bf Джеймс Аквух}
+		\centerline{\Large \bf 3 группа}
+		\bigskip
+		\vfill
+		\bigskip
+		\vfill
+		\vfill
+		\vfill
+		\hfill
+		\vfill
+		\vfill
+		\centerline{\Large \bf Минск 2016}
+	\end{titlepage}
+	\noindent
+	
+	\noindent\textbf{49} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x)=\int_0^x \frac{t}{t+1} y(t) dt + e^x$$ \\ \\
+	\textbf{Решение.} \\ \\
+	$y' = \frac{x}{x+1} y + e^x, y(0)=1$\\
+	$y'-\frac{x}{x+1}y=0$\\
+	$\ln(y)=-\ln(x+1)+\ln(c)+x$\\
+	$y=\frac{C(x)e^x}{x+1}$\\
+	$\frac{C'(x)e^x}{x+1}=e^x$\\
+	$C(x)=\frac{x^2}{2}+x+C$\\
+	\textbf{Ответ: $y=\frac{e^x}{x+1}[\frac{x^2}{2}+x+1]$} \\ \\
+
+	\noindent\textbf{54} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x) = \int_{1}^{x}\frac{4x-3t}{t^2}y(t)dt + 4x\ln{x} - 1$$ 
+	\textbf{Решение.} \\ \\
+	$y'(x)=\frac{1}{x}y(x)+4\int_{1}^{x}\frac{4}{t^2}y(t)dt + 4\ln{x} + 4$ \\ \\
+	$y''(x)=-\frac{1}{x^2}y(x)+\frac{1}{x}y'(x)+4(\frac{1}{x^2}y(x)+\int_{1}^{x}0dt)-\frac{4}{x}$ \\ \\
+	$y''(x)=\frac{1}{x}y'(x)+\frac{3}{x^2}y(x)-\frac{4}{x}$ \\ \\
+	$y''(x)-\frac{1}{x}y'(x)-\frac{3}{x^2}y(x)=-\frac{4}{x}$ \\ \\
+	$x^2y''(x)-xy'(x)-3y(x)=0$ \\ \\
+	Замена: $x=e^t$ \\ \\
+	$y''(t)-y'(t)-3y(t)=0$ \\ \\
+	Характеричстическое уравнение:\\
+	$\lambda^2-\lambda-3=0$ \\ \\
+	Общее решение: \\ \\
+	$y(t)=c_1e^{3t}+c_2e^{-t}$ \\ \\
+	$y(x)=c_1x^3+\frac{c_2}{x}$ \\ \\
+	Частное решение: \\ \\
+	$y(x)=x$ \\ \\
+	Ответ:\\ \\
+	$y(x)=c_1x^3+\frac{c_2}{x}+x$ \\ \\
+
+	\noindent\textbf{57} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x)=6\int_{0}^{x}\cos(5(x-t))y(t)dt-4e^{5t}$$\\ \\
+	\textbf{Решение.} \\ \\
+	$y'(x)=6y(x)-30\int_{0}^{x}\sin(5(x-t))y(t)dt-20e^{5t}$\\
+	$y''(x)=6y'(x)-150\int_{0}^{x}\cos(5(x-t))y(t)dt-100e^{5t}$\\
+	$25y(x)+y''(x)-6y'(x)=-200e^{5t}$\\
+	$y=-8e^{5t}$\\
+	$y_{o}=c_1e^{3x}\sin4x+c_2e^{3x}\cos4x$\\
+	$y(x)=c_1e^{3x}\sin4x+c_2e^{3x}\cos4x-8e^{5t}$\\
+	Граничные условия:
+	$y(0)=-4$ и $y'(0)=-20$\\
+	$y(0)=c_1\sin0+c_2\cos0-8=-4$\\
+	$y'(0)=12c_1\cos0-12\sin0-40=-20\ \rightarrow c_1=5/3\ \ c_2=4$\\
+	$y(x)=\frac{5}{3}e^{3x}\sin4x+4e^{3x}\cos4x-8e^{5t}$ \\ \\ 
+
+	\noindent\textbf{58} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x) = 2\int_{0}^{x}\sin(x-t)y(t)dt + e^x$$ 
+	\textbf{Решение.} \\ \\
+	$y'(x) = 2(\sin(x-x)y(x) + \int_{0}^{x}\cos(x-t)y(t)dt) + e^x = 2\int_{0}^{x}\cos(x-t)y(t)dt + e^x$ \\ \\
+	Получаем дифференциальное уравнение: \\ \\
+	$y''(x) - y(x) = 2e^x$ \\ \\
+	$\lambda = \pm1$ - резонансный случай \\ \\
+	Однородное уравнение: \\ \\
+	$y''(x) - y(x) = 0 \Rightarrow y_{oo}(x) = c_1e^x + c_2e^{-x}$ \\ \\
+	$y_p(x) = cxe^x \Rightarrow 2e^x = (cxe^x)'' - cxe^x = c(xe^x + e^x)' - cxe^x = c(xe^x + 2e^x) - cxe^x = 2ce^x \Rightarrow c = 1$ \\ \\
+	$y(x) = c_1e^x + c_2e^{-x} + xe^x$ \\ \\
+	Граничные условия: $y(0) = 1; y'(0) = 1$ \\ \\
+	$y(0) = c_1e^0 + c_2e^{-0} + 0e^0 = c_1 + c_2$ \\ \\
+	$y'(0) = c_1e^0 - c_2e^{-0} + 0e^0 + e^0 = c_1 - c_2 + 1$\\ \\
+	Получаем систему: \\ \\
+	$c_1 + c_2 = 1$ \\
+	$c_1 - c_2 + 1 = 1$ \\
+	Отсюда $c_1 = c_2 = 1/2$. \\ \\ 
+	\textbf{Ответ.} \\ \\
+	$y(x) = \frac{e^x + e^{-x}}{2} + xe^x = ch(x) + xe^x$ \\ \\
+
+	\noindent\textbf{59} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x)=-3\int_0^x {\sin(x-t)y(t)dt} + 2\sh(x),``y(0)=0,``y'(0)=2$$ \\ \\ 
+	\textbf{Решение.} \\ \\
+	$y'=-3\sin(x) \int_0^x {\sin(t)y(t)dt}+3\cos(x)\sin(x)y(x)-3\cos(x)\int_0^x {\cos(t)y(t)dt}-3\sin(x)\cos(x)y(x)_2\ch(x)$\\
+	$y'' = -3\cos(x)\int_0^x{\sin(t)y(t)dt}-3\sin(x)\sin(x)y(x)+3\sin(x)\int_0^x{\cos(t)y(t)dt}-3\cos(x)\cos(x)y(x)+2\sh(x)$\\
+	$y''=-3y$\\
+	$y=C_1\sin(2x)+C_2\cos(2x)$\\
+	$y=\sin(2x)$\\
+	\textbf{Ответ: $y=\sin(2x)$} \\ \\
+
+	\noindent\textbf{67} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x)=\int_{0}^{x}\frac{e^t}{e^x+1}dt+e^{-x}$$\\ \\ 
+	\textbf{Решение.} \\ \\
+	$y(x)=\frac{1}{e^x+1}\int_{0}^{x}e^tdt+e^{-x}$\\
+	$y(x)=\frac{e^x-1}{e^x+1}+e^{-x}$\\
+	$y(x)=\frac{e^x+e^{-x}}{e^x+1}$ \\ \\ 
+
+	\noindent\textbf{68} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x) = \int_{0}^{x}\frac{y(t)}{(x+1(t+1))}dt + \frac{\ln(x+1)}{x+1}$$ 
+	\textbf{Решение.} \\ \\
+	$y(x) = \frac{\phi(x)}{x+1} + \frac{\ln(x+1)}{x+1}, \phi(x) = \int_{0}^{x}\frac{y(t)}{t+1}dt.$ \\  \\
+	$\phi'(x) = \frac{y(x)}{x+1} = \frac{\phi(x) + \ln(x+1)}{(x+1)^2}$ \\ \\
+	$\phi'(x) - \frac{\phi(x)}{(x+1)^2} = \frac{\ln(x+1)}{(x+1)^2}$ \\ \\ 
+	Однородное уравнение: \\ \\
+	$\phi'(x) - \frac{\phi(x)}{(x+1)^2} = 0 \Rightarrow \phi(x) = c(x)e^{\frac{1}{x+1}}$ \\ \\ 
+	Подставляем в исходное дифференциальное уравнение: \\ \\
+	$c'(x)e^{\frac{1}{x+1}} + \frac{c(x)e^{\frac{1}{x+1}}}{(x+1)^2} - \frac{c(x)e^{\frac{1}{x+1}}}{(x+1)^2} = \frac{\ln(x+1)}{(x+1)^2} \Rightarrow c'(x) = \frac{\ln(x+1)e^{\frac{1}{x+1}}}{(x+1)^2}$ \\ \\
+
+	\noindent\textbf{69} \\ \\
+	Решить уравнение Вольтерра сведением к обыкновенному дифференциальному уравнению.\\ \\
+	$$y(x)=e^x\int_0^x(\tg(t)-1)e^{-t}y(t)dt+\cos(x)$$ \\ \\ 
+	\textbf{Решение.} \\ \\
+	$y'=(\tg(x)-1)y(x)-\sin(x),``y(0)=1$\\
+	$\ln(y)=-x=\ln(\cos(x))+\ln(C(x))$\\
+	$y=\frac{C(x)}{e^x\cos(x)}$\\
+	$C'=-e^x\cos(x)\sin(x)$\\
+	$C(x)=-\frac{e^x}{10}[\sin(2x)-2\cos(2x)]+C$\\
+	$y(0)=1 \Rightarrow C=\frac{4}{5}$\\
+	\textbf{Ответ: $y=\frac{4}{5e^x\cos(x)}-\frac{\sin(x)}{5}+\frac{\cos(x)}{5}-\frac{\sin^2(x)}{5\cos(x)}$} \\ \\
+
+\end{document}

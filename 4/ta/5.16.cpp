@@ -45,7 +45,7 @@ int main (){
 
 	queue<Path> q;
 
-	int len = 10;
+	int len = 4;
 
 	for (int i = 0; i <= 6; ++i) {
 		for (int j = i + 1; j <= 6; ++j) {
