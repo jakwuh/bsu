@@ -2,16 +2,20 @@
 #include <fstream>
 #include <sstream>
 #include <cstddef>
+#include <unordered_set>
 #include <algorithm>
-
-typedef long long ll;
+#include <vector>
 
 using namespace std;
+
+typedef long long ll;
+typedef unordered_set<int> Set;
 
 class Node {
 	public:
 		Node *l, *r;
 		ll v, cl, cr, ct;
+		Set cls, crs, cts;
 		Node (ll _v, Node *_l = 0, Node *_r = 0) {
 			v = _v;
 			l = _l;
@@ -45,7 +49,6 @@ void insert(Node *n, ll v) {
 
 void print(Node *n, ofstream& out) {
 	if (!n) return;
-	// cout << n->v << '(' << n->cl << ',' << n->cr << ',' << n->ct << ')' << ' ';
 	sout << n->v << '\n';
 	print(n->l, out);
 	print(n->r, out);
@@ -58,18 +61,60 @@ ll fill_rl(Node *n) {
 	return max(n->cl, n->cr) + 1;
 }
 
-void fill_t(Node *n, ll ct) {
+Set fill_rls(Node *n) {
+	if (!n) return {};
+	Set cts;
+	Set cls = n->l ? fill_rls(n->l) : Set();
+	Set crs = n->r ? fill_rls(n->r) : Set();
+	if (!cls.size() && !crs.size()) {
+		n->cls = {0};
+		n->crs = {0};
+		return {1};
+	}
+	for (auto it : cls) {
+		n->cls.insert(it);
+		cts.insert(it + 1);
+	}
+	for (auto it : crs) {
+		n->crs.insert(it);
+		cts.insert(it + 1);
+	}
+	return cts;
+}
+
+bool hasHalfPath(Set s1, Set s2) {
+	for (auto it1 : s1) {
+		for (auto it2 : s2) {
+			if (it1 + it2 == k) return true;
+		}
+	}
+	return false;
+}
+
+void fill_t(Node *n, ll ct, Set cts) {
 	if (!n) return;
+
 	n->ct = ct;
+	n->cts = cts;
 	ll cl = n->cl, cr = n->cr;
+	Set cls = n->cls, crs = n->crs;
 
-	bool nice = true;
-	if (ct >= k || cr >= k || cl >= k) nice = false;
-	if (ct + cr >= k || ct + cl >= k|| cl + cr >= k) nice = false;
-	if (nice && (!answer || answer->v < n->v)) answer = n;
+	if (ct < k && cr < k && cl < k) {
+		if (!hasHalfPath(cls, crs) && !hasHalfPath(cts, cls) && !hasHalfPath(cts, crs)) {
+			if (!answer || answer->v < n->v) answer = n;
+		}
+	}
 
-	fill_t(n->l, max(ct, cr) + 1);
-	fill_t(n->r, max(ct, cl) + 1);
+	Set cts_l, cts_r;
+	for (auto it : n->cts) {
+		cts_l.insert(it + 1);
+		cts_r.insert(it + 1);
+	}
+	for (auto it : n->crs) cts_l.insert(it + 1);
+	for (auto it : n->cls) cts_r.insert(it + 1);
+
+	fill_t(n->l, max(ct, cr) + 1, cts_l);
+	fill_t(n->r, max(ct, cl) + 1, cts_r);
 }
 
 Node* find_parent(Node *n) {
@@ -111,7 +156,8 @@ int main() {
 	while (in >> a) insert(root, a);
 
 	fill_rl(root);
-	fill_t(root, 0);
+	fill_rls(root);
+	fill_t(root, 0, {});
 	
 	if (answer) root = remove_r(answer, root);
 	
