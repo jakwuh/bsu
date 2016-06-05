@@ -24,6 +24,8 @@ const diffFactory = x => function diff(...v) {
 	}
 }
 
+const R2 = v => x => abs(w(v)(x) * diffFactory([x, ...v])(...[...Array(v.length + 1).keys()]));
+
 const print = ({name, n, x, p, Rn, fn, r}) => {
 	log(`${name} for n = ${n}`)
 	table([,
@@ -60,7 +62,7 @@ const newtonTest = n => {
 	const p = x.map(newton(v))
 	const fn = x.map(ary(f, 1))
 	const r = subtract(p, x.map(ary(f, 1))).map(abs)
-	const Rn = x.map(R(v))
+	const Rn = x.map(R2(v))
 	print({name: 'Newton', n, x, p, Rn, fn, r})
 }
 
