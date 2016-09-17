@@ -62,7 +62,6 @@ int main(int argc, char ** argv) {
 			buffer += childRowsCount * m;
 		}
 	} else {
-		A = malloc(sizeof(long) * childRowsCount * m);
 		MPI_Recv(A, childRowsCount * m, MPI_LONG, ROOT, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
 	}
 
