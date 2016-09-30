@@ -4,17 +4,31 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
-#include "./utils.c"
 
 #define ROOT 0
 
+struct Profiler {
+	double start;
+	double end;
+};
+
+void printVector(long *v, long n);
+
+void printVectorAsMatrix(long* v, long n, long m);
+
+long* transposeVectorAsMatrix(long* v, long n, long m);
+
+long* generateRandomVector(long n);
+
+double realtime();
+
 int main(int argc, char ** argv) {
 	int rank, processesCount;
-	long n, m, k, *A, *B, *AB;
+	long n, m, k, *A, *B, *AB = NULL;
 	struct Profiler profiler;
 	MPI_Status status;
 
-	srand(time(NULL));
+	srand(time(0));
 
 	profiler.start = realtime();
 
@@ -108,4 +122,41 @@ int main(int argc, char ** argv) {
 
 
 	MPI_Finalize();
+}
+
+void printVector(long *v, long n) {
+	for (long i = 0; i < n; ++i) {
+		printf("%ld\t", v[i]);
+	}
+}
+
+void printVectorAsMatrix(long* v, long n, long m) {
+	for (long i = 0; i < n; ++i) {
+		printVector(v + i * m, m);
+		printf("\n");
+	}
+	printf("\n");
+}
+
+long* transposeVectorAsMatrix(long* v, long n, long m) {
+	long *tv = (long*)malloc(sizeof(long) * n * m);
+	for (long i = 0; i < n; ++i) {
+		for (long j = 0; j < m; ++j) {
+			tv[j * n + i] = v[i * m + j];
+		}
+	}
+	return tv;
+}
+
+long* generateRandomVector(long n) {
+	srand(time(NULL));
+	long *v = (long*)malloc(sizeof(long) * n);
+	for (long i = 0; i < n; ++i) {
+		v[i] = rand() % 10;
+	}
+	return v;
+}
+
+double realtime() {
+	return clock() * 1. / CLOCKS_PER_SEC;
 }

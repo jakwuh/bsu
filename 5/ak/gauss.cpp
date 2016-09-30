@@ -1,15 +1,32 @@
 #include <mpi.h>
 #include <iostream>
+#include <fstream>
 #include <string.h>
-#include <cstdlib>
-#include "./utils.c"
+#include <time.h>
+#include <cmath>
 
 #define ROOT 0
+#define DEBUG 1
+
+struct Profiler {
+    double start;
+    double end;
+};
+
+void printVector(double *v, long n);
+
+void printVectorAsMatrix(double* v, long n, long m);
+
+double* generateDoubleRandomVector(long n);
+
+double realtime();
+
+void printResidual(double* A, double* AD, long n);
 
 int main(int argc, char ** argv) {
 	int rank, processesCount;
-	long n, m;
-	double *A;
+	long n;
+	double *A, *copyA;
 	struct Profiler profiler;
 	MPI_Status status;
 
@@ -21,20 +38,25 @@ int main(int argc, char ** argv) {
 
 	if (rank == ROOT) {
 		std::cout << "Gaussian elimination." << std::endl;
-		std::cout << "Enter dimensions of an extended matrix (n, m): " << std::endl;
-		std::cin >> n >> m;
+		std::cout << "Enter number of rows in matrix (n): " << std::endl;
+		std::cin >> n;
 	}
 	
 	MPI_Barrier(MPI_COMM_WORLD);
-	MPI_Bcast(&m, 1, MPI_LONG, ROOT, MPI_COMM_WORLD);
 	MPI_Bcast(&n, 1, MPI_LONG, ROOT, MPI_COMM_WORLD);
 
-	bool shouldPrintMatrix = n < 10 && m < 10;
+	bool shouldPrintMatrix = n < 10;
 	long childRowsCount = n / processesCount;
 	long rootRowsCount = childRowsCount + n % processesCount;
+	long m = n + 1;
 
 	if (rank == ROOT) {
 		A = generateDoubleRandomVector(n * m);
+		if (DEBUG) {
+			// this should run only in debug since it affects profiling
+			copyA = new double[n * m];
+			memcpy(copyA, A, n * m * sizeof(double));
+		}
 
 		if (shouldPrintMatrix) {
 			std::cout << "Initial matrix: " << std::endl;
@@ -88,10 +110,14 @@ int main(int argc, char ** argv) {
 			long offset = (rootRowsCount + (i - 1) * childRowsCount) * m;
 			memcpy(A + offset, dA, childRowsCount * m * sizeof(double));
 		}
+
 		profiler.end = realtime();
 		if (shouldPrintMatrix) {
 			printf("Canonical matrix:\n");
 			printVectorAsMatrix(A, n, m);
+		}
+		if (DEBUG) {
+			printResidual(copyA, A, n);
 		}
 		printf("Execution time: %.3lfs\n", profiler.end - profiler.start);
 	} else {
@@ -99,4 +125,42 @@ int main(int argc, char ** argv) {
 	}
 
 	MPI_Finalize();
+}
+
+void printVector(double *v, long n) {
+    for (long i = 0; i < n; ++i) {
+        printf("%lf\t", v[i]);
+    }
+}
+
+void printVectorAsMatrix(double* v, long n, long m) {
+    for (long i = 0; i < n; ++i) {
+        printVector(v + i * m, m);
+        printf("\n");
+    }
+    printf("\n");
+}
+
+double* generateDoubleRandomVector(long n) {
+    srand(time(NULL));
+    double *v = new double[n];
+    for (long i = 0; i < n; ++i) {
+        v[i] = rand() % 100;
+    }
+    return v;
+}
+
+void printResidual(double* A, double* AD, long n) {
+	for (long i = 0; i < n; ++i) {
+		double sum = 0;
+		for (long j = 0; j < n; ++j) {
+			sum += A[i * (n + 1) + j] * AD[n + (n + 1) * j];
+		}
+		sum = std::abs((double)(sum - A[i * (n + 1) + n]));
+		std::cout << sum << ' ';
+	}
+}
+
+double realtime() {
+    return clock() * 1. / CLOCKS_PER_SEC;
 }
