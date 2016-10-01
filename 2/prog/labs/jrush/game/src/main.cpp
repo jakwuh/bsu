@@ -4,11 +4,11 @@
 * @date 24.03.2015
 */
 
-#include "core\application.h"
+#include "core/application.h"
 
 Application* app;
 
-#include "core\event_handler.cpp"
+#include "core/event_handler.cpp"
 
 int WINAPI WinMain(HINSTANCE hI, HINSTANCE hPI, LPSTR lpCmdLine, int nCmdShow)
 {

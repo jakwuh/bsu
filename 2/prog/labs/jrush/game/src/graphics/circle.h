@@ -10,8 +10,8 @@
 #include <Windows.h>
 #include <cmath>
 #include <assert.h>
-#include "..\config\errors.h"
-#include "..\core\interfaces.h"
+#include "../config/errors.h"
+#include "../core/interfaces.h"
 
 namespace graphics
 {

@@ -5,9 +5,9 @@
 #include <string>
 #include <Windows.h>
 #include <commctrl.h>
-#include "..\utils\styles.h"
-#include "..\core\interfaces.h"
-#include "..\config\config.h"
+#include "../utils/styles.h"
+#include "../core/interfaces.h"
+#include "../config/config.h"
 
 class Screen : public IDrawable
 {

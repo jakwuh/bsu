@@ -10,10 +10,10 @@
 #include <Windows.h>
 #include <algorithm>
 
-#include "..\core\interfaces.h"
-#include "..\config\config.h"
-#include "..\graphics\circle.h"
-#include "..\utils\styles.h"
+#include "../core/interfaces.h"
+#include "../config/config.h"
+#include "../graphics/circle.h"
+#include "../utils/styles.h"
 
 class Bot;
 

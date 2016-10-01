@@ -7,10 +7,10 @@
 #ifndef __BITMAP_H_INCLUDED__
 #define __BITMAP_H_INCLUDED__
 
-#include "..\config\surface.h"
-#include "..\config\config.h"
-#include "..\config\errors.h"
-#include "..\includes\map.h"
+#include "../config/surface.h"
+#include "../config/config.h"
+#include "../config/errors.h"
+#include "../includes/map.h"
 #include <Windows.h>
 
 void generateBitmap(Map<Surface>, int, int, LPTSTR);

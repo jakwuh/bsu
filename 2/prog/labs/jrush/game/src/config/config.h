@@ -8,7 +8,7 @@
 #define __CONFIG_H_INCLUDED__
 
 #include <Windows.h>
-#include "..\core\interfaces.h"
+#include "../core/interfaces.h"
 #include <map>
 
 using namespace types;

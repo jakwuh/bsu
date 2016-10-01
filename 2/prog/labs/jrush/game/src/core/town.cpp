@@ -1,6 +1,6 @@
 #include "town.h"
-#include "..\controllers\bot.h"
-#include "..\controllers\player.h"
+#include "../controllers/bot.h"
+#include "../controllers/player.h"
 #undef max
 
 Town::Town(int _px_x, int _px_y, int _capacity, double _bps, double _cooldown)

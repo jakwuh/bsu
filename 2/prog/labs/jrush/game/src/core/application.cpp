@@ -4,7 +4,7 @@ Application::Application(HINSTANCE _hI, WNDPROC _wndProc) :
 h_instance(_hI), window_proc(_wndProc)
 {
 	window_classname = "JRUSH";
-	map_path = "resources\\output0.bmp";
+	map_path = "resources//output0.bmp";
 	
 	registerWindows();
 	count_levels();
@@ -76,8 +76,8 @@ void Application::setSettings(int _level, int fps)
 {
 	::config::level = _level;
 	::config::milliseconds_per_tact = 40 + (101 - fps) / 100 * 120;
-	std::string tmp = "Настройки сохранены!\nУровень:\t" + 
-		std::to_string(::config::level) + "\nСкорость прорисовки:\t" 
+	std::string tmp = "Настройки сохранены!/nУровень:/t" + 
+		std::to_string(::config::level) + "/nСкорость прорисовки:/t" 
 		+ std::to_string(fps) + "/100";
 	MessageBox(NULL, tmp.c_str(), "Настройки", MB_OK);
 }

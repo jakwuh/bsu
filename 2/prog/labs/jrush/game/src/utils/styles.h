@@ -3,7 +3,7 @@
 
 #include <Windows.h>
 #include <map>
-#include "..\core\interfaces.h"
+#include "../core/interfaces.h"
 
 using namespace types;
 

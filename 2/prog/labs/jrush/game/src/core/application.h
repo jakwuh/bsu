@@ -11,16 +11,16 @@
 #include <string>
 #include <cstring>
 
-#include "..\config\errors.h"
-#include "..\config\levels.h"
-#include "..\config\config.h"
-#include "..\core\interfaces.h"
-#include "..\core\town.h"
-#include "..\controllers\player.h"
-#include "..\graphics\view.h"
-#include "..\graphics\menu.h"
-#include "..\graphics\settings.h"
-#include "..\utils\styles.h"
+#include "../config/errors.h"
+#include "../config/levels.h"
+#include "../config/config.h"
+#include "../core/interfaces.h"
+#include "../core/town.h"
+#include "../controllers/player.h"
+#include "../graphics/view.h"
+#include "../graphics/menu.h"
+#include "../graphics/settings.h"
+#include "../utils/styles.h"
 
 class Application
 {

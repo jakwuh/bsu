@@ -8,8 +8,8 @@
 #include <map>
 #include <string>
 #include <Windows.h>
-#include "..\utils\styles.h"
-#include "..\core\interfaces.h"
+#include "../utils/styles.h"
+#include "../core/interfaces.h"
 
 class Menu : public IDrawable
 {

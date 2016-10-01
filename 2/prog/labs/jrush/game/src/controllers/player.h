@@ -9,11 +9,11 @@
 
 #include <Windows.h>
 #include <string>
-#include "..\graphics\cursor.h"
-#include "..\core\interfaces.h"
-#include "..\core\town.h"
-#include "..\config\config.h"
-#include "..\core\interfaces.h"
+#include "../graphics/cursor.h"
+#include "../core/interfaces.h"
+#include "../core/town.h"
+#include "../config/config.h"
+#include "../core/interfaces.h"
 
 using namespace types;
 

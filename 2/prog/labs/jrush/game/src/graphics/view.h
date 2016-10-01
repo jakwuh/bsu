@@ -12,11 +12,11 @@
 #include <Windows.h>
 #include <string>
 
-#include "..\core\interfaces.h"
-#include "..\core\town.h"
-#include "..\config\config.h"
-#include "..\controllers\player.h"
-#include "..\utils\styles.h"
+#include "../core/interfaces.h"
+#include "../core/town.h"
+#include "../config/config.h"
+#include "../controllers/player.h"
+#include "../utils/styles.h"
 
 using namespace types;
 

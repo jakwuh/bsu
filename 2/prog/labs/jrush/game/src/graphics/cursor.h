@@ -10,10 +10,10 @@
 #include <algorithm>
 #include <cmath>
 
-#include "..\graphics\circle.h"
-#include "..\config\config.h"
-#include "..\utils\math.h"
-#include "..\utils\styles.h"
+#include "../graphics/circle.h"
+#include "../config/config.h"
+#include "../utils/math.h"
+#include "../utils/styles.h"
 
 namespace graphics{
 

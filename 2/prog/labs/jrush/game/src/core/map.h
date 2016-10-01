@@ -9,7 +9,7 @@
 
 #include <Windows.h>
 
-#include "..\core\town.h"
+#include "../core/town.h"
 
 class Cell
 {

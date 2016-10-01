@@ -9,9 +9,9 @@
 
 #include <cmath>
 
-#include "..\graphics\circle.h"
-#include "..\utils\math.h"
-#include "..\config\config.h"
+#include "../graphics/circle.h"
+#include "../utils/math.h"
+#include "../config/config.h"
 
 class Player;
 

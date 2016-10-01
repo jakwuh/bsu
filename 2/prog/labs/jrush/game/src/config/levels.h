@@ -7,10 +7,10 @@
 #ifndef __LEVELS_H_INCLUDED__
 #define __LEVELS_H_INCLUDED__
 
-#include "..\config\config.h"
-#include "..\controllers\player.h"
-#include "..\core\town.h"
-#include "..\core\interfaces.h"
+#include "../config/config.h"
+#include "../controllers/player.h"
+#include "../core/town.h"
+#include "../core/interfaces.h"
 #include <vector>
 #include <fstream>
 #include <cstring>

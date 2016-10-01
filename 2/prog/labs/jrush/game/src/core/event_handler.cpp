@@ -1,6 +1,6 @@
 #include <Windows.h>
-#include "..\graphics\menu.h"
-#include "..\graphics\settings.h"
+#include "../graphics/menu.h"
+#include "../graphics/settings.h"
 
 LRESULT WINAPI wndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {

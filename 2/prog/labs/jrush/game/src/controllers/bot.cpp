@@ -1,5 +1,5 @@
 #include "bot.h"
-#include "..\core\town.h"
+#include "../core/town.h"
 
 Bot::Bot(Town *_home, Town *_aim, Player* _hoster) 
 	: speed(::config::bot_speed), home(_home), aim(_aim), 
