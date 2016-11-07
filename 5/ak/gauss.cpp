@@ -26,7 +26,7 @@ void printResidual(double* A, double* AD, long n);
 int main(int argc, char ** argv) {
 	int rank, processesCount;
 	long n;
-	double *A, *copyA;
+	double *A = nullptr, *copyA = nullptr;
 	struct Profiler profiler;
 	MPI_Status status;
 
@@ -110,6 +110,7 @@ int main(int argc, char ** argv) {
 			long offset = (rootRowsCount + (i - 1) * childRowsCount) * m;
 			memcpy(A + offset, dA, childRowsCount * m * sizeof(double));
 		}
+		delete[] dA;
 
 		profiler.end = realtime();
 		if (shouldPrintMatrix) {
@@ -123,6 +124,10 @@ int main(int argc, char ** argv) {
 	} else {
 		MPI_Send(A, childRowsCount * m, MPI_DOUBLE, ROOT, 0, MPI_COMM_WORLD);
 	}
+
+    delete[] A;
+    delete[] copyA;
+    delete[] v;
 
 	MPI_Finalize();
 }

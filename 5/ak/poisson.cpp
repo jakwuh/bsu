@@ -33,7 +33,8 @@ struct Profiler {
 
 struct Point {
     double x, y;
-    Point(double _x, double _y): x(_x), y(_y) {
+
+    Point(double _x, double _y) : x(_x), y(_y) {
     }
 };
 
@@ -52,17 +53,14 @@ typedef Square<long> Area;
 
 class Cell {
 private:
-    double step_x, step_y;
-    double sqr_step_x, sqr_step_y, weight;
-    double residual;
-
+    double step_x, step_y, sqr_step_x, sqr_step_y, weight, residual;
     long rows, columns;
-
-    unique_ptr<double[]> top_border, adjacent_top_border;
-    unique_ptr<double[]> right_border, adjacent_right_border;
-    unique_ptr<double[]> bottom_border, adjacent_bottom_border;
-    unique_ptr<double[]> left_border, adjacent_left_border;
     vector <vector<double>> inner_lines;
+    unique_ptr<double[]>
+            top_border, adjacent_top_border,
+            right_border, adjacent_right_border,
+            bottom_border, adjacent_bottom_border,
+            left_border, adjacent_left_border;
 
     Area area, calc_area, world_area;
     Point left_top;
@@ -74,72 +72,66 @@ public:
         rows = area.bottom - area.top;
         columns = area.right - area.left;
 
-        calc_area.top = area.top == world_area.top ? 1 : 0;
-        calc_area.left = area.left == world_area.left ? 1 : 0;
-        calc_area.right = columns + (area.right == world_area.right ? -1 : 0);
-        calc_area.bottom = rows + (area.bottom == world_area.bottom ? -1 : 0);
+        auto to_number = [](bool a) { return static_cast<long>(a); };
+
+        calc_area.top = to_number(area.top == world_area.top);
+        calc_area.left = to_number(area.left == world_area.left);
+        calc_area.right = columns - to_number(area.right == world_area.right);
+        calc_area.bottom = rows - to_number(area.bottom == world_area.bottom);
+
+        auto allocate_zeros = [](long n) {
+            auto ptr = new double[n];
+            std::fill_n(ptr, n, 0);
+            return ptr;
+        };
 
         if (rows > 0 && columns > 0) {
             sqr_step_x = step_x * step_x;
             sqr_step_y = step_y * step_y;
             weight = 1. / (2 * (1. / sqr_step_x + 1. / sqr_step_y));
 
-            top_border.reset(new double[columns]);
-            bottom_border.reset(new double[columns]);
-            left_border.reset(new double[rows]);
-            right_border.reset(new double[rows]);
-
-            std::fill_n(top_border.get(), columns, 0);
-            std::fill_n(bottom_border.get(), columns, 0);
-            std::fill_n(left_border.get(), rows, 0);
-            std::fill_n(right_border.get(), rows, 0);
+            top_border.reset(allocate_zeros(columns));
+            left_border.reset(allocate_zeros(rows));
+            bottom_border.reset(allocate_zeros(columns));
+            right_border.reset(allocate_zeros(rows));
 
             if (area.top != world_area.top) {
-                adjacent_top_border.reset(new double[columns]);
-                std::fill_n(adjacent_top_border.get(), columns, 0);
+                adjacent_top_border.reset(allocate_zeros(columns));
+            } else {
+                for (long j = 0; j < columns; ++j) {
+                    set(0, j, f_top(left_top.x + step_x * j));
+                }
             }
+
             if (area.bottom != world_area.bottom) {
-                adjacent_bottom_border.reset(new double[columns]);
-                std::fill_n(adjacent_bottom_border.get(), columns, 0);
+                adjacent_bottom_border.reset(allocate_zeros(columns));
+            } else {
+                for (long j = 0; j < columns; ++j) {
+                    set(rows - 1, j, f_bottom(left_top.x + step_x * j));
+                }
             }
+
             if (area.left != world_area.left) {
-                adjacent_left_border.reset(new double[rows]);
-                std::fill_n(adjacent_left_border.get(), rows, 0);
+                adjacent_left_border.reset(allocate_zeros(rows));
+            } else {
+                for (long i = 0; i < rows; ++i) {
+                    set(i, 0, f_left(left_top.y + step_y * i));
+                }
             }
+
             if (area.right != world_area.right) {
-                adjacent_right_border.reset(new double[rows]);
-                 std::fill_n(adjacent_right_border.get(), rows, 0);
-            }
-
-            if (rows > 2 && columns > 2) {
-                inner_lines.resize(rows - 2);
-                for (auto &it : inner_lines) it.resize(columns - 2, 0);
+                adjacent_right_border.reset(allocate_zeros(rows));
+            } else {
+                for (long i = 0; i < rows; ++i) {
+                    set(i, columns - 1, f_right(left_top.y + step_y * i));
+                }
             }
         }
 
-        fill_with_defaults();
-        debug();
-    }
-
-    void fill_with_defaults() {
-        if (area.top == world_area.top) {
-            for (long j = 0; j < columns; ++j) {
-                set(0, j, f_top(left_top.x + step_x * j));
-            }
-        }
-        if (area.bottom == world_area.bottom) {
-            for (long j = 0; j < columns; ++j) {
-                set(rows - 1, j, f_bottom(left_top.x + step_x * j));
-            }
-        }
-        if (area.left == world_area.left) {
-            for (long i = 0; i < rows; ++i) {
-                set(i, 0, f_left(left_top.y + step_y * i));
-            }
-        }
-        if (area.right == world_area.right) {
-            for (long i = 0; i < rows; ++i) {
-                set(i, columns - 1, f_right(left_top.y + step_y * i));
+        if (rows > 2 && columns > 2) {
+            inner_lines.resize(rows - 2);
+            for (auto &it : inner_lines) {
+                it.resize(columns - 2, 0);
             }
         }
     }
@@ -167,9 +159,6 @@ public:
     }
 
     void set(long i, long j, double value) {
-        bool x_inner = false;
-        bool y_inner = false;
-
         if (j == -1) {
             adjacent_left_border[i] = value;
         } else if (j == columns) {
@@ -199,8 +188,6 @@ public:
 
     void debug() {
         MPI_Barrier(MPI_COMM_WORLD);
-        std::cout.precision(5);
-        std::cout << std::fixed;
 
         for (long i = -1; i <= rows; ++i) {
             for (long j = -1; j <= columns; ++j) {
@@ -221,14 +208,18 @@ public:
     }
 
     void calculate() {
-        debug();
+        if (DEBUG) {
+            printf("Calculating: top: %ld, left: %ld, bottom: %ld, right: %ld\n",
+                   calc_area.top, calc_area.left, calc_area.bottom, calc_area.right);
+        }
+
         residual = 0;
         for (long i = calc_area.top; i < calc_area.bottom; ++i) {
             for (long j = calc_area.left; j < calc_area.right; ++j) {
                 double x = left_top.x + j * step_x;
                 double y = left_top.y + i * step_y;
                 double value = weight * ((get(i + 1, j) + get(i - 1, j)) / sqr_step_x
-                                + (get(i, j + 1) + get(i, j - 1)) / sqr_step_y - f(x, y));
+                                         + (get(i, j + 1) + get(i, j - 1)) / sqr_step_y - f(x, y));
                 residual = std::max(residual, std::abs(value - get(i, j)));
                 set(i, j, value);
             }
@@ -256,8 +247,6 @@ public:
             MPI_Recv(adjacent_bottom_border.get(), columns, MPI_DOUBLE, bottom, MPI_ANY_TAG, communicator, &status);
         }
 
-        MPI_Barrier(communicator);
-
         if (bottom != MPI_PROC_NULL) {
             MPI_Send(bottom_border.get(), columns, MPI_DOUBLE, bottom, 0, communicator);
         }
@@ -265,16 +254,12 @@ public:
             MPI_Recv(adjacent_top_border.get(), columns, MPI_DOUBLE, top, MPI_ANY_TAG, communicator, &status);
         }
 
-        MPI_Barrier(communicator);
-
         if (right != MPI_PROC_NULL) {
             MPI_Send(right_border.get(), rows, MPI_DOUBLE, right, 0, communicator);
         }
         if (left != MPI_PROC_NULL) {
             MPI_Recv(adjacent_left_border.get(), rows, MPI_DOUBLE, left, MPI_ANY_TAG, communicator, &status);
         }
-
-        MPI_Barrier(communicator);
 
         if (left != MPI_PROC_NULL) {
             MPI_Send(left_border.get(), rows, MPI_DOUBLE, left, 0, communicator);
@@ -285,6 +270,16 @@ public:
 
         MPI_Barrier(communicator);
     }
+
+    unique_ptr<double[]> serialize() {
+        auto ptr = new double[rows * columns];
+        for (long i = 0; i < rows; ++i) {
+            for (long j = 0; j < columns; ++j) {
+                ptr[i * columns + j] = get(i, j);
+            }
+        }
+        return unique_ptr<double[]>(ptr);
+    }
 };
 
 int main(int argc, char **argv) {
@@ -292,6 +287,11 @@ int main(int argc, char **argv) {
     int processes_rows, processes_columns;
     long rows, columns;
     double top = 1, right = 1;
+    MPI_Status status;
+    Profiler profiler;
+
+    std::cout.precision(5);
+    std::cout << std::fixed;
 
     /*
      * (0,top) ...   (right,top)
@@ -330,6 +330,7 @@ int main(int argc, char **argv) {
         }
     }
 
+    profiler.start_preparing = current_time();
     int dimensions[2] = {processes_rows, processes_columns};
     int periods[2] = {0, 0};
     int coordinates[2];
@@ -339,7 +340,7 @@ int main(int argc, char **argv) {
     MPI_Cart_coords(communicator, rank, 2, coordinates);
 
     double step_x = right / (columns - 1);
-    double step_y = - top / (rows - 1);
+    double step_y = -top / (rows - 1);
 
     long first_columns = columns / processes_columns + columns % processes_columns;
     long other_columns = columns / processes_columns;
@@ -364,47 +365,82 @@ int main(int argc, char **argv) {
     Cell cell(world_area, area, point, step_x, step_y);
 
     if (DEBUG) {
-        printf("Parameters for process #%d\n", rank);
+        printf("\nParameters for process #%d\n", rank);
         printf("\tprocess_i: %d\n\tprocess_j: %d\n", process_i, process_j);
         printf("\tarea.top: %ld\n\tarea.left: %ld\n\tarea.right: %ld\n\tarea.bottom: %ld\n",
                area.top, area.left, area.right, area.bottom);
-        printf("\tleft_top.x: %f\n\tleft_top.y: %f\n", point.x, point.y);
+        printf("\tleft_top.x: %f\n\tleft_top.y: %f\n\n", point.x, point.y);
 
     }
-        MPI_Barrier(communicator);
+
+    MPI_Barrier(communicator);
+    profiler.end_preparing = current_time();
+    profiler.start_calculating = current_time();
 
     double max_residual = 1E20;
+    long iterations_count = 0;
 
     while (max_residual > 1E-5) {
         cell.exchange(communicator);
-        std::cout << std::endl;
         cell.calculate();
+        iterations_count++;
         double residual = cell.get_residual();
         MPI_Allreduce(&residual, &max_residual, 1, MPI_DOUBLE, MPI_MAX, communicator);
     }
+    profiler.end_calculating = current_time();
+    profiler.start_sending = current_time();
 
-//    if (rank == ROOT) {
-//        vector<vector<double> > answer(vector<double>(0, columns), rows);
-//
-//        double *dA = new double[childRowsCount * m];
-//        for (long i = 1; i < processesCount; ++i) {
-//            MPI_Recv(dA, childRowsCount * m, MPI_DOUBLE, i, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-//            long offset = (rootRowsCount + (i - 1) * childRowsCount) * m;
-//            memcpy(A + offset, dA, childRowsCount * m * sizeof(double));
-//        }
-//
-//        profiler.end = realtime();
-//        if (shouldPrintMatrix) {
-//            printf("Canonical matrix:\n");
-//            printVectorAsMatrix(A, n, m);
-//        }
-//        if (DEBUG) {
-//            printResidual(copyA, A, n);
-//        }
-//        printf("Execution time: %.3lfs\n", profiler.end - profiler.start);
-//    } else {
-//        MPI_Send(A, childRowsCount * m, MPI_DOUBLE, ROOT, 0, MPI_COMM_WORLD);
-//    }
+    if (rank == ROOT) {
+        vector<vector<double> > answer(rows, vector<double>(columns, 0));
+
+        for (long i = 0; i < cell_rows; ++i) {
+            for (long j = 0; j < cell_columns; ++j) {
+                answer[i][j] = cell.get(i, j);
+            }
+        }
+
+        for (long i = 1; i < processes_count; ++i) {
+            MPI_Cart_coords(communicator, i, 2, coordinates);
+            process_i = coordinates[0];
+            process_j = coordinates[1];
+
+            cell_columns_offset = process_j == 0 ? 0 : first_columns + (process_j - 1) * other_columns;
+            cell_rows_offset = process_i == 0 ? 0 : first_rows + (process_i - 1) * other_rows;
+            cell_columns = process_j == 0 ? first_columns : other_columns;
+            cell_rows = process_i == 0 ? first_rows : other_rows;
+
+            unique_ptr<double[]> ptr(new double[cell_rows * cell_columns]);
+            MPI_Recv(ptr.get(), cell_rows * cell_columns, MPI_DOUBLE, i, MPI_ANY_TAG, communicator, &status);
+
+            for (long i = 0; i < cell_rows; ++i) {
+                for (long j = 0; j < cell_columns; ++j) {
+                    answer[cell_rows_offset + i][cell_columns_offset + j] = ptr[i * cell_columns + j];
+                }
+            }
+        }
+        profiler.end_sending = current_time();
+
+        if (DEBUG && rows < 20 && columns < 20) {
+            std::cout << std::endl;
+            for (auto &row: answer) {
+                for (auto &el: row) {
+                    std::cout << el << '\t';
+                }
+                std::cout << std::endl;
+            }
+            std::cout << std::endl;
+        }
+
+        printf("\nDone!\n");
+        printf("Iterations count: %.ld\n", iterations_count);
+        printf("Time to prepare: %.3lfs\n", profiler.end_preparing - profiler.start_preparing);
+        printf("Time to calculate: %.3lfs\n", profiler.end_calculating - profiler.start_calculating);
+        printf("Time to send: %.3lfs\n", profiler.end_sending - profiler.start_sending);
+        printf("Total time: %.3lfs\n", profiler.end_sending - profiler.start_preparing);
+    } else {
+        MPI_Send(cell.serialize().get(), cell_columns * cell_rows, MPI_DOUBLE, ROOT, 0, communicator);
+    }
+
     MPI_Finalize();
 }
 
