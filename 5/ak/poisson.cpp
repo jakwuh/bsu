@@ -278,7 +278,8 @@ public:
                 ptr[i * columns + j] = get(i, j);
             }
         }
-        return unique_ptr<double[]>(ptr);
+        return unique_ptr < double
+        [] > (ptr);
     }
 };
 
@@ -350,18 +351,26 @@ int main(int argc, char **argv) {
     int process_i = coordinates[0];
     int process_j = coordinates[1];
 
-    long cell_columns_offset = process_j == 0 ? 0 : first_columns + (process_j - 1) * other_columns;
-    long cell_rows_offset = process_i == 0 ? 0 : first_rows + (process_i - 1) * other_rows;
-    long cell_columns = process_j == 0 ? first_columns : other_columns;
-    long cell_rows = process_i == 0 ? first_rows : other_rows;
+    struct CellArea{
+        long rows, rows_offset, columns, columns_offset;
+    };
 
-    double left_top_x = cell_columns_offset == 0 ? 0 : step_x * cell_columns_offset;
-    double left_top_y = cell_rows_offset == 0 ? top : top + step_y * cell_rows_offset;
+    auto calculate_area = [&](int i, int j) {
+        long columns_offset = process_j == 0 ? 0 : first_columns + (process_j - 1) * other_columns;
+        long rows_offset = process_i == 0 ? 0 : first_rows + (process_i - 1) * other_rows;
+        long columns = process_j == 0 ? first_columns : other_columns;
+        long rows = process_i == 0 ? first_rows : other_rows;
+        return CellArea{rows, rows_offset, columns, columns_offset};
+    };
+
+    auto ca = calculate_area(process_i, process_j);
+    double left_top_x = ca.columns_offset == 0 ? 0 : step_x * ca.columns_offset;
+    double left_top_y = ca.rows_offset == 0 ? top : top + step_y * ca.rows_offset;
 
     Point point(left_top_x, left_top_y);
     Area world_area(0, columns, rows, 0);
-    Area area(cell_rows_offset, cell_columns_offset + cell_columns,
-              cell_rows_offset + cell_rows, cell_columns_offset);
+    Area area(ca.rows_offset, ca.columns_offset + ca.columns,
+              ca.rows_offset + ca.rows, ca.columns_offset);
     Cell cell(world_area, area, point, step_x, step_y);
 
     if (DEBUG) {
@@ -391,10 +400,10 @@ int main(int argc, char **argv) {
     profiler.start_sending = current_time();
 
     if (rank == ROOT) {
-        vector<vector<double> > answer(rows, vector<double>(columns, 0));
+        vector <vector<double>> answer(rows, vector<double>(columns, 0));
 
-        for (long i = 0; i < cell_rows; ++i) {
-            for (long j = 0; j < cell_columns; ++j) {
+        for (long i = 0; i < ca.rows; ++i) {
+            for (long j = 0; j < ca.columns; ++j) {
                 answer[i][j] = cell.get(i, j);
             }
         }
@@ -404,17 +413,14 @@ int main(int argc, char **argv) {
             process_i = coordinates[0];
             process_j = coordinates[1];
 
-            cell_columns_offset = process_j == 0 ? 0 : first_columns + (process_j - 1) * other_columns;
-            cell_rows_offset = process_i == 0 ? 0 : first_rows + (process_i - 1) * other_rows;
-            cell_columns = process_j == 0 ? first_columns : other_columns;
-            cell_rows = process_i == 0 ? first_rows : other_rows;
+            ca = calculate_area(process_i, process_j);
 
-            unique_ptr<double[]> ptr(new double[cell_rows * cell_columns]);
-            MPI_Recv(ptr.get(), cell_rows * cell_columns, MPI_DOUBLE, i, MPI_ANY_TAG, communicator, &status);
+            unique_ptr<double[]> ptr(new double[ca.rows * ca.columns]);
+            MPI_Recv(ptr.get(), ca.rows * ca.columns, MPI_DOUBLE, i, MPI_ANY_TAG, communicator, &status);
 
-            for (long i = 0; i < cell_rows; ++i) {
-                for (long j = 0; j < cell_columns; ++j) {
-                    answer[cell_rows_offset + i][cell_columns_offset + j] = ptr[i * cell_columns + j];
+            for (long i = 0; i < ca.rows; ++i) {
+                for (long j = 0; j < ca.columns; ++j) {
+                    answer[ca.rows_offset + i][ca.columns_offset + j] = ptr[i * ca.columns + j];
                 }
             }
         }
@@ -438,7 +444,7 @@ int main(int argc, char **argv) {
         printf("Time to send: %.3lfs\n", profiler.end_sending - profiler.start_sending);
         printf("Total time: %.3lfs\n", profiler.end_sending - profiler.start_preparing);
     } else {
-        MPI_Send(cell.serialize().get(), cell_columns * cell_rows, MPI_DOUBLE, ROOT, 0, communicator);
+        MPI_Send(cell.serialize().get(), ca.columns * ca.rows, MPI_DOUBLE, ROOT, 0, communicator);
     }
 
     MPI_Finalize();
