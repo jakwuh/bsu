@@ -65,7 +65,7 @@ int main(int argc, char ** argv) {
 
 		double *buffer = A + rootRowsCount * m;
 		for (long i = 1; i < processesCount; ++i) {
-			MPI_Send(buffer, childRowsCount * m, MPI_LONG, i, 0, MPI_COMM_WORLD);
+			MPI_Send(buffer, childRowsCount * m, MPI_DOUBLE, i, 0, MPI_COMM_WORLD);
 			buffer += childRowsCount * m;
 		}
 	} else {

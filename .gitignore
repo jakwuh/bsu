@@ -27,3 +27,5 @@ Debug
 */\.idea
 *.class
 *.log
+
+.idea
