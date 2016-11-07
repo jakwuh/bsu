@@ -445,28 +445,23 @@ int main(int argc, char **argv) {
 }
 
 double f(double x, double y) {
-    return 0;
-//    return x * y;
+    return x * y;
 }
 
 double f_left(double y) {  // f_1
-    return y;
-//    return y * y;
+    return y * y;
 }
 
 double f_right(double y) {  // f_2
-    return 1;
-//    return sin(y);
+    return sin(y);
 }
 
 double f_bottom(double x) {  // f_3
-    return x;
-//    return x * x * x;
+    return x * x * x;
 }
 
 double f_top(double x) {  // f_4
-    return 1;
-//    return x * x;
+    return x * x;
 }
 
 double current_time() {
