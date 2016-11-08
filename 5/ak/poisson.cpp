@@ -2,8 +2,8 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <time.h>
-#include <assert.h>
+#include <ctime>
+#include <cassert>
 #include <vector>
 #include <memory>
 #include <cmath>
@@ -54,7 +54,7 @@ struct Square {
 typedef Square<long> Area;
 
 class Cell {
-private:
+ private:
     double step_x, step_y, sqr_step_x, sqr_step_y, weight, residual;
     long rows, columns;
     vector <vector<double>> inner_lines;
@@ -67,8 +67,9 @@ private:
     Area area, calc_area, world_area;
     Point left_top;
 
-public:
-    Cell(Area _world_area, Area _area, Point _left_top, double _step_x, double _step_y)
+ public:
+    Cell(Area _world_area, Area _area, Point _left_top,
+            double _step_x, double _step_y)
             : world_area(_world_area), area(_area), left_top(_left_top),
               step_x(_step_x), step_y(_step_y) {
         rows = area.bottom - area.top;
@@ -188,31 +189,38 @@ public:
         }
     }
 
-    void debug() {
+    void dump() {
         MPI_Barrier(MPI_COMM_WORLD);
 
         for (long i = -1; i <= rows; ++i) {
             for (long j = -1; j <= columns; ++j) {
-                bool crit1 = i == -1 && (!adjacent_top_border.get() || (j == -1 || j == columns));
-                bool crit2 = i == rows && (!adjacent_bottom_border.get() || (j == -1 || j == columns));
-                bool crit3 = j == -1 && (!adjacent_left_border.get() || (i == -1 || i == rows));
-                bool crit4 = j == columns && (!adjacent_right_border.get() || (i == -1 || i == rows));
+                bool crit1 = i == -1 && (!adjacent_top_border.get() ||
+                    (j == -1 || j == columns));
+                bool crit2 = i == rows && (!adjacent_bottom_border.get() ||
+                    (j == -1 || j == columns));
+                bool crit3 = j == -1 && (!adjacent_left_border.get() ||
+                    (i == -1 || i == rows));
+                bool crit4 = j == columns && (!adjacent_right_border.get() ||
+                    (i == -1 || i == rows));
                 if (crit1 || crit2 || crit3 || crit4) {
-                    std::cout << std::setw(10) << std::setfill(' ') << "null";
+                    std::cout << std::setw(10) << "null";
                 } else {
-                    std::cout << std::setw(10) << std::setfill(' ') << get(i, j);
+                    std::cout << std::setw(10) << get(i, j);
                 }
             }
             std::cout << std::endl;
         }
         std::cout << std::endl;
+
         MPI_Barrier(MPI_COMM_WORLD);
     }
 
     void calculate() {
         if (DEBUG) {
-            printf("Calculating: top: %ld, left: %ld, bottom: %ld, right: %ld\n",
-                   calc_area.top, calc_area.left, calc_area.bottom, calc_area.right);
+            printf("Calculating: top: %ld, left: %ld,"
+                " bottom: %ld, right: %ld\n",
+                calc_area.top, calc_area.left,
+                calc_area.bottom, calc_area.right);
         }
 
         residual = 0;
@@ -220,8 +228,9 @@ public:
             for (long j = calc_area.left; j < calc_area.right; ++j) {
                 double x = left_top.x + j * step_x;
                 double y = left_top.y + i * step_y;
-                double value = weight * ((get(i + 1, j) + get(i - 1, j)) / sqr_step_x
-                                         + (get(i, j + 1) + get(i, j - 1)) / sqr_step_y - f(x, y));
+                double value = weight * (
+                    (get(i + 1, j) + get(i - 1, j)) / sqr_step_x +
+                    (get(i, j + 1) + get(i, j - 1)) / sqr_step_y - f(x, y));
                 residual = std::max(residual, std::abs(value - get(i, j)));
                 set(i, j, value);
             }
@@ -232,42 +241,51 @@ public:
         return residual;
     }
 
-    void exchange(MPI_Comm &communicator) {
+    void exchange(MPI_Comm const &communicator) {
         MPI_Status status;
         int top, right, bottom, left;
         MPI_Cart_shift(communicator, 1, 1, &left, &right);
         MPI_Cart_shift(communicator, 0, 1, &top, &bottom);
 
         if (DEBUG) {
-            printf("Exchanging data with top: %d, right: %d, bottom: %d, left: %d\n", top, right, bottom, left);
+            printf("Exchanging data with top: %d, right: %d,"
+                " bottom: %d, left: %d\n", top, right, bottom, left);
         }
 
         if (top != MPI_PROC_NULL) {
-            MPI_Send(top_border.get(), columns, MPI_DOUBLE, top, 0, communicator);
+            MPI_Send(top_border.get(), columns, MPI_DOUBLE, top, 0,
+                communicator);
         }
         if (bottom != MPI_PROC_NULL) {
-            MPI_Recv(adjacent_bottom_border.get(), columns, MPI_DOUBLE, bottom, MPI_ANY_TAG, communicator, &status);
+            MPI_Recv(adjacent_bottom_border.get(), columns, MPI_DOUBLE, bottom,
+                MPI_ANY_TAG, communicator, &status);
         }
 
         if (bottom != MPI_PROC_NULL) {
-            MPI_Send(bottom_border.get(), columns, MPI_DOUBLE, bottom, 0, communicator);
+            MPI_Send(bottom_border.get(), columns, MPI_DOUBLE, bottom, 0,
+                communicator);
         }
         if (top != MPI_PROC_NULL) {
-            MPI_Recv(adjacent_top_border.get(), columns, MPI_DOUBLE, top, MPI_ANY_TAG, communicator, &status);
+            MPI_Recv(adjacent_top_border.get(), columns, MPI_DOUBLE, top,
+                MPI_ANY_TAG, communicator, &status);
         }
 
         if (right != MPI_PROC_NULL) {
-            MPI_Send(right_border.get(), rows, MPI_DOUBLE, right, 0, communicator);
+            MPI_Send(right_border.get(), rows, MPI_DOUBLE, right, 0,
+                communicator);
         }
         if (left != MPI_PROC_NULL) {
-            MPI_Recv(adjacent_left_border.get(), rows, MPI_DOUBLE, left, MPI_ANY_TAG, communicator, &status);
+            MPI_Recv(adjacent_left_border.get(), rows, MPI_DOUBLE, left,
+                MPI_ANY_TAG, communicator, &status);
         }
 
         if (left != MPI_PROC_NULL) {
-            MPI_Send(left_border.get(), rows, MPI_DOUBLE, left, 0, communicator);
+            MPI_Send(left_border.get(), rows, MPI_DOUBLE, left, 0,
+                communicator);
         }
         if (right != MPI_PROC_NULL) {
-            MPI_Recv(adjacent_right_border.get(), rows, MPI_DOUBLE, right, MPI_ANY_TAG, communicator, &status);
+            MPI_Recv(adjacent_right_border.get(), rows, MPI_DOUBLE, right,
+                MPI_ANY_TAG, communicator, &status);
         }
 
         MPI_Barrier(communicator);
@@ -306,15 +324,15 @@ int main(int argc, char **argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &processes_count);
 
     if (rank == ROOT) {
-        std::cout << "Calculation of Poisson's equation." << std::endl;
-        std::cout << "Enter how would you split the area (rows, columns): " << std::endl;
+        std::cout << "Calculation of Poisson's equation.\n";
+        std::cout << "Enter how would you split the area (rows, columns): \n";
         std::cin >> rows >> columns;
     }
 
     MPI_Bcast(&rows, 1, MPI_LONG, ROOT, MPI_COMM_WORLD);
     MPI_Bcast(&columns, 1, MPI_LONG, ROOT, MPI_COMM_WORLD);
 
-    processes_columns = (int) sqrt(processes_count);
+    processes_columns = static_cast<int>(sqrt(processes_count));
     while (processes_columns > 1 && processes_count % processes_columns != 0) {
         processes_columns--;
     }
@@ -325,7 +343,8 @@ int main(int argc, char **argv) {
     if (rank == ROOT) {
         if (processes_columns == 1) {
             std::cout << "Using 1D topology with " << processes_count
-                      << (processes_count == 1 ? " process" : " processes") << std::endl;
+                      << (processes_count == 1 ? " process" : " processes")
+                      << std::endl;
         } else {
             std::cout << "Using 2D topology with (" << processes_rows << " * "
                       << processes_columns << ") processes" << std::endl;
@@ -344,7 +363,8 @@ int main(int argc, char **argv) {
     double step_x = right / (columns - 1);
     double step_y = -top / (rows - 1);
 
-    long first_columns = columns / processes_columns + columns % processes_columns;
+    long first_columns = columns / processes_columns +
+        columns % processes_columns;
     long other_columns = columns / processes_columns;
     long first_rows = rows / processes_rows + rows % processes_rows;
     long other_rows = rows / processes_rows;
@@ -357,16 +377,20 @@ int main(int argc, char **argv) {
     };
 
     auto calculate_area = [&](int i, int j) {
-        long columns_offset = process_j == 0 ? 0 : first_columns + (process_j - 1) * other_columns;
-        long rows_offset = process_i == 0 ? 0 : first_rows + (process_i - 1) * other_rows;
+        long columns_offset = process_j == 0 ? 0 : first_columns +
+            (process_j - 1) * other_columns;
+        long rows_offset = process_i == 0 ? 0 : first_rows +
+            (process_i - 1) * other_rows;
         long columns = process_j == 0 ? first_columns : other_columns;
         long rows = process_i == 0 ? first_rows : other_rows;
         return CellArea{rows, rows_offset, columns, columns_offset};
     };
 
     auto ca = calculate_area(process_i, process_j);
-    double left_top_x = ca.columns_offset == 0 ? 0 : step_x * ca.columns_offset;
-    double left_top_y = ca.rows_offset == 0 ? top : top + step_y * ca.rows_offset;
+    double left_top_x = ca.columns_offset == 0 ?
+        0 : step_x * ca.columns_offset;
+    double left_top_y = ca.rows_offset == 0 ?
+        top : top + step_y * ca.rows_offset;
 
     Point point(left_top_x, left_top_y);
     Area world_area(0, columns, rows, 0);
@@ -377,10 +401,10 @@ int main(int argc, char **argv) {
     if (DEBUG) {
         printf("\nParameters for process #%d\n", rank);
         printf("\tprocess_i: %d\n\tprocess_j: %d\n", process_i, process_j);
-        printf("\tarea.top: %ld\n\tarea.left: %ld\n\tarea.right: %ld\n\tarea.bottom: %ld\n",
-               area.top, area.left, area.right, area.bottom);
+        printf("\tarea.top: %ld\n\tarea.left: %ld\n\t"
+            "area.right: %ld\n\tarea.bottom: %ld\n",
+            area.top, area.left, area.right, area.bottom);
         printf("\tleft_top.x: %f\n\tleft_top.y: %f\n\n", point.x, point.y);
-
     }
 
     MPI_Barrier(communicator);
@@ -395,7 +419,8 @@ int main(int argc, char **argv) {
         cell.calculate();
         iterations_count++;
         double residual = cell.get_residual();
-        MPI_Allreduce(&residual, &max_residual, 1, MPI_DOUBLE, MPI_MAX, communicator);
+        MPI_Allreduce(&residual, &max_residual, 1, MPI_DOUBLE,
+            MPI_MAX, communicator);
     }
     profiler.end_calculating = current_time();
     profiler.start_sending = current_time();
@@ -417,11 +442,14 @@ int main(int argc, char **argv) {
             ca = calculate_area(process_i, process_j);
 
             unique_ptr<double[]> ptr(new double[ca.rows * ca.columns]);
-            MPI_Recv(ptr.get(), ca.rows * ca.columns, MPI_DOUBLE, i, MPI_ANY_TAG, communicator, &status);
+            MPI_Recv(ptr.get(), ca.rows * ca.columns, MPI_DOUBLE, i,
+                MPI_ANY_TAG, communicator, &status);
 
             for (long i = 0; i < ca.rows; ++i) {
                 for (long j = 0; j < ca.columns; ++j) {
-                    answer[ca.rows_offset + i][ca.columns_offset + j] = ptr[i * ca.columns + j];
+                    long a_i = ca.rows_offset + i;
+                    long a_j = ca.columns_offset + j;
+                    answer[a_i][a_j] = ptr[i * ca.columns + j];
                 }
             }
         }
@@ -429,8 +457,8 @@ int main(int argc, char **argv) {
 
         if (DEBUG && rows < 20 && columns < 20) {
             std::cout << std::endl;
-            for (auto &row: answer) {
-                for (auto &el: row) {
+            for (auto &row : answer) {
+                for (auto &el : row) {
                     std::cout << std::setw(10) << std::setfill(' ') << el;
                 }
                 std::cout << std::endl;
@@ -440,12 +468,17 @@ int main(int argc, char **argv) {
 
         printf("\nDone!\n");
         printf("Iterations count: %.ld\n", iterations_count);
-        printf("Time to prepare: %.3lfs\n", profiler.end_preparing - profiler.start_preparing);
-        printf("Time to calculate: %.3lfs\n", profiler.end_calculating - profiler.start_calculating);
-        printf("Time to send: %.3lfs\n", profiler.end_sending - profiler.start_sending);
-        printf("Total time: %.3lfs\n", profiler.end_sending - profiler.start_preparing);
+        printf("Time to prepare: %.3lfs\n",
+            profiler.end_preparing - profiler.start_preparing);
+        printf("Time to calculate: %.3lfs\n",
+            profiler.end_calculating - profiler.start_calculating);
+        printf("Time to send: %.3lfs\n",
+            profiler.end_sending - profiler.start_sending);
+        printf("Total time: %.3lfs\n",
+            profiler.end_sending - profiler.start_preparing);
     } else {
-        MPI_Send(cell.serialize().get(), ca.columns * ca.rows, MPI_DOUBLE, ROOT, 0, communicator);
+        MPI_Send(cell.serialize().get(), ca.columns * ca.rows,
+            MPI_DOUBLE, ROOT, 0, communicator);
     }
 
     MPI_Finalize();
