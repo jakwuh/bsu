@@ -280,7 +280,7 @@ public:
                 ptr[i * columns + j] = get(i, j);
             }
         }
-        return unique_ptr < double[]> (ptr);
+        return std::move(unique_ptr < double[]> (ptr));
     }
 };
 
