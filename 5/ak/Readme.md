@@ -1,3 +1,3 @@
 ## ak
 
-[Poisson's wolfram solution](poisson.png)
+![Poisson's wolfram solution](poisson.png)
