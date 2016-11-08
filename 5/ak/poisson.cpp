@@ -1,11 +1,13 @@
 #include <mpi.h>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <time.h>
 #include <assert.h>
 #include <vector>
 #include <memory>
 #include <cmath>
+#include <limits>
 
 #define DEBUG 1
 #define ROOT 0
@@ -196,9 +198,9 @@ public:
                 bool crit3 = j == -1 && (!adjacent_left_border.get() || (i == -1 || i == rows));
                 bool crit4 = j == columns && (!adjacent_right_border.get() || (i == -1 || i == rows));
                 if (crit1 || crit2 || crit3 || crit4) {
-                    std::cout << "null\t";
+                    std::cout << std::setw(10) << std::setfill(' ') << "null";
                 } else {
-                    std::cout << get(i, j) << '\t';
+                    std::cout << std::setw(10) << std::setfill(' ') << get(i, j);
                 }
             }
             std::cout << std::endl;
@@ -278,8 +280,7 @@ public:
                 ptr[i * columns + j] = get(i, j);
             }
         }
-        return unique_ptr < double
-        [] > (ptr);
+        return unique_ptr < double[]> (ptr);
     }
 };
 
@@ -386,10 +387,10 @@ int main(int argc, char **argv) {
     profiler.end_preparing = current_time();
     profiler.start_calculating = current_time();
 
-    double max_residual = 1E20;
+    double max_residual = std::numeric_limits<double>::infinity();
     long iterations_count = 0;
 
-    while (max_residual > 1E-5) {
+    while (max_residual > 1E-20) {
         cell.exchange(communicator);
         cell.calculate();
         iterations_count++;
@@ -430,7 +431,7 @@ int main(int argc, char **argv) {
             std::cout << std::endl;
             for (auto &row: answer) {
                 for (auto &el: row) {
-                    std::cout << el << '\t';
+                    std::cout << std::setw(10) << std::setfill(' ') << el;
                 }
                 std::cout << std::endl;
             }
@@ -451,23 +452,23 @@ int main(int argc, char **argv) {
 }
 
 double f(double x, double y) {
-    return x * y;
+    return x / (1 + y * y);
 }
 
 double f_left(double y) {  // f_1
-    return y * y;
+    return 0;
 }
 
 double f_right(double y) {  // f_2
-    return sin(y);
+    return 0;
 }
 
 double f_bottom(double x) {  // f_3
-    return x * x * x;
+    return 0;
 }
 
 double f_top(double x) {  // f_4
-    return x * x;
+    return 0;
 }
 
 double current_time() {
