@@ -9,7 +9,7 @@
 #include <cmath>
 #include <limits>
 
-#define DEBUG 1
+#define DEBUG 0
 #define ROOT 0
 
 using std::unique_ptr;
@@ -414,7 +414,7 @@ int main(int argc, char **argv) {
     double max_residual = std::numeric_limits<double>::infinity();
     long iterations_count = 0;
 
-    while (max_residual > 1E-20) {
+    while (max_residual > 1E-7) {
         cell.exchange(communicator);
         cell.calculate();
         iterations_count++;
