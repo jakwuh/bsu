@@ -28,3 +28,4 @@ Debug
 *.log
 
 .idea
+.ipynb_checkpoints
