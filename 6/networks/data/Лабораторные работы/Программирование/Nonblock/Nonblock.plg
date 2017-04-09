@@ -1,0 +1,44 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Nonblock - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\zimyanin.CIT\LOCALS~1\Temp\RSP15.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Nonblock.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"C:\Documents and Settings\zimyanin.CIT\Desktop\Компьютерные сети_ФПМИ\ЛАБ_0ld\Лабораторная работа 4_3\Nonblock.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\zimyanin.CIT\LOCALS~1\Temp\RSP15.tmp" 
+Creating temporary file "C:\DOCUME~1\zimyanin.CIT\LOCALS~1\Temp\RSP16.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib ws2_32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Nonblock.pdb" /debug /machine:I386 /out:"Debug/Nonblock.exe" /pdbtype:sept 
+".\Debug\Nonblock.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\zimyanin.CIT\LOCALS~1\Temp\RSP16.tmp"
+<h3>Output Window</h3>
+Compiling...
+Nonblock.cpp
+c:\program files\microsoft visual studio\vc98\include\winsock2.h(371) : error C2079: 'sin_addr' uses undefined struct 'in_addr'
+c:\program files\microsoft visual studio\vc98\include\winsock2.h(3647) : error C2143: syntax error : missing ';' before '}'
+c:\program files\microsoft visual studio\vc98\include\winsock2.h(3647) : error C2143: syntax error : missing ';' before '}'
+c:\program files\microsoft visual studio\vc98\include\winsock2.h(3647) : error C2143: syntax error : missing ';' before '}'
+c:\program files\microsoft visual studio\vc98\include\stdio.h(36) : error C2143: syntax error : missing ';' before '{'
+c:\program files\microsoft visual studio\vc98\include\stdio.h(36) : error C2447: missing function header (old-style formal list?)
+c:\program files\microsoft visual studio\vc98\include\wchar.h(665) : error C2065: 'FILE' : undeclared identifier
+c:\program files\microsoft visual studio\vc98\include\wchar.h(665) : error C2059: syntax error : ','
+c:\program files\microsoft visual studio\vc98\include\wchar.h(666) : error C2143: syntax error : missing ';' before '{'
+c:\program files\microsoft visual studio\vc98\include\wchar.h(666) : error C2447: missing function header (old-style formal list?)
+c:\program files\microsoft visual studio\vc98\include\iosfwd(22) : error C2146: syntax error : missing ';' before identifier '_Fpz'
+c:\program files\microsoft visual studio\vc98\include\iosfwd(22) : fatal error C1004: unexpected end of file found
+Error executing cl.exe.
+
+
+
+<h3>Results</h3>
+Nonblock.exe - 12 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
