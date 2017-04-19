@@ -1,0 +1,5 @@
+![2-0.scheme.PNG](images/2-0.scheme.PNG)
+![2-1.ping.PNG](images/2-1.ping.PNG)
+![3.1-0.scheme.PNG](images/3.1-0.scheme.PNG)
+![3.2-0.scheme.PNG](images/3.2-0.scheme.PNG)
+![4-0.scheme.PNG](images/4-0.scheme.PNG)

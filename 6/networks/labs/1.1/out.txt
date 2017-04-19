@@ -11,11 +11,10 @@ Windows IP Configuration
    Node Type . . . . . . . . . . . . : Hybrid
    IP Routing Enabled. . . . . . . . : No
    WINS Proxy Enabled. . . . . . . . : No
-   DNS Suffix Search List. . . . . . : yandex.net
 
 Ethernet adapter Local Area Connection 2:
 
-   Connection-specific DNS Suffix  . : yandex.net
+   Connection-specific DNS Suffix  . : 
    Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Desktop Adapter
    Physical Address. . . . . . . . . : 08-00-27-41-B9-55
    DHCP Enabled. . . . . . . . . . . : Yes
@@ -23,19 +22,19 @@ Ethernet adapter Local Area Connection 2:
    Link-local IPv6 Address . . . . . : fe80::1cf7:8f89:89a4:1bbd%13(Preferred) 
    IPv4 Address. . . . . . . . . . . : 10.0.2.15(Preferred) 
    Subnet Mask . . . . . . . . . . . : 255.255.255.0
-   Lease Obtained. . . . . . . . . . : Saturday, April 08, 2017 3:30:40 AM
-   Lease Expires . . . . . . . . . . : Sunday, April 09, 2017 11:23:34 AM
+   Lease Obtained. . . . . . . . . . : Wednesday, April 19, 2017 9:37:01 AM
+   Lease Expires . . . . . . . . . . : Thursday, April 20, 2017 9:37:00 AM
    Default Gateway . . . . . . . . . : 10.0.2.2
    DHCP Server . . . . . . . . . . . : 10.0.2.2
    DHCPv6 IAID . . . . . . . . . . . : 268959783
    DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-19-F9-AF-00-00-15-5D-E6-C5-E3
-   DNS Servers . . . . . . . . . . . : 213.180.205.1
+   DNS Servers . . . . . . . . . . . : 192.168.100.1
    NetBIOS over Tcpip. . . . . . . . : Enabled
 
-Tunnel adapter isatap.yandex.net:
+Tunnel adapter isatap.{A2692622-D935-45DD-BC6A-0FEA4F88524C}:
 
    Media State . . . . . . . . . . . : Media disconnected
-   Connection-specific DNS Suffix  . : yandex.net
+   Connection-specific DNS Suffix  . : 
    Description . . . . . . . . . . . : Microsoft ISATAP Adapter
    Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
    DHCP Enabled. . . . . . . . . . . : No
@@ -48,14 +47,14 @@ Tunnel adapter Teredo Tunneling Pseudo-Interface:
    Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
    DHCP Enabled. . . . . . . . . . . : No
    Autoconfiguration Enabled . . . . : Yes
-   IPv6 Address. . . . . . . . . . . : 2001:0:9d38:6ab8:1cb6:1805:dad3:89b2(Preferred) 
-   Link-local IPv6 Address . . . . . : fe80::1cb6:1805:dad3:89b2%14(Preferred) 
+   IPv6 Address. . . . . . . . . . . : 2001:0:9d38:953c:28db:e03:dad3:97ff(Preferred) 
+   Link-local IPv6 Address . . . . . : fe80::28db:e03:dad3:97ff%14(Preferred) 
    Default Gateway . . . . . . . . . : ::
    NetBIOS over Tcpip. . . . . . . . : Disabled
 
 Z:\bsu\networks\labs\1.1>nslookup vk.com 
-Server:  ns-cache.yandex.net
-Address:  213.180.205.1
+Server:  192.168.100.1
+Address:  192.168.100.1
 
 Name:    vk.com
 Addresses:  87.240.165.82
@@ -65,34 +64,34 @@ Addresses:  87.240.165.82
 Z:\bsu\networks\labs\1.1>ping -i 20 87.240.165.82 
 
 Pinging 87.240.165.82 with 32 bytes of data:
-Reply from 87.240.165.82: bytes=32 time=25ms TTL=19
-Reply from 87.240.165.82: bytes=32 time=26ms TTL=19
-Reply from 87.240.165.82: bytes=32 time=26ms TTL=19
-Reply from 87.240.165.82: bytes=32 time=26ms TTL=19
+Reply from 87.240.165.82: bytes=32 time=30ms TTL=19
+Reply from 87.240.165.82: bytes=32 time=31ms TTL=19
+Reply from 87.240.165.82: bytes=32 time=32ms TTL=19
+Reply from 87.240.165.82: bytes=32 time=30ms TTL=19
 
 Ping statistics for 87.240.165.82:
     Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 25ms, Maximum = 26ms, Average = 25ms
+    Minimum = 30ms, Maximum = 32ms, Average = 30ms
 
 Z:\bsu\networks\labs\1.1>ping -l 512 -n 10 -i 255 vk.com 
 
-Pinging vk.com [95.213.11.180] with 512 bytes of data:
-Reply from 95.213.11.180: bytes=512 time=35ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=38ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=38ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=37ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=38ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=37ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=40ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=36ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=38ms TTL=254
-Reply from 95.213.11.180: bytes=512 time=38ms TTL=254
+Pinging vk.com [87.240.165.82] with 512 bytes of data:
+Reply from 87.240.165.82: bytes=512 time=37ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=39ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=38ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=39ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=38ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=41ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=38ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=39ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=40ms TTL=254
+Reply from 87.240.165.82: bytes=512 time=37ms TTL=254
 
-Ping statistics for 95.213.11.180:
+Ping statistics for 87.240.165.82:
     Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 35ms, Maximum = 40ms, Average = 37ms
+    Minimum = 37ms, Maximum = 41ms, Average = 38ms
 
 Z:\bsu\networks\labs\1.1>ping ::1 
 
@@ -120,70 +119,94 @@ Ping statistics for 127.0.0.1:
 Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 0ms, Average = 0ms
 
+Z:\bsu\networks\labs\1.1>ping onliner.by 
+
+Pinging onliner.by [178.124.129.16] with 32 bytes of data:
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 178.124.129.16:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+
 Z:\bsu\networks\labs\1.1>ping ya.ru 
 
-Pinging ya.ru [93.158.134.3] with 32 bytes of data:
-Reply from 93.158.134.3: bytes=32 time=29ms TTL=127
-Request timed out.
-Reply from 93.158.134.3: bytes=32 time=25ms TTL=127
-Reply from 93.158.134.3: bytes=32 time=29ms TTL=127
+Pinging ya.ru [87.250.250.242] with 32 bytes of data:
+Reply from 87.250.250.242: bytes=32 time=24ms TTL=127
+Reply from 87.250.250.242: bytes=32 time=24ms TTL=127
+Reply from 87.250.250.242: bytes=32 time=26ms TTL=127
+Reply from 87.250.250.242: bytes=32 time=24ms TTL=127
 
-Ping statistics for 93.158.134.3:
-    Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
+Ping statistics for 87.250.250.242:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 25ms, Maximum = 29ms, Average = 27ms
+    Minimum = 24ms, Maximum = 26ms, Average = 24ms
 
 Z:\bsu\networks\labs\1.1>ping yandex.ru 
 
-Pinging yandex.ru [5.255.255.70] with 32 bytes of data:
-Reply from 5.255.255.70: bytes=32 time=25ms TTL=127
-Reply from 5.255.255.70: bytes=32 time=26ms TTL=127
-Reply from 5.255.255.70: bytes=32 time=26ms TTL=127
-Reply from 5.255.255.70: bytes=32 time=28ms TTL=127
+Pinging yandex.ru [5.255.255.5] with 32 bytes of data:
+Reply from 5.255.255.5: bytes=32 time=17ms TTL=127
+Reply from 5.255.255.5: bytes=32 time=18ms TTL=127
+Reply from 5.255.255.5: bytes=32 time=20ms TTL=127
+Reply from 5.255.255.5: bytes=32 time=18ms TTL=127
 
-Ping statistics for 5.255.255.70:
+Ping statistics for 5.255.255.5:
     Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = 25ms, Maximum = 28ms, Average = 26ms
+    Minimum = 17ms, Maximum = 20ms, Average = 18ms
 
 Z:\bsu\networks\labs\1.1>nslookup ya.ru 
-Server:  ns-cache.yandex.net
-Address:  213.180.205.1
+Server:  192.168.100.1
+Address:  192.168.100.1
 
 Name:    ya.ru
-Addresses:  2a02:6b8::3
-	  93.158.134.3
-	  213.180.193.3
-	  213.180.204.3
+Addresses:  2a02:6b8::2:242
+	  87.250.250.242
 
 
 Z:\bsu\networks\labs\1.1>nslookup yandex.ru 
-Server:  ns-cache.yandex.net
-Address:  213.180.205.1
+Server:  192.168.100.1
+Address:  192.168.100.1
 
 Name:    yandex.ru
 Addresses:  2a02:6b8:a::a
-	  5.255.255.70
-	  77.88.55.66
-	  5.255.255.55
-	  77.88.55.70
+	  5.255.255.5
+	  5.255.255.88
+	  77.88.55.77
+	  77.88.55.88
 
+
+Z:\bsu\networks\labs\1.1>tracert
+
+Usage: tracert [-d] [-h maximum_hops] [-j host-list] [-w timeout] 
+               [-R] [-S srcaddr] [-4] [-6] target_name
+
+Options:
+    -d                 Do not resolve addresses to hostnames.
+    -h maximum_hops    Maximum number of hops to search for target.
+    -j host-list       Loose source route along host-list (IPv4-only).
+    -w timeout         Wait timeout milliseconds for each reply.
+    -R                 Trace round-trip path (IPv6-only).
+    -S srcaddr         Source address to use (IPv6-only).
+    -4                 Force using IPv4.
+    -6                 Force using IPv6.
 
 Z:\bsu\networks\labs\1.1>tracert -d -h 10 vk.com 
 
-Tracing route to vk.com [95.213.11.180]
+Tracing route to vk.com [87.240.165.82]
 over a maximum of 10 hops:
 
   1    <1 ms    <1 ms    <1 ms  10.0.2.2 
-  2     2 ms     3 ms     1 ms  192.168.100.1 
+  2     3 ms     1 ms     4 ms  192.168.100.1 
   3     *        *        *     Request timed out.
-  4     9 ms     7 ms     7 ms  93.84.80.210 
-  5     9 ms     6 ms     7 ms  10.0.3.45 
-  6    11 ms     9 ms    33 ms  93.85.80.45 
-  7     5 ms    11 ms     7 ms  93.85.80.38 
-  8     5 ms     4 ms     5 ms  93.85.80.74 
-  9    33 ms    26 ms    43 ms  86.57.255.58 
- 10    33 ms    31 ms    43 ms  10.254.116.54 
+  4     7 ms    11 ms     7 ms  93.84.80.210 
+  5     9 ms     7 ms    10 ms  10.0.3.45 
+  6    16 ms    12 ms     6 ms  93.85.80.45 
+  7    13 ms    11 ms    12 ms  93.85.80.38 
+  8     7 ms     7 ms     6 ms  93.85.80.74 
+  9    31 ms    29 ms    30 ms  86.57.255.58 
+ 10    32 ms    31 ms    31 ms  87.240.191.247 
 
 Trace complete.
 
@@ -216,13 +239,8 @@ Active Connections
   TCP    0.0.0.0:49153          IE11Win7:0             LISTENING
   TCP    0.0.0.0:49154          IE11Win7:0             LISTENING
   TCP    0.0.0.0:49155          IE11Win7:0             LISTENING
-  TCP    0.0.0.0:49158          IE11Win7:0             LISTENING
+  TCP    0.0.0.0:49157          IE11Win7:0             LISTENING
   TCP    10.0.2.15:139          IE11Win7:0             LISTENING
-  TCP    10.0.2.15:49247        74.125.232.255:https   CLOSE_WAIT
-  TCP    10.0.2.15:49250        74.125.232.255:https   CLOSE_WAIT
-  TCP    10.0.2.15:49251        74.125.232.255:https   CLOSE_WAIT
-  TCP    10.0.2.15:49284        173.194.32.152:https   CLOSE_WAIT
-  TCP    10.0.2.15:49314        74.125.232.238:https   CLOSE_WAIT
 
 Z:\bsu\networks\labs\1.1>netstat -a -n -p TCP 
 
@@ -240,28 +258,23 @@ Active Connections
   TCP    0.0.0.0:49153          0.0.0.0:0              LISTENING
   TCP    0.0.0.0:49154          0.0.0.0:0              LISTENING
   TCP    0.0.0.0:49155          0.0.0.0:0              LISTENING
-  TCP    0.0.0.0:49158          0.0.0.0:0              LISTENING
+  TCP    0.0.0.0:49157          0.0.0.0:0              LISTENING
   TCP    10.0.2.15:139          0.0.0.0:0              LISTENING
-  TCP    10.0.2.15:49247        74.125.232.255:443     CLOSE_WAIT
-  TCP    10.0.2.15:49250        74.125.232.255:443     CLOSE_WAIT
-  TCP    10.0.2.15:49251        74.125.232.255:443     CLOSE_WAIT
-  TCP    10.0.2.15:49284        173.194.32.152:443     CLOSE_WAIT
-  TCP    10.0.2.15:49314        74.125.232.238:443     CLOSE_WAIT
 
 Z:\bsu\networks\labs\1.1>netstat -a -s -r 
 
 IPv4 Statistics
 
-  Packets Received                   = 29768
+  Packets Received                   = 34426
   Received Header Errors             = 0
   Received Address Errors            = 0
   Datagrams Forwarded                = 0
   Unknown Protocols Received         = 0
-  Received Packets Discarded         = 23
-  Received Packets Delivered         = 32304
-  Output Requests                    = 11390
+  Received Packets Discarded         = 9
+  Received Packets Delivered         = 34960
+  Output Requests                    = 11218
   Routing Discards                   = 0
-  Discarded Output Packets           = 14
+  Discarded Output Packets           = 0
   Output Packet No Route             = 6
   Reassembly Required                = 0
   Reassembly Successful              = 0
@@ -272,17 +285,17 @@ IPv4 Statistics
 
 IPv6 Statistics
 
-  Packets Received                   = 17
+  Packets Received                   = 3
   Received Header Errors             = 0
   Received Address Errors            = 0
   Datagrams Forwarded                = 0
   Unknown Protocols Received         = 0
   Received Packets Discarded         = 0
-  Received Packets Delivered         = 19675
-  Output Requests                    = 20262
+  Received Packets Delivered         = 2326
+  Output Requests                    = 2438
   Routing Discards                   = 0
   Discarded Output Packets           = 0
-  Output Packet No Route             = 12
+  Output Packet No Route             = 6
   Reassembly Required                = 0
   Reassembly Successful              = 0
   Reassembly Failures                = 0
@@ -293,15 +306,15 @@ IPv6 Statistics
 ICMPv4 Statistics
 
                             Received    Sent
-  Messages                  253         266       
+  Messages                  171         233       
   Errors                    0           0         
-  Destination Unreachable   2           2         
-  Time Exceeded             83          0         
+  Destination Unreachable   0           0         
+  Time Exceeded             110         0         
   Parameter Problems        0           0         
   Source Quenches           0           0         
   Redirects                 0           0         
-  Echo Replies              145         23        
-  Echos                     23          241       
+  Echo Replies              57          4         
+  Echos                     4           229       
   Timestamps                0           0         
   Timestamp Replies         0           0         
   Address Masks             0           0         
@@ -312,49 +325,49 @@ ICMPv4 Statistics
 ICMPv6 Statistics
 
                             Received    Sent
-  Messages                  65          93        
+  Messages                  19          24        
   Errors                    0           0         
   Destination Unreachable   0           0         
   Packet Too Big            0           0         
   Time Exceeded             0           0         
   Parameter Problems        0           0         
-  Echos                     24          24        
-  Echo Replies              24          24        
+  Echos                     8           8         
+  Echo Replies              8           8         
   MLD Queries               0           0         
   MLD Reports               0           0         
   MLD Dones                 0           0         
-  Router Solicitations      0           37        
-  Router Advertisements     17          0         
-  Neighbor Solicitations    0           4         
-  Neighbor Advertisements   0           4         
+  Router Solicitations      0           6         
+  Router Advertisements     3           0         
+  Neighbor Solicitations    0           1         
+  Neighbor Advertisements   0           1         
   Redirects                 0           0         
   Router Renumberings       0           0         
 
 TCP Statistics for IPv4
 
-  Active Opens                        = 129
-  Passive Opens                       = 19
-  Failed Connection Attempts          = 6
-  Reset Connections                   = 40
-  Current Connections                 = 5
-  Segments Received                   = 29640
-  Segments Sent                       = 8011
-  Segments Retransmitted              = 473
+  Active Opens                        = 38
+  Passive Opens                       = 5
+  Failed Connection Attempts          = 1
+  Reset Connections                   = 24
+  Current Connections                 = 0
+  Segments Received                   = 34254
+  Segments Sent                       = 10444
+  Segments Retransmitted              = 2
 
 TCP Statistics for IPv6
 
-  Active Opens                        = 33
-  Passive Opens                       = 33
+  Active Opens                        = 9
+  Passive Opens                       = 9
   Failed Connection Attempts          = 0
-  Reset Connections                   = 36
+  Reset Connections                   = 14
   Current Connections                 = 0
-  Segments Received                   = 1513
-  Segments Sent                       = 1513
+  Segments Received                   = 7964
+  Segments Sent                       = 7964
   Segments Retransmitted              = 0
 
 UDP Statistics for IPv4
 
-  D===========================================================================
+  Datagrams Re===========================================================================
 Interface List
  13...08 00 27 41 b9 55 ......Intel(R) PRO/1000 MT Desktop Adapter
   1...........................Software Loopback Interface 1
@@ -388,13 +401,13 @@ Active Routes:
  14     58 ::/0                     On-link
   1    306 ::1/128                  On-link
  14     58 2001::/32                On-link
- 14    306 2001:0:9d38:6ab8:1cb6:1805:dad3:89b2/128
+ 14    306 2001:0:9d38:953c:28db:e03:dad3:97ff/128
                                     On-link
  13    266 fe80::/64                On-link
  14    306 fe80::/64                On-link
- 14    306 fe80::1cb6:1805:dad3:89b2/128
-                                    On-link
  13    266 fe80::1cf7:8f89:89a4:1bbd/128
+                                    On-link
+ 14    306 fe80::28db:e03:dad3:97ff/128
                                     On-link
   1    306 ff00::/8                 On-link
  14    306 ff00::/8                 On-link
@@ -402,17 +415,17 @@ Active Routes:
 ===========================================================================
 Persistent Routes:
   None
-atagrams Received    = 1810
-  No Ports              = 23
+ceived    = 447
+  No Ports              = 9
   Receive Errors        = 0
-  Datagrams Sent        = 2897
+  Datagrams Sent        = 645
 
 UDP Statistics for IPv6
 
-  Datagrams Received    = 13580
+  Datagrams Received    = 1560
   No Ports              = 0
   Receive Errors        = 0
-  Datagrams Sent        = 19907
+  Datagrams Sent        = 2342
 
 Z:\bsu\networks\labs\1.1>net view 
 Server Name            Remark
@@ -469,13 +482,13 @@ Active Routes:
  14     58 ::/0                     On-link
   1    306 ::1/128                  On-link
  14     58 2001::/32                On-link
- 14    306 2001:0:9d38:6ab8:1cb6:1805:dad3:89b2/128
+ 14    306 2001:0:9d38:953c:28db:e03:dad3:97ff/128
                                     On-link
  13    266 fe80::/64                On-link
  14    306 fe80::/64                On-link
- 14    306 fe80::1cb6:1805:dad3:89b2/128
-                                    On-link
  13    266 fe80::1cf7:8f89:89a4:1bbd/128
+                                    On-link
+ 14    306 fe80::28db:e03:dad3:97ff/128
                                     On-link
   1    306 ff00::/8                 On-link
  14    306 ff00::/8                 On-link

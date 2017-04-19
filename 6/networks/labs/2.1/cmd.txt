@@ -1,0 +1,5 @@
+show interfaces
+configure terminal
+banner motd # James@banner for Router1 #
+description James@description for Router1
+hostname James@Router1

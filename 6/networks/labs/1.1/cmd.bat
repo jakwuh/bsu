@@ -14,12 +14,14 @@ ping -l 512 -n 10 -i 255 vk.com
 ping ::1
 ping 127.0.0.1
 
+ping onliner.by
 ping ya.ru
 ping yandex.ru
 nslookup ya.ru
 nslookup yandex.ru
 
 :: 4
+tracert
 tracert -d -h 10 vk.com
 
 :: 5
