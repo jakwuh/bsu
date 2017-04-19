@@ -1,5 +1,29 @@
-show interfaces
-configure terminal
-banner motd # James@banner for Router1 #
-description James@description for Router1
-hostname James@Router1
+:: configuring router
+:: guest mode
+show int
+enable
+
+:: privileged mode
+show running-config
+conf t
+
+:: global mode
+enablee secret admin-secret
+enable password admin-password
+hostname JamesRouter1
+banner motd #Hello World from JamesRouter1#
+
+:: F 0/0 config mode
+int F 0/0
+ip address 192.168.10.1 255.255.255.0
+description #Description for FastEthernet 0/0#
+no shutdown
+exit
+
+::global mode
+exit
+
+::privileged mode
+exit
+show int F 0/0
+
