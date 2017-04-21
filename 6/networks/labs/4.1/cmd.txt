@@ -1,0 +1,43 @@
+:: R1
+enable
+conf t
+hostname R1
+
+int s 0/0
+desc connection to R2
+ip address 135.152.0.1 255.255.0.0
+clock rate 64000
+no shutdown
+exit
+
+int F 0/0
+ip address 135.151.0.1 255.255.0.0
+no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 135.152.0.2
+ip route 135.153.0.0 255.255.0.0 135.152.0.2
+
+exit
+
+
+:: R2
+enable
+conf t
+hostname R2
+
+int s 0/0
+desc connection to R1
+ip address 135.152.0.2 255.255.0.0
+no shutdown
+exit
+
+int F 0/0
+ip address 135.153.0.1 255.255.0.0
+no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 135.152.0.1
+ip route 135.151.0.0 255.255.0.0 135.152.0.1
+
+exit
