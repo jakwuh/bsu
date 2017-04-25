@@ -1,0 +1,111 @@
+<html>
+<head>
+    <title>Rectlinear minimum spanning tree</title>
+</head>
+<style>
+    canvas {
+        width: 100%;
+        height: 80%;
+        border: 1px solid black;
+    }
+</style>
+<body>
+<button id="random">Add 10 random points</button>
+<button id="reset">Reset</button>
+<canvas></canvas>
+</body>
+<script>
+    let edges = new Map();
+    let points = new Set();
+    let canvas = document.getElementsByTagName('canvas')[0];
+    let context = canvas.getContext('2d');
+
+    canvas.height = canvas.clientHeight;
+    canvas.width = canvas.clientWidth;
+
+    const findWeight = (i, j) => Math.abs(i.x - j.x) + Math.abs(i.y - j.y);
+
+    const addPoint = (x, y) => {
+        points.add({x, y});
+        find();
+    };
+
+    const drawPoint = ({x, y}) => {
+        context.beginPath();
+        context.arc(x, y, 3, 0, 2 * Math.PI, false);
+        context.lineWidth = 2;
+        context.strokeStyle = '#003300';
+        context.stroke();
+    };
+
+    const drawPoints = () => {
+        for (let point of points) {
+            drawPoint(point);
+        }
+    };
+
+    const drawEdge = (i, j) => {
+        context.beginPath();
+        context.moveTo(i.x, i.y);
+        context.lineTo(j.x, j.y);
+        context.stroke();
+    };
+
+    const clearCanvas = () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    function find() {
+        clearCanvas();
+        drawPoints();
+        edges.clear();
+
+        let point = points.values().next().value;
+        let vertices = new Set([point]);
+        let remains = new Set(points);
+
+        remains.delete(point);
+
+        while (vertices.size < points.size) {
+            let best;
+            for (let i of vertices) {
+                for (let j of remains) {
+                    if (!best || findWeight(i, j) < findWeight(...best)) {
+                        best = [i, j];
+                    }
+                }
+            }
+            drawEdge(...best);
+            best.map(v => {
+                vertices.add(v);
+                remains.delete(v);
+            });
+        }
+    }
+
+    document.getElementById('random').onclick = () => {
+        let n = 10;
+        let width = canvas.width;
+        let height = canvas.height;
+        let padding = 10;
+
+        while (n-- > 0) {
+            let x = Math.random() * (width - 2 * padding) + padding;
+            let y = Math.random() * (height - 2 * padding) + padding;
+            points.add({x, y});
+        }
+
+        find();
+    };
+
+    document.getElementById('reset').onclick = () => {
+        points.clear();
+        edges.clear();
+        clearCanvas();
+    };
+
+    canvas.onclick = e => {
+        addPoint(e.offsetX, e.offsetY);
+    };
+</script>
+</html>
