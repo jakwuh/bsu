@@ -1,0 +1,189 @@
+<html>
+<head>
+    <title>Karp's minimum mean cycle algorithm</title>
+</head>
+<style>
+    #network {
+        width: 100%;
+        height: 100%;
+        border: 1px solid lightgray;
+    }
+</style>
+<script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
+<link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css"/>
+<body>
+<div id="network"></div>
+</body>
+<script>
+    class Graph {
+        constructor(nodes, edges) {
+            this.nodes = new Set();
+            this.edges = new Map();
+
+            for (let node of nodes) {
+                this.nodes.add(node);
+                this.edges.set(node, new Map());
+            }
+
+            for (let {from, to, weight} of edges) {
+                this.edges.get(nodes[from]).set(nodes[to], weight);
+            }
+        }
+
+        isStrong() {
+            if (this.isEmpty()) {
+                return false;
+            }
+
+            for (let e of this.nodes) {
+                e.used = false;
+            }
+
+            let node = this.nodes.values().next().value;
+            let nodes = new Set([node]);
+            let neighbors = [...this.edges.get(node).keys()];
+
+            while (neighbors.length) {
+                let neighbor = neighbors.pop();
+                nodes.add(neighbor);
+                neighbor.used = true;
+
+                for (let n of this.edges.get(neighbor).keys()) {
+                    if (!n.used) {
+                        neighbors.push(n);
+                    }
+                }
+            }
+
+            return nodes.size === this.nodes.size;
+        }
+
+        isEmpty() {
+            return !this.nodes.size;
+        }
+
+        findCycle() {
+            if (!this.isStrong()) {
+                throw new Error('Graph should be strong');
+            }
+
+            let n = this.nodes.size;
+            let s = this.nodes.values().next().value;
+            let f = [...Array(n + 1)].map(() => new Map());
+            let parents = [...Array(n + 1)].map(() => new Map());
+
+            for (let k = 0; k <= n; ++k) {
+                for (let v of this.nodes) {
+                    f[k].set(v, Infinity);
+                }
+            }
+            f[0].set(s, 0);
+
+            for (let k = 1; k <= n; ++k) {
+                for (let from of this.nodes) {
+                    let edges = this.edges.get(from);
+                    for (let to of edges.keys()) {
+                        let weight = edges.get(to);
+                        if (f[k - 1].get(from) + weight < f[k].get(to)) {
+                            f[k].set(to, f[k - 1].get(from) + weight);
+                            parents[k].set(to, from);
+                        }
+                    }
+                }
+            }
+
+            let min = Infinity;
+            let minV;
+            for (let v of this.nodes) {
+                let max = -Infinity;
+                let maxK;
+                for (let k = 0; k < n; ++k) {
+                    let current = (f[n].get(v) - f[k].get(v)) / (n - k);
+                    if (current > max) {
+                        max = current;
+                        maxK = k;
+                    }
+                }
+                if (max < min) {
+                    min = max;
+                    minV = v;
+                }
+            }
+
+            if (min < 0) {
+                throw new Error('Graph has negative cycle');
+            }
+
+            let k = n;
+            let path = [];
+            let current = minV;
+            while (current) {
+                path.push(current);
+                current = parents[k--].get(current);
+                if (current === minV) break;
+            }
+
+            return path;
+        }
+
+    }
+
+    let nodes = [
+        {id: 0},
+        {id: 1},
+        {id: 2},
+        {id: 3}
+    ];
+
+    let edges = [
+        {from: 0, to: 2, weight: 10},
+        {from: 0, to: 1, weight: 1},
+        {from: 1, to: 2, weight: 3},
+        {from: 3, to: 0, weight: 8},
+        {from: 3, to: 1, weight: 0},
+        {from: 2, to: 3, weight: 2},
+    ];
+
+    edges.forEach(e => {
+        e.label = String(e.weight);
+    });
+
+    let g = new Graph(nodes, edges);
+    let cycle = g.findCycle();
+
+    for (let i = 0; i < cycle.length; ++i) {
+        let from = cycle[(i + 1) % cycle.length];
+        let to = cycle[i];
+        let edge = edges.find(e => e.from === from.id && e.to === to.id);
+        edge.color = 'red';
+    }
+
+    let container = document.getElementById('network');
+    let data = {
+        nodes: nodes,
+        edges: edges
+    };
+    let options = {
+        nodes: {
+            shape: 'dot',
+            size: 16
+        },
+        edges: {
+            arrows: 'to'
+        },
+        physics: {
+            forceAtlas2Based: {
+                gravitationalConstant: -26,
+                centralGravity: 0.005,
+                springLength: 230,
+                springConstant: 0.18
+            },
+            maxVelocity: 146,
+            solver: 'forceAtlas2Based',
+            timestep: 0.35,
+            stabilization: {iterations: 150}
+        }
+    };
+    let network = new vis.Network(container, data, options);
+</script>
+</html>
