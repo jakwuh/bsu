@@ -51,20 +51,24 @@
         async dfs(from) {
             from.used = true;
             for (let to of this.edges.get(from).keys()) {
-                await this.updateEdge(from, to, {color: 'red'});
+                if (to.used) continue;
 
                 let [f, c] = this.edges.get(from).get(to);
                 let path;
 
                 if (Math.abs(f) < c) {
+                    await this.updateEdge(from, to, {color: 'red'});
                     if (to === this.dest) {
                         path = [to, from];
-                    } else if (!to.used) {
+                    } else {
                         path = await this.dfs(to);
+                        if (path) {
+                            path.push(from);
+                        }
                     }
+                    await this.updateEdge(from, to, {color: 'lightblue'});
                 }
 
-                await this.updateEdge(from, to, {color: 'lightblue'});
 
                 if (path) {
                     return path;
@@ -96,11 +100,13 @@
                         return e.from === from.id && e.to === to.id
                             || e.from === to.id && e.to === from.id;
                     });
+
+                    let fcf = f + cf;
                     this.data.edges.update({
                         id: edge.id,
-                        label: `${f + cf}/${c}`,
-                        arrows: f === 0 ? 'middle' :
-                            ((edge.from === from.id && f > 0) || (edge.to === from.id && f < 0) ? 'from' : 'to')
+                        label: `${Math.abs(fcf)}/${c}`,
+                        arrows: fcf === 0 ? 'middle' :
+                            ((edge.from === from.id && fcf > 0) || (edge.to === from.id && fcf < 0)) ? 'to' : 'from'
                     });
                 }
 
