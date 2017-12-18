@@ -1,0 +1,32 @@
+tourists
+   name
+   level num
+
+tours
+   name
+   level num
+
+stops
+   name
+
+trips
+   tourist_id
+   duration int
+   completed bool
+
+tours_stops
+   tour_id
+   stop_id
+   order num
+
+trips_stops
+   trip_id
+   stop_id
+   date date
+   status
+   help
+
+trips_tourists
+   trip_id
+   tourist_id
+

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-http-proxy": "1",
+    "koa": "2",
+    "koa-proxy": "^0.9.0",
+    "koa-router": "^7.3.0",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.13.3"
+  }
+}
