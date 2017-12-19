@@ -8,12 +8,12 @@ BEGIN
 	IF NEW.started = 1
 	THEN
 	  SIGNAL  SQLSTATE '45000'
-		SET MESSAGE_TEXT = 'Cannot start at the moment of creation';
+		SET MESSAGE_TEXT = 'Chislo loshadei vladelcev uchastvuushih v zabege bolee 1';
 	END IF;
 
     IF NEW.completed = 1 THEN
       SIGNAL  SQLSTATE '45000'
-		SET MESSAGE_TEXT = 'Cannot finish at the moment of creation';
+		SET MESSAGE_TEXT = 'Loshad v techenie nedeli ne mozhet uchastvovat v dvuh scachkax';
     END IF;
 
      SET tourist_level = (SELECT level FROM tourists WHERE id = NEW.leader_id);
@@ -65,7 +65,7 @@ BEGIN
     SET tour_level = (SELECT level FROM tours WHERE id = tour_id);
 
     IF tourist_level < tour_level THEN
-        SET @message = concat('Tourist`s level should gte than tour level, tour_level: ', tour_level,  ', tourist_level: ', tourist_level);
+        SET @message = concat('Jockey ne mozhet bit vladelcem loshadi: ', tour_level,  ', tourist_level: ', tourist_level);
       SIGNAL  SQLSTATE '45000'
         SET MESSAGE_TEXT = @message;
     END IF;

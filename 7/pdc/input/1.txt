@@ -1,0 +1,7 @@
+1 a b
+1 t b
+2 b c
+1 a e
+2 e d
+2 e r
+2 e y

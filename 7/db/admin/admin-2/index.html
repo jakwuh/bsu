@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Express Admin</title>
+    <title>ROMA MEGA Admin</title>
     <link rel="shortcut icon" href="/favicon.ico" />
 
     <link id="bootstrap" href="/csslib/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
@@ -28,6 +28,11 @@
     <script src="/jslib/chosen.jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/jslib/cookie.js" type="text/javascript" charset="utf-8"></script>
     <script src="/express-admin.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        body {
+            background: lightblue
+        }
+    </style>
 </head>
 <body id="express-admin" class="container">
 
@@ -36,7 +41,7 @@
         <div class="navbar navbar-fixed-top navbar-inverse">
             <div id="navbar" class="container">
                 <div class="navbar-header">
-                    <a href="/" class="navbar-brand">Express Admin</a>
+                    <a href="/" class="navbar-brand">MEIN LABA</a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -58,9 +63,9 @@
         <section id="content">
             <a href="/drop-triggers" class="btn btn-default">Drop triggers</a>
             <a href="/create-triggers" class="btn btn-default">Create triggers</a>
-            <a href="/make-select/?query=select * from trips" class="btn btn-default">Select 1</a>
-            <a href="/make-select/?query=select * from tours" class="btn btn-default">Select 2</a>
-            <a href="/make-select/?query=select * from tourists" class="btn btn-default">Select 3</a>
+            <a href="/make-select/?query=select * from horse" class="btn btn-default">Select 1</a>
+            <a href="/make-select/?query=select * from horseowner" class="btn btn-default">Select 2</a>
+            <a href="/make-select/?query=select * from jockey" class="btn btn-default">Select 3</a>
 
             <br>
         <pre><!--result--></pre>

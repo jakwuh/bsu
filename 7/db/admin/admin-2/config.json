@@ -1,0 +1,15 @@
+{
+    "mysql": {
+        "database": "mydb",
+        "user": "root",
+        "password": "admin"
+    },
+    "server": {
+        "port": 3000
+    },
+    "app": {
+        "layouts": true,
+        "themes": true,
+        "languages": true
+    }
+}
